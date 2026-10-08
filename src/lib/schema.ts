@@ -1,6 +1,7 @@
 import type { CollectionEntry } from 'astro:content';
 import { site, adresseBelegt } from './site';
 import { istPlatzhalter } from './format';
+import { foto, url } from './fotos';
 
 type Kueche = CollectionEntry<'kuechen'>;
 
@@ -34,7 +35,7 @@ export function foodcourtSchema(kuechen: Kueche[]) {
     description: site.beschreibung,
     url: basis,
     logo: site.logo.src,
-    image: 'https://foodcourt47.de/wp-content/uploads/2023/02/2-1024x710.jpg',
+    image: 'https://foodcourt47.de/wp-content/uploads/2023/02/2.jpg',
     servesCuisine: kuechen.map((k) => k.data.kueche),
     hasMenu: `${basis}/speisekarte`,
     acceptsReservations: site.reservierungUrl,
@@ -44,7 +45,8 @@ export function foodcourtSchema(kuechen: Kueche[]) {
   };
 }
 
-export function kuecheSchema(k: Kueche) {
+export async function kuecheSchema(k: Kueche) {
+  const bild = url(await foto(k.data.fotos[0]), 1600);
   return {
     '@context': 'https://schema.org',
     '@type': 'Restaurant',
@@ -54,7 +56,7 @@ export function kuecheSchema(k: Kueche) {
     url: `${basis}/${k.id}`,
     sameAs: [k.data.website],
     logo: k.data.logo.src,
-    image: k.data.fotos[0],
+    image: bild,
     servesCuisine: k.data.kueche,
     containedInPlace: { '@id': `${basis}/#foodcourt` },
     acceptsReservations: site.reservierungUrl,

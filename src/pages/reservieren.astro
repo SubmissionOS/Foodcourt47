@@ -1,220 +1,79 @@
 ---
 import Basis from '../layouts/Basis.astro';
+import Bild from '../components/Bild.astro';
+import SeitenHero from '../components/SeitenHero.astro';
 import { site } from '../lib/site';
 import { markiere } from '../lib/format';
-import { alleKuechen } from '../lib/kuechen';
-
-const kuechen = await alleKuechen();
 ---
 <Basis
   titel="Tisch reservieren"
   beschreibung="Tisch im Foodcourt47 Hammerbrook online reservieren. Pizza, Curry und Sushi an einem Tisch, familienfreundlich, alle Gerichte auf Wunsch vegan."
 >
-  <div class="wrap">
-    <div class="r-raster">
-      <header class="r-kopf">
-        <span class="marke">Reservierung</span>
-        <h1>Tisch reservieren</h1>
-        <p class="lead">Reservieren Sie Ihren Tisch online. Pizza, Curry und Sushi gibt es unter einem Dach.</p>
-        <ol class="r-schritte">
-          <li><span class="mono">01</span> Online-Reservierung öffnen</li>
-          <li><span class="mono">02</span> Tag, Uhrzeit und Personenzahl wählen</li>
-          <li><span class="mono">03</span> Kontaktdaten eintragen und abschicken</li>
-        </ol>
-      </header>
+  <SeitenHero foto="tisch-teilen" vorzeile="Reservierung" titel="Ihr <em>Tisch</em>" satz="Reservieren Sie online. Wir freuen uns auf Sie.">
+    <a class="knopf knopf--hell r-hero-knopf" href={site.reservierungUrl} target="_blank" rel="noopener">
+      Online reservieren<span class="nur-sr"> (öffnet neues Fenster)</span>
+    </a>
+  </SeitenHero>
 
-      <!-- Fahrkarte: das auffällige Element der Seite -->
-      <section class="fahrkarte" aria-labelledby="fk-titel">
-        <div class="fk-oben">
-          <span class="fk-label mono">Fahrkarte · Foodcourt47</span>
-          <h2 id="fk-titel" class="fk-titel">Hammerbrook</h2>
-          <dl class="fk-daten">
-            <div><dt>Gleis</dt><dd class="fk-gleise">{kuechen.map((k) => <span class={`gleis linie-${k.id}`}>{k.data.gleis}</span>)}</dd></div>
-            <div><dt>Mittag</dt><dd class="mono">{site.mittag.tage} 11–16</dd></div>
-            <div><dt>Ort</dt><dd set:html={markiere(site.adresse.strasse)} /></div>
-          </dl>
-        </div>
-        <div class="fk-unten">
-          <a class="knopf fk-knopf" href={site.reservierungUrl} target="_blank" rel="noopener">
-            Online reservieren <span class="pfeil" aria-hidden="true">↗</span><span class="nur-sr">(öffnet neues Fenster)</span>
-          </a>
-          <p class="fk-klein">Die Reservierung läuft über aleno. Erst mit dem Klick werden Daten an aleno übertragen.</p>
-        </div>
-      </section>
+  <section class="wrap r" aria-labelledby="r-titel">
+    <div class="r-text einblenden">
+      <h2 id="r-titel">Gut zu <em>wissen</em></h2>
+      <p class="lead">Die Online-Reservierung läuft über aleno. Erst mit dem Klick auf den Button werden Daten an aleno übertragen.</p>
+      <p>Kinder sind willkommen, und jedes Gericht gibt es auf Wunsch vegan. Für Gruppen und Feiern: <span class="ph">[Ab wie vielen Personen bitte telefonisch anfragen?]</span></p>
+      <dl class="r-daten">
+        <div><dt>Telefon</dt><dd set:html={markiere(site.telefon)} /></div>
+        <div><dt>Adresse</dt><dd set:html={markiere(`${site.adresse.strasse}, ${site.adresse.plz} ${site.adresse.ort}`)} /></div>
+        <div><dt>Mittag</dt><dd>{site.mittag.tage}, 11 bis 16 Uhr</dd></div>
+        <div><dt>Öffnungszeiten</dt><dd set:html={markiere(site.oeffnungszeiten)} /></div>
+      </dl>
+      <a class="knopf" href={site.reservierungUrl} target="_blank" rel="noopener">Online reservieren<span class="nur-sr"> (öffnet neues Fenster)</span></a>
     </div>
-
-    <section class="zeile" aria-labelledby="tel-titel">
-      <span class="kenn">Lieber anrufen?</span>
-      <div class="r-info">
-        <div>
-          <h2 id="tel-titel" class="r-h2">Telefon</h2>
-          <p class="r-gross" set:html={markiere(site.telefon)} />
-        </div>
-        <div>
-          <h2 class="r-h2">Gruppen und Feiern</h2>
-          <p><span class="ph">[Ab wie vielen Personen bitte telefonisch anfragen? Gibt es Gruppenmenüs?]</span></p>
-        </div>
-        <div>
-          <h2 class="r-h2">Öffnungszeiten</h2>
-          <p><Fragment set:html={markiere(site.oeffnungszeiten)} /><br />Mittagsangebot {site.mittag.tage} 11–16 Uhr</p>
-        </div>
-      </div>
-    </section>
-  </div>
+    <Bild id="abend-tisch" format="4 / 5" sizes="(min-width: 64rem) 40vw, 100vw" />
+  </section>
 </Basis>
 
 <style>
-  .r-raster {
+  .r-hero-knopf {
+    margin-top: 2rem;
+  }
+  .r {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 3rem;
-    padding-block: 3rem 5rem;
-  }
-  .r-kopf h1 {
-    margin-bottom: 1.25rem;
-  }
-  .r-schritte {
-    margin: 2rem 0 0;
-    padding: 0;
-    list-style: none;
-    font-size: 1.1rem;
-    font-weight: 600;
-  }
-  .r-schritte li {
-    display: flex;
-    gap: 1rem;
-    padding-block: 0.7rem;
-    border-top: 1px solid #12191f33;
-  }
-  .r-schritte li:last-child {
-    border-bottom: 1px solid #12191f33;
-  }
-  .r-schritte .mono {
-    color: var(--tinte-2);
-    font-weight: 400;
-  }
-
-  .fahrkarte {
-    --loch: 0.9rem;
-    position: relative;
-    background: #fff;
-    border: var(--strich) solid var(--tinte);
-    box-shadow: 0.6rem 0.6rem 0 var(--tinte);
-  }
-  .fk-oben {
-    padding: 1.5rem 1.5rem 1.75rem;
-  }
-  .fk-label {
-    display: block;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--tinte-2);
-  }
-  .fk-titel {
-    margin: 0.4rem 0 1.5rem;
-    font-size: clamp(2.25rem, 6vw, 3.5rem);
-    font-weight: 900;
-    letter-spacing: -0.03em;
-  }
-  .fk-daten {
-    display: grid;
-    gap: 0.9rem;
-    margin: 0;
-  }
-  .fk-daten div {
-    display: grid;
-    grid-template-columns: 5rem minmax(0, 1fr);
+    gap: 4rem;
+    padding-top: var(--luft);
     align-items: center;
   }
-  .fk-daten dt {
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--tinte-2);
+  .r h2 {
+    margin-bottom: 2rem;
   }
-  .fk-daten dd {
-    margin: 0;
-    font-weight: 700;
+  .r h2 em {
+    color: var(--messing);
   }
-  .fk-gleise {
-    display: flex;
-    gap: 0.35rem;
-  }
-  .fk-gleise .gleis {
-    --g: 2rem;
-  }
-  /* Perforation zwischen den Abschnitten */
-  .fk-unten {
-    position: relative;
-    padding: 1.75rem 1.5rem 1.5rem;
-    border-top: 3px dashed var(--tinte);
-    background: var(--grund);
-  }
-  .fk-unten::before,
-  .fk-unten::after {
-    content: '';
-    position: absolute;
-    top: calc(var(--loch) * -1 - 1.5px);
-    width: calc(var(--loch) * 2);
-    height: calc(var(--loch) * 2);
-    border-radius: 50%;
-    background: var(--grund);
-    border: var(--strich) solid var(--tinte);
-  }
-  .fk-unten::before {
-    left: calc(var(--loch) * -1 - 3px);
-    clip-path: inset(0 0 0 50%);
-  }
-  .fk-unten::after {
-    right: calc(var(--loch) * -1 - 3px);
-    clip-path: inset(0 50% 0 0);
-  }
-  .fk-knopf {
-    width: 100%;
-    justify-content: center;
-    font-size: 1.1rem;
-    min-height: 3.5rem;
-  }
-  .fk-klein {
-    margin: 1rem 0 0;
-    font-size: 0.85rem;
-    color: var(--tinte-2);
-  }
-
-  @media (min-width: 64rem) {
-    .r-raster {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 28rem);
-      gap: 5rem;
-      align-items: center;
-      padding-block: 4.5rem 6rem;
-    }
-    .fk-oben {
-      padding: 2rem 2rem 2.25rem;
-    }
-    .fk-unten {
-      padding: 2rem;
-    }
-  }
-
-  .r-info {
+  .r-daten {
     display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 2rem;
+    gap: 1.1rem;
+    margin: 2.5rem 0 3rem;
   }
-  .r-h2 {
-    font-size: 1.15rem;
-    margin-bottom: 0.6rem;
+  .r-daten div {
+    display: grid;
+    grid-template-columns: 9rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid #1d1b181f;
   }
-  .r-gross {
-    font-size: 1.5rem;
-    font-weight: 800;
+  .r-daten dt {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--messing);
   }
-  @media (min-width: 48rem) {
-    .r-info {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 2.5rem;
+  .r-daten dd {
+    margin: 0;
+  }
+  @media (min-width: 64rem) {
+    .r {
+      grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+      gap: 7rem;
     }
   }
 </style>

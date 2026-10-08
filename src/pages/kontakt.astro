@@ -1,5 +1,6 @@
 ---
 import Basis from '../layouts/Basis.astro';
+import SeitenHero from '../components/SeitenHero.astro';
 import { site } from '../lib/site';
 import { markiere } from '../lib/format';
 ---
@@ -7,184 +8,67 @@ import { markiere } from '../lib/format';
   titel="Kontakt und Anfahrt"
   beschreibung="Kontakt und Anfahrt zum Foodcourt47 in Hamburg-Hammerbrook: Adresse, Telefon, E-Mail und Öffnungszeiten."
 >
-  <div class="wrap">
-    <div class="k-raster">
-      <header class="k-kopf">
-        <span class="marke">Kontakt</span>
-        <h1>So finden Sie uns</h1>
-        <p class="lead">Foodcourt47 liegt in Hamburg-Hammerbrook.</p>
-      </header>
+  <SeitenHero foto="hero-gastraum" vorzeile="Kontakt" titel="Besuchen Sie <em>uns</em>" satz="Mitten in Hamburg-Hammerbrook." />
 
-      <!-- Haltestellenschild: das auffällige Element der Seite -->
-      <div class="halt" aria-hidden="true">
-        <div class="halt-schild">
-          <span class="halt-h">H</span>
-        </div>
-        <div class="halt-tafel">
-          <span class="halt-name">Foodcourt47</span>
-          <span class="halt-ort">Hammerbrook</span>
-        </div>
-        <div class="halt-mast"></div>
-      </div>
+  <section class="wrap k" aria-label="Kontaktdaten">
+    <div class="k-spalte einblenden">
+      <h2 class="k-h">Adresse</h2>
+      <p class="k-gross">
+        {site.name}<br />
+        <Fragment set:html={markiere(site.adresse.strasse)} /><br />
+        <Fragment set:html={markiere(`${site.adresse.plz} ${site.adresse.ort}`)} />
+      </p>
+      <p set:html={markiere(site.anfahrt)} />
     </div>
+    <div class="k-spalte einblenden">
+      <h2 class="k-h">Zeiten</h2>
+      <p class="k-gross">Mittag {site.mittag.tage}<br />11 bis 16 Uhr</p>
+      <p set:html={markiere(site.oeffnungszeiten)} />
+    </div>
+    <div class="k-spalte einblenden">
+      <h2 class="k-h">Kontakt</h2>
+      <p class="k-gross"><Fragment set:html={markiere(site.telefon)} /><br /><Fragment set:html={markiere(site.email)} /></p>
+      <a class="knopf" href="/reservieren">Tisch reservieren</a>
+    </div>
+  </section>
 
-    <section class="zeile" aria-labelledby="adr-titel">
-      <span class="kenn">Adresse</span>
-      <div class="k-spalten">
-        <div>
-          <h2 id="adr-titel" class="k-h2">Besuch</h2>
-          <address class="k-gross">
-            {site.name}<br />
-            <Fragment set:html={markiere(site.adresse.strasse)} /><br />
-            <Fragment set:html={markiere(`${site.adresse.plz} ${site.adresse.ort}`)} />
-          </address>
-          <p class="k-anfahrt" set:html={markiere(site.anfahrt)} />
-        </div>
-        <div class="k-karte">
-          <span class="ph">[Karte: Kartenausschnitt erst nach Einwilligung laden oder als statisches Bild einbinden]</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="zeile" aria-labelledby="kontakt-titel">
-      <span class="kenn">Direkt</span>
-      <div class="k-drei">
-        <div>
-          <h2 id="kontakt-titel" class="k-h2">Telefon</h2>
-          <p class="k-gross" set:html={markiere(site.telefon)} />
-        </div>
-        <div>
-          <h2 class="k-h2">E-Mail</h2>
-          <p class="k-gross" set:html={markiere(site.email)} />
-        </div>
-        <div>
-          <h2 class="k-h2">Öffnungszeiten</h2>
-          <p><Fragment set:html={markiere(site.oeffnungszeiten)} /></p>
-          <p>Mittagsangebot {site.mittag.tage} 11–16 Uhr</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="zeile" aria-labelledby="online-titel">
-      <span class="kenn">Online</span>
-      <div>
-        <h2 id="online-titel" class="k-h2">Tisch reservieren</h2>
-        <p>Am schnellsten geht es über die Online-Reservierung.</p>
-        <a class="knopf" href="/reservieren">Zur Reservierung <span class="pfeil" aria-hidden="true">→</span></a>
-      </div>
-    </section>
+  <div class="wrap">
+    <div class="k-karte">
+      <span class="ph">[Karte: Kartenausschnitt erst nach Einwilligung laden oder als statisches Bild einbinden]</span>
+    </div>
   </div>
 </Basis>
 
 <style>
-  .k-raster {
+  .k {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 2rem;
-    padding-block: 3rem 4rem;
-    align-items: end;
+    gap: 3.5rem;
+    padding-block: var(--luft);
   }
-  .k-kopf h1 {
+  .k-h {
     margin-bottom: 1rem;
-  }
-
-  .halt {
-    display: grid;
-    justify-items: center;
-    width: 11rem;
-  }
-  .halt-schild {
-    display: grid;
-    place-items: center;
-    width: 7.5rem;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: var(--signal);
-    border: 0.35rem solid var(--cucino);
-  }
-  .halt-h {
-    color: var(--cucino);
-    font-size: 4.5rem;
-    font-weight: 900;
-    line-height: 1;
-    padding-top: 0.1em;
-  }
-  .halt-tafel {
-    display: grid;
-    width: 100%;
-    margin-top: 0.5rem;
-    padding: 0.6rem 0.75rem 0.5rem;
-    background: #fff;
-    border: var(--strich) solid var(--tinte);
-    text-align: center;
-  }
-  .halt-name {
-    font-weight: 900;
-    font-size: 1.15rem;
-  }
-  .halt-ort {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-  .halt-mast {
-    width: 0.6rem;
-    height: 5rem;
-    background: var(--tinte-2);
-  }
-  @media (min-width: 64rem) {
-    .k-raster {
-      grid-template-columns: minmax(0, 1fr) auto;
-      padding-block: 4rem 0;
-    }
-    .halt {
-      margin-right: 4rem;
-    }
-  }
-
-  .k-h2 {
-    font-size: 1.15rem;
-    margin-bottom: 0.75rem;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--messing);
   }
   .k-gross {
-    font-style: normal;
-    font-size: 1.5rem;
-    font-weight: 800;
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 2.4vw, 2rem);
     line-height: 1.3;
-  }
-  .k-anfahrt {
-    margin-top: 1.25rem;
-  }
-  .k-spalten {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 2rem;
   }
   .k-karte {
     display: grid;
     place-items: center;
-    min-height: 16rem;
-    padding: 1.5rem;
+    min-height: 26rem;
+    padding: 2rem;
     text-align: center;
-    background:
-      repeating-linear-gradient(0deg, transparent 0 38px, #12191f14 38px 40px),
-      repeating-linear-gradient(90deg, transparent 0 38px, #12191f14 38px 40px),
-      var(--grund-tief);
-    border: 2px dashed #12191f55;
-  }
-  .k-drei {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 2rem;
+    background: var(--leinen);
   }
   @media (min-width: 64rem) {
-    .k-spalten {
-      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-      gap: 3rem;
-    }
-    .k-drei {
+    .k {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 4rem;
     }
   }
 </style>

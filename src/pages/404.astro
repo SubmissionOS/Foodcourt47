@@ -1,40 +1,22 @@
 ---
 import Basis from '../layouts/Basis.astro';
+import SeitenHero from '../components/SeitenHero.astro';
 ---
 <Basis titel="Seite nicht gefunden" beschreibung="Diese Seite gibt es nicht. Zurück zur Startseite des Foodcourt47 Hammerbrook.">
-  <div class="wrap fehler">
-    <p class="fehler-tafel mono" aria-hidden="true">Zug fällt aus</p>
-    <h1>Diese Seite gibt es nicht.</h1>
-    <p class="lead">Vielleicht hilft einer dieser Wege weiter.</p>
-    <p class="fehler-wege">
-      <a class="knopf" href="/">Zur Startseite</a>
-      <a class="knopf knopf--hell" href="/speisekarte">Speisekarte</a>
+  <SeitenHero foto="abend-tisch" vorzeile="Seite nicht gefunden" titel="Dieser Tisch ist <em>leer.</em>" satz="Die Seite gibt es nicht. Vielleicht finden Sie hier, was Sie suchen.">
+    <p class="wege">
+      <a class="knopf knopf--hell" href="/">Zur Startseite</a>
+      <a class="weiter" href="/speisekarte">Speisekarte</a>
     </p>
-  </div>
+  </SeitenHero>
 </Basis>
 
 <style>
-  .fehler {
-    padding-block: 4rem 2rem;
-  }
-  .fehler-tafel {
-    display: inline-block;
-    margin-bottom: 2rem;
-    padding: 0.6rem 1rem 0.45rem;
-    background: var(--tafel);
-    color: var(--signal);
-    font-size: 1.25rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  .fehler h1 {
-    margin-bottom: 1rem;
-  }
-  .fehler-wege {
+  .wege {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    align-items: center;
+    gap: 1.25rem 2rem;
     margin-top: 2rem;
   }
 </style>

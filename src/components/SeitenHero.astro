@@ -1,0 +1,74 @@
+---
+// Hero für Unterseiten: Foto mit Titel, Header liegt transparent darüber
+import { foto, url, srcset } from '../lib/fotos';
+
+interface Props {
+  foto: string;
+  vorzeile?: string;
+  /** darf <em> enthalten */
+  titel: string;
+  satz?: string;
+  hoch?: boolean;
+}
+const { foto: fotoId, vorzeile, titel, satz, hoch = false } = Astro.props;
+const f = await foto(fotoId);
+---
+<section class:list={['s-hero dunkel', { 's-hero--hoch': hoch }]} aria-labelledby="s-hero-titel">
+  <div class="s-hero-bild" data-parallax data-placeholder-photo={f.stock ? 'PLACEHOLDER_PHOTO' : undefined}>
+    <img src={url(f, 2000)} srcset={srcset(f)} sizes="100vw" alt={f.alt} width={f.breite} height={f.hoehe} fetchpriority="high" />
+  </div>
+  <div class="wrap s-hero-text">
+    {vorzeile && <span class="vorzeile">{vorzeile}</span>}
+    <h1 id="s-hero-titel" set:html={titel} />
+    {satz && <p class="s-hero-satz">{satz}</p>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .s-hero {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: 72svh;
+    overflow: hidden;
+  }
+  .s-hero--hoch {
+    min-height: 92svh;
+  }
+  .s-hero-bild {
+    position: absolute;
+    inset: -4% 0 0;
+    transform: scale(1.06);
+    will-change: transform;
+  }
+  .s-hero-bild img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .s-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, #121815d9 0%, #12181573 40%, #12181540 75%, #12181566 100%),
+      linear-gradient(to right, #12181566 0%, #12181500 60%);
+  }
+  .s-hero-text {
+    position: relative;
+    z-index: 1;
+    padding-block: 9rem clamp(3rem, 8vh, 5.5rem);
+  }
+  .s-hero .vorzeile {
+    color: #e9dcc4;
+  }
+  .s-hero h1 :global(em) {
+    color: #e9dcc4;
+  }
+  .s-hero-satz {
+    margin: 1.5rem 0 0;
+    font-size: clamp(1.1rem, 1.6vw, 1.25rem);
+    max-width: 40ch;
+  }
+</style>

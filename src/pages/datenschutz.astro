@@ -6,28 +6,30 @@ const seite = await getEntry('seiten', 'datenschutz');
 if (!seite) throw new Error('Inhalt src/content/seiten/datenschutz.md fehlt');
 const { Content } = await render(seite);
 ---
-<Basis titel="Datenschutz" beschreibung="Datenschutzerklärung des Foodcourt47 Hammerbrook (Entwurf).">
-  <div class="wrap">
-    <header class="d-kopf">
-      <span class="marke">Rechtliches · Stand <span class="ph">{seite.data.stand}</span></span>
-      <h1>{seite.data.titel}</h1>
-    </header>
-    <div class="zeile">
-      <span class="kenn">Entwurf</span>
-      <div class="prosa">
-        <Content />
-      </div>
+<Basis titel="Datenschutz" kopf="solide" beschreibung="Datenschutzerklärung des Foodcourt47 Hammerbrook (Entwurf).">
+  <article class="wrap recht">
+    <h1>{seite.data.titel}</h1>
+    <p class="stand">Stand <span class="ph">{seite.data.stand}</span></p>
+    <div class="prosa">
+      <Content />
     </div>
-  </div>
+  </article>
 </Basis>
 
 <style>
-  .d-kopf {
-    padding-block: 3rem 2.5rem;
+  .recht {
+    max-width: 52rem;
+    padding-top: 5rem;
+  }
+  .recht h1 {
+    margin-bottom: 1rem;
+  }
+  .stand {
+    margin-bottom: 2.5rem;
+    color: var(--rauch);
   }
   .prosa :global(p:first-child) {
-    padding: 0.75rem 1rem;
-    border-left: var(--strich) solid var(--signal);
-    background: #fff;
+    padding: 1rem 1.25rem;
+    background: var(--leinen);
   }
 </style>

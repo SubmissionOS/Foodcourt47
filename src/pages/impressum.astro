@@ -5,79 +5,44 @@ import { markiere } from '../lib/format';
 
 const i = site.impressum;
 ---
-<Basis titel="Impressum" beschreibung="Impressum des Foodcourt47 Hammerbrook, betrieben von der Eat Manju Phönix GmbH, Hamburg.">
-  <div class="wrap recht">
-    <header class="recht-kopf">
-      <span class="marke">Rechtliches</span>
-      <h1>Impressum</h1>
-      <p class="recht-hinweis"><strong>Entwurf.</strong> Angaben übernommen von foodcourt47.de/impressum. Vor dem Livegang prüfen und Platzhalter ergänzen.</p>
-    </header>
+<Basis titel="Impressum" kopf="solide" beschreibung="Impressum des Foodcourt47 Hammerbrook, betrieben von der Eat Manju Phönix GmbH, Hamburg.">
+  <article class="wrap recht">
+    <h1>Impressum</h1>
+    <p class="recht-hinweis"><em>Entwurf.</em> Angaben übernommen von foodcourt47.de/impressum. Vor dem Livegang prüfen und Platzhalter ergänzen.</p>
 
-    <section class="zeile">
-      <span class="kenn">Anbieter</span>
-      <div>
-        <h2 class="recht-h2">Angaben gemäß § 5 DDG</h2>
-        <p>
-          {i.firma}<br />
-          {i.strasse}<br />
-          {i.plzOrt}
-        </p>
-        <p>Vertreten durch den Geschäftsführer {i.vertreten}</p>
-      </div>
-    </section>
+    <h2>Angaben gemäß § 5 DDG</h2>
+    <p>{i.firma}<br />{i.strasse}<br />{i.plzOrt}</p>
+    <p>Vertreten durch den Geschäftsführer {i.vertreten}</p>
 
-    <section class="zeile">
-      <span class="kenn">Kontakt</span>
-      <div>
-        <h2 class="recht-h2">Kontakt</h2>
-        <p>
-          Telefon: <Fragment set:html={markiere(i.telefon)} /><br />
-          E-Mail: <Fragment set:html={markiere(i.email)} />
-        </p>
-      </div>
-    </section>
+    <h2>Kontakt</h2>
+    <p>Telefon: <Fragment set:html={markiere(i.telefon)} /><br />E-Mail: <Fragment set:html={markiere(i.email)} /></p>
 
-    <section class="zeile">
-      <span class="kenn">Register</span>
-      <div>
-        <h2 class="recht-h2">Registereintrag</h2>
-        <p>
-          Registergericht: {i.gericht}<br />
-          Registernummer: {i.register}
-        </p>
-        <h2 class="recht-h2">Umsatzsteuer</h2>
-        <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: <Fragment set:html={markiere(i.ustId)} /></p>
-      </div>
-    </section>
+    <h2>Registereintrag</h2>
+    <p>Registergericht: {i.gericht}<br />Registernummer: {i.register}</p>
 
-    <section class="zeile">
-      <span class="kenn">Inhalt</span>
-      <div>
-        <h2 class="recht-h2">Verantwortlich für den Inhalt</h2>
-        <p>{i.vertreten}, Anschrift wie oben</p>
-        <p><span class="ph">[Hinweise zur Streitschlichtung und Haftung ergänzen]</span></p>
-      </div>
-    </section>
-  </div>
+    <h2>Umsatzsteuer</h2>
+    <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: <Fragment set:html={markiere(i.ustId)} /></p>
+
+    <h2>Verantwortlich für den Inhalt</h2>
+    <p>{i.vertreten}, Anschrift wie oben</p>
+    <p><span class="ph">[Hinweise zur Streitschlichtung und Haftung ergänzen]</span></p>
+  </article>
 </Basis>
 
 <style>
-  .recht-kopf {
-    padding-block: 3rem 2.5rem;
+  .recht {
+    max-width: 52rem;
+    padding-top: 5rem;
   }
-  .recht-kopf h1 {
-    margin-bottom: 1.25rem;
+  .recht h1 {
+    margin-bottom: 2rem;
+  }
+  .recht h2 {
+    margin: 2.75rem 0 0.75rem;
+    font-size: 1.75rem;
   }
   .recht-hinweis {
-    padding: 0.75rem 1rem;
-    border-left: var(--strich) solid var(--signal);
-    background: #fff;
-  }
-  .recht-h2 {
-    font-size: 1.2rem;
-    margin-bottom: 0.6rem;
-  }
-  .recht-h2:not(:first-child) {
-    margin-top: 1.75rem;
+    padding: 1rem 1.25rem;
+    background: var(--leinen);
   }
 </style>

@@ -2,10 +2,10 @@
 import Basis from '../layouts/Basis.astro';
 import Karte from '../components/Karte.astro';
 import Bild from '../components/Bild.astro';
+import SeitenHero from '../components/SeitenHero.astro';
 import { alleKuechen, type Kueche } from '../lib/kuechen';
 import { kuecheSchema } from '../lib/schema';
-import { site } from '../lib/site';
-import { markiere } from '../lib/format';
+import { foto, url } from '../lib/fotos';
 
 export async function getStaticPaths() {
   const kuechen = await alleKuechen();
@@ -22,230 +22,118 @@ interface Props {
 const { k, naechste } = Astro.props;
 const d = k.data;
 const domain = new URL(d.website).hostname;
+const [heroId, ...weitere] = d.fotos;
+const heroFoto = await foto(heroId);
 ---
 <Basis
   titel={`${d.name}: ${d.kategorie}`}
   beschreibung={`${d.name} im Foodcourt47 Hammerbrook: ${d.claim} ${d.karten.map((c) => `${c.titel} ${c.zeit}`).join(', ')}.`}
-  linie={k.id}
-  schema={kuecheSchema(k)}
-  ogBild={d.bild?.src}
+  akzent={k.id}
+  schema={await kuecheSchema(k)}
+  ogBild={url(heroFoto, 1600)}
 >
-  <section class="schild auf-dunkel" aria-labelledby="k-titel">
-    <div class="wrap schild-innen">
-      <div class="schild-links">
-        <span class="schild-gleis" aria-hidden="true">{d.gleis}</span>
-        <div>
-          <span class="marke schild-marke">Gleis {d.gleis} · {d.kategorie}</span>
-          <h1 id="k-titel">{d.name}</h1>
-          <p class="schild-claim">{d.claim}</p>
-          <nav class="schild-sprung" aria-label="Auf dieser Seite">
-            {d.karten.map((c) => (
-              <a href={`#${c.id}`}>{c.titel} <span class="mono">{c.zeit}</span></a>
-            ))}
-          </nav>
-        </div>
-      </div>
-      <div class="schild-logo">
-        <Bild src={d.logo.src} alt={d.logo.alt} breite={d.logo.breite} hoehe={d.logo.hoehe} platzhalter={`[Logo ${d.name}]`} eager />
-      </div>
+  <SeitenHero foto={heroId} vorzeile={`${d.kueche} im Foodcourt47`} titel={d.name} satz={d.claim} hoch />
+
+  <section class="wrap einleitung" aria-label={`Über ${d.name}`}>
+    <div class="ein-text einblenden">
+      <p class="ein-gross">{d.einleitung[0]}</p>
+      {d.einleitung.slice(1).map((p) => <p>{p}</p>)}
+      <p class="ein-vegan"><em>Auf Wunsch bereiten wir jedes Gericht vegan zu.</em></p>
+      <a class="weiter" href={d.website} target="_blank" rel="noopener">{domain}<span class="nur-sr"> (öffnet neues Fenster)</span></a>
     </div>
+    {weitere.length > 0 && (
+      <div class="ein-bilder">
+        {weitere.slice(0, 2).map((id, i) => (
+          <Bild id={id} format={i === 0 ? '4 / 5' : '1 / 1'} sizes="(min-width: 64rem) 25vw, 50vw" class={`ein-bild-${i + 1}`} />
+        ))}
+      </div>
+    )}
   </section>
 
-  <div class="wrap">
-    <section class="zeile ueber" aria-labelledby="ueber-titel">
-      <span class="kenn">Küche</span>
-      <div class="ueber-raster">
-        <div>
-          <h2 id="ueber-titel" class="nur-sr">Über {d.name}</h2>
-          {d.einleitung.map((absatz, i) => <p class:list={{ lead: i === 0 }}>{absatz}</p>)}
-          <p class="ueber-fakten">
-            Auf Wunsch bereiten wir jedes Gericht vegan zu.
-          </p>
-          <a class="knopf knopf--hell" href={d.website} target="_blank" rel="noopener">
-            {domain} <span class="pfeil" aria-hidden="true">↗</span><span class="nur-sr">(öffnet neues Fenster)</span>
-          </a>
-        </div>
-        <Bild
-          src={d.bild?.src}
-          alt={d.bild?.alt ?? ''}
-          breite={d.bild?.breite ?? 1024}
-          hoehe={d.bild?.hoehe ?? 710}
-          platzhalter={d.bildPlatzhalter}
-          sizes="(min-width: 64rem) 36rem, 100vw"
-        />
+  {d.karten.map((c) => (
+    <section class="karte-block" id={c.id} aria-labelledby={`${c.id}-titel`}>
+      <header class="karte-kopf wrap">
+        <span class="vorzeile">{c.zeit}</span>
+        <h2 id={`${c.id}-titel`}>{c.titel}</h2>
+      </header>
+      <div class="wrap">
+        <Karte karte={c} spalten={c.sektionen.length > 2} />
       </div>
     </section>
+  ))}
 
-    {d.karten.map((c) => (
-      <section class="zeile karte-zeile" id={c.id} aria-labelledby={`${c.id}-titel`}>
-        <span class="kenn" set:html={markiere(c.zeit)} />
-        <div>
-          <h2 id={`${c.id}-titel`} class="karte-h2">{c.titel}</h2>
-          <Karte karte={c} spalten={c.sektionen.length > 2} />
-        </div>
-      </section>
-    ))}
-
-    <section class="zeile" aria-labelledby="weiter-titel">
-      <span class="kenn">Weiter</span>
-      <div class="weiter">
-        <h2 id="weiter-titel" class="nur-sr">Weiter</h2>
-        <a class={`weiter-gleis linie-${naechste.id}`} href={`/${naechste.id}`}>
-          <span class="gleis" aria-hidden="true">{naechste.data.gleis}</span>
-          <span>
-            <span class="weiter-label mono">Nächstes Gleis</span>
-            <span class="weiter-name">{naechste.data.name}</span>
-          </span>
-        </a>
-        <a class="knopf" href={site.reservierungUrl} target="_blank" rel="noopener">
-          Tisch reservieren <span class="pfeil" aria-hidden="true">↗</span><span class="nur-sr">(öffnet neues Fenster)</span>
-        </a>
-      </div>
-    </section>
-  </div>
+  <section class="naechste" style={`--akzent: var(--k-${naechste.id})`} aria-label="Weitere Küche">
+    <a class="naechste-link wrap" href={`/${naechste.id}`}>
+      <span class="vorzeile">Nebenan im Foodcourt47</span>
+      <span class="naechste-name">{naechste.data.name}</span>
+      <span class="weiter">Zur Küche</span>
+    </a>
+  </section>
 </Basis>
 
 <style>
-  /* Gleisschild in der Linienfarbe: das auffällige Element der Seite */
-  .schild {
-    background: var(--linie);
-    color: #fff;
-    border-bottom: var(--strich) solid var(--tinte);
-  }
-  .schild-innen {
+  .einleitung {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 2rem;
-    padding-block: 2.5rem 3rem;
-  }
-  .schild-links {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.25rem;
-  }
-  .schild-gleis {
-    display: grid;
-    place-items: center;
-    inline-size: clamp(5rem, 16vw, 11rem);
-    aspect-ratio: 1;
-    border: 0.35rem solid #fff;
-    font-weight: 900;
-    font-size: clamp(3.5rem, 12vw, 8rem);
-    line-height: 1;
-    padding-top: 0.08em;
-  }
-  .schild-marke {
-    color: #ffffffd9;
-  }
-  .schild h1 {
-    font-size: clamp(2.75rem, 9vw, 6.5rem);
-  }
-  .schild-claim {
-    margin: 1rem 0 0;
-    font-size: clamp(1.15rem, 2.2vw, 1.5rem);
-    font-weight: 600;
-  }
-  .schild-sprung {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.5rem;
-    margin-top: 1.75rem;
-  }
-  .schild-sprung a {
-    font-weight: 700;
-    text-decoration-color: #ffffff80;
-  }
-  .schild-sprung .mono {
-    font-weight: 400;
-    font-size: 0.85em;
-    opacity: 0.85;
-  }
-  .schild-logo {
-    width: min(100%, 14rem);
-    border: 0.35rem solid #fff;
-    background: #fff;
-  }
-
-  @media (min-width: 48rem) {
-    .schild-links {
-      grid-template-columns: auto minmax(0, 1fr);
-      gap: 2.5rem;
-      align-items: start;
-    }
-  }
-  @media (min-width: 64rem) {
-    .schild-innen {
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: end;
-      padding-block: 4rem 4.5rem;
-    }
-    .schild-logo {
-      width: 15rem;
-    }
-  }
-
-  .ueber {
-    border-top: 0;
-  }
-  .ueber-raster {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 2rem;
-  }
-  .ueber-fakten {
-    padding-left: 0.9rem;
-    border-left: var(--strich) solid var(--linie);
-    font-weight: 600;
-    margin-block: 1.5rem 2rem;
-  }
-  @media (min-width: 64rem) {
-    .ueber-raster {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 4rem;
-      align-items: start;
-    }
-  }
-
-  .karte-zeile {
-    scroll-margin-top: 1rem;
-  }
-  .karte-zeile .kenn {
-    color: var(--linie);
-  }
-  .karte-h2 {
-    margin-bottom: 1.75rem;
-  }
-
-  .weiter {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    gap: 3.5rem;
+    padding-block: var(--luft);
     align-items: center;
-    gap: 1.5rem 2rem;
   }
-  .weiter-gleis {
-    display: flex;
-    align-items: center;
+  .ein-gross {
+    font-family: var(--serif);
+    font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+    line-height: 1.25;
+    max-width: 26ch;
+  }
+  .ein-vegan {
+    margin: 1.75rem 0 2rem;
+    font-size: 1.3rem;
+    color: var(--akzent);
+  }
+  .ein-bilder {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
     gap: 1rem;
+    align-items: end;
+  }
+  @media (min-width: 64rem) {
+    .einleitung {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      gap: 6rem;
+    }
+  }
+
+  .karte-block {
+    padding-block: var(--luft);
+    border-top: 1px solid #1d1b181f;
+    scroll-margin-top: 5rem;
+  }
+  .karte-block:nth-of-type(odd) {
+    background: #efe7da;
+  }
+  .karte-kopf {
+    margin-bottom: 3.5rem;
+    text-align: center;
+  }
+
+  .naechste {
+    border-top: 1px solid #1d1b181f;
+  }
+  .naechste-link {
+    display: grid;
+    justify-items: center;
+    padding-block: var(--luft);
+    text-align: center;
     text-decoration: none;
   }
-  .weiter-gleis .gleis {
-    --g: 3.5rem;
+  .naechste-name {
+    margin-bottom: 1.75rem;
+    font-family: var(--serif);
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    line-height: 1;
+    transition: color 400ms var(--weich);
   }
-  .weiter-label {
-    display: block;
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--tinte-2);
-  }
-  .weiter-name {
-    font-size: clamp(1.5rem, 3vw, 2.25rem);
-    font-weight: 900;
-    letter-spacing: -0.02em;
-  }
-  .weiter-gleis:hover .weiter-name {
-    text-decoration: underline;
-    text-decoration-color: var(--linie);
+  .naechste-link:hover .naechste-name {
+    color: var(--akzent);
   }
 </style>

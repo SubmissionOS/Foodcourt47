@@ -306,3 +306,8 @@ a {
     transform: none;
   }
 }
+
+/* Luft vor dem Footer, außer wenn die Seite mit einer dunklen Fläche endet */
+main > :last-child:not(.dunkel) {
+  margin-bottom: var(--luft);
+}
