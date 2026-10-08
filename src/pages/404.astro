@@ -3,7 +3,7 @@ import Basis from '../layouts/Basis.astro';
 import SeitenHero from '../components/SeitenHero.astro';
 ---
 <Basis titel="Seite nicht gefunden" beschreibung="Diese Seite gibt es nicht. Zurück zur Startseite des Foodcourt47 Hammerbrook.">
-  <SeitenHero foto="abend-tisch" titel="Dieser Tisch ist leer." satz="Die Seite gibt es nicht. Vielleicht finden Sie hier, was Sie suchen.">
+  <SeitenHero foto="abend-tisch" titel="Dieser Tisch ist leer." satz="Diese Seite gibt es nicht.">
     <p class="wege">
       <a class="knopf knopf--hell" href="/">Zur Startseite</a>
       <a class="weiter" href="/speisekarte">Speisekarte</a>
@@ -18,5 +18,11 @@ import SeitenHero from '../components/SeitenHero.astro';
     align-items: center;
     gap: 1.25rem 2rem;
     margin-top: 2rem;
+  }
+</style>
+<style is:global>
+  /* 404 endet mit dem Hero: Restfläche bis zum Footer dunkel statt creme */
+  main:has(.s-hero:only-child) {
+    background: var(--kiefer);
   }
 </style>
