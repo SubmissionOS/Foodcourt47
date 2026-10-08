@@ -68,7 +68,12 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 
       // Header wird beim Scrollen solide
       const kopf = document.querySelector<HTMLElement>('[data-kopf]');
-      const pruefen = () => kopf?.classList.toggle('ist-gescrollt', window.scrollY > 40);
+      const fest = kopf?.hasAttribute('data-fest') ?? false;
+      const pruefen = () => {
+        const oben = window.scrollY <= 40;
+        kopf?.classList.toggle('ist-oben', oben);
+        kopf?.classList.toggle('ist-gescrollt', fest || !oben);
+      };
       pruefen();
       window.addEventListener('scroll', pruefen, { passive: true });
 

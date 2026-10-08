@@ -2,9 +2,11 @@
 import { site } from '../lib/site';
 
 interface Props {
+  /** "transparent": liegt über einem Hero-Foto. "solide": startet direkt als schwebende Leiste */
   modus: 'transparent' | 'solide';
 }
 const { modus } = Astro.props;
+const fest = modus === 'solide';
 
 const links = [
   { href: '/cucino-italiano', label: 'Cucino Italiano' },
@@ -20,11 +22,10 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
 ---
 <div class="entwurf">Designentwurf von GuddiWeb · noch nicht live</div>
 
-<header class:list={['kopf', `kopf--${modus}`]} data-kopf>
-  <div class="kopf-innen">
+<header class:list={['kopf ist-oben', { 'ist-gescrollt ist-fest': fest }]} data-kopf data-fest={fest ? '' : undefined}>
+  <div class="kopf-leiste">
     <a class="logo" href="/" aria-label={`${site.name}, zur Startseite`}>
       Foodcourt<span class="logo-nr">47</span>
-      <span class="logo-ort">Hammerbrook</span>
     </a>
 
     <nav class="nav" aria-label="Hauptnavigation">
@@ -35,7 +36,7 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
       </ul>
     </nav>
 
-    <a class="knopf kopf-knopf" href="/reservieren">Tisch reservieren</a>
+    <a class="kopf-knopf" href="/reservieren">Reservieren</a>
 
     <details class="mobil">
       <summary aria-label="Menü öffnen">
@@ -51,6 +52,7 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
           </ul>
         </nav>
         <a class="knopf knopf--hell" href="/reservieren">Tisch reservieren</a>
+        <p class="mobil-info">{site.adresse.strasse}, {site.adresse.plz} {site.adresse.ort}<br />{site.telefon}</p>
       </div>
     </details>
   </div>
@@ -60,10 +62,10 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
   .entwurf {
     position: relative;
     z-index: 31;
+    height: 2rem;
     padding: 0.4rem var(--rand);
     background: var(--tinte);
     color: #d9cdb8;
-    height: 2rem;
     font-size: 0.75rem;
     line-height: 1.2rem;
     letter-spacing: 0.03em;
@@ -73,41 +75,23 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
     text-overflow: ellipsis;
   }
 
+  /* Zustand 1: transparent über dem Hero, helle Schrift */
   .kopf {
-    position: sticky;
-    top: 0;
-    z-index: 30;
-    color: var(--tinte);
-    background: var(--creme);
-    transition: background-color 400ms var(--weich), color 400ms var(--weich), box-shadow 400ms var(--weich);
-  }
-  .kopf--transparent {
+    --abstand-seite: 0px;
+    --abstand-oben: 2rem;
     position: fixed;
-    top: 2rem;
-    left: 0;
-    right: 0;
-    background: transparent;
+    top: var(--abstand-oben);
+    left: var(--abstand-seite);
+    right: var(--abstand-seite);
+    z-index: 30;
     color: var(--creme);
+    transition:
+      top 500ms var(--weich),
+      left 500ms var(--weich),
+      right 500ms var(--weich),
+      color 400ms var(--weich);
   }
-  .kopf--transparent::before {
-    content: '';
-    position: absolute;
-    inset: 0 0 -3rem;
-    background: linear-gradient(#0000004d, #0000);
-    pointer-events: none;
-    transition: opacity 400ms var(--weich);
-  }
-  .kopf--transparent:global(.ist-gescrollt) {
-    top: 0;
-    background: var(--creme);
-    color: var(--tinte);
-    box-shadow: 0 1px 0 #1d1b1814;
-  }
-  .kopf--transparent:global(.ist-gescrollt)::before {
-    opacity: 0;
-  }
-
-  .kopf-innen {
+  .kopf-leiste {
     position: relative;
     display: flex;
     align-items: center;
@@ -115,32 +99,60 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
     max-width: var(--breite);
     margin-inline: auto;
     padding: 1.1rem var(--rand);
+    border-radius: 12px;
+    transition: padding 500ms var(--weich), box-shadow 500ms var(--weich), max-width 500ms var(--weich);
+  }
+  /* Glasfläche als eigene Ebene, damit das fixierte Mobil-Menü nicht eingesperrt wird */
+  .kopf-leiste::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: #f4eee4c7;
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    backdrop-filter: blur(16px) saturate(1.4);
+    opacity: 0;
+    transition: opacity 500ms var(--weich);
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .kopf-leiste::before {
+      background: var(--creme);
+    }
+  }
+
+  /* Zustand 2: schwebende Leiste */
+  .kopf:global(.ist-gescrollt) {
+    --abstand-seite: clamp(12px, 2vw, 32px);
+    --abstand-oben: 16px;
+    color: var(--tinte);
+  }
+  .kopf:global(.ist-gescrollt) .kopf-leiste {
+    max-width: 1600px;
+    padding: 0.7rem clamp(1rem, 2.2vw, 2rem);
+    box-shadow: 0 12px 40px -12px #1d1b1826, 0 2px 8px -4px #1d1b1814;
+  }
+  .kopf:global(.ist-gescrollt) .kopf-leiste::before {
+    opacity: 1;
+  }
+  /* Seiten ohne Hero: ganz oben schwebt die Leiste unter dem Banner */
+  .kopf:global(.ist-fest.ist-oben) {
+    --abstand-oben: calc(2rem + 12px);
   }
 
   .logo {
-    display: grid;
-    grid-template-columns: auto auto;
-    justify-content: start;
     margin-right: auto;
     font-family: var(--serif);
-    font-size: 1.75rem;
+    font-size: 1.7rem;
     font-weight: 500;
     line-height: 1;
     letter-spacing: -0.01em;
     text-decoration: none;
+    white-space: nowrap;
   }
   .logo-nr {
     font-style: italic;
-    margin-left: 0.05em;
-  }
-  .logo-ort {
-    grid-column: 1 / -1;
-    margin-top: 0.3rem;
-    font-family: var(--sans);
-    font-size: 0.68rem;
-    font-weight: 400;
-    letter-spacing: 0.32em;
-    opacity: 0.8;
+    margin-left: 0.04em;
   }
 
   .nav,
@@ -149,24 +161,30 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
   }
   .nav ul {
     display: flex;
-    gap: 1.75rem;
+    gap: clamp(1.1rem, 1.6vw, 2rem);
     margin: 0;
     padding: 0;
     list-style: none;
   }
+  .nav a,
+  .kopf-knopf {
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+  }
   .nav a {
     position: relative;
-    font-size: 0.92rem;
-    font-weight: 400;
-    letter-spacing: 0.02em;
-    text-decoration: none;
+    padding-block: 0.4rem;
   }
   .nav a::after {
     content: '';
     position: absolute;
     left: 0;
-    right: 0;
-    bottom: -0.35rem;
+    right: 0.2em;
+    bottom: 0;
     height: 1px;
     background: currentColor;
     transform: scaleX(0);
@@ -177,28 +195,35 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
   .nav a[aria-current='page']::after {
     transform: scaleX(1);
   }
-  .kopf--transparent .kopf-knopf {
-    background: transparent;
-    border-color: currentColor;
-    color: inherit;
+  .kopf-knopf {
+    align-items: center;
+    min-height: 2.6rem;
+    padding: 0.55rem 1.3rem 0.5rem 1.5rem;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    transition: background-color 400ms var(--weich), color 400ms var(--weich), border-color 400ms var(--weich);
   }
-  .kopf--transparent .kopf-knopf:hover,
-  .kopf--transparent:global(.ist-gescrollt) .kopf-knopf {
+  .kopf-knopf:hover {
+    background: var(--creme);
+    border-color: var(--creme);
+    color: var(--tinte);
+  }
+  .kopf:global(.ist-gescrollt) .kopf-knopf {
     background: var(--tinte);
     border-color: var(--tinte);
     color: var(--creme);
   }
-  .kopf-knopf {
-    min-height: 2.75rem;
-    padding: 0.6rem 1.4rem;
-    font-size: 0.88rem;
+  .kopf:global(.ist-gescrollt) .kopf-knopf:hover {
+    background: var(--messing);
+    border-color: var(--messing);
   }
 
+  /* Mobil: dieselbe schwebende Leiste, Menü als Overlay */
   .mobil summary {
     display: grid;
     place-items: center;
-    width: 3rem;
-    height: 3rem;
+    width: 2.75rem;
+    height: 2.75rem;
     cursor: pointer;
     list-style: none;
   }
@@ -208,7 +233,7 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
   .mobil-linien,
   .mobil-linien::before {
     display: block;
-    width: 1.6rem;
+    width: 1.5rem;
     height: 1px;
     background: currentColor;
     transition: transform 300ms var(--weich);
@@ -229,22 +254,23 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
     top: 0;
     transform: rotate(-90deg);
   }
+  .mobil[open] summary {
+    position: relative;
+    z-index: 3;
+    color: var(--creme);
+  }
   .mobil-panel {
     position: fixed;
     inset: 0;
-    z-index: -1;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 2.5rem;
+    gap: 2.25rem;
     padding: 6rem var(--rand) 3rem;
     background: var(--kiefer);
     color: var(--creme);
-  }
-  .mobil[open] summary {
-    position: relative;
-    z-index: 2;
-    color: var(--creme);
+    overflow-y: auto;
   }
   .mobil-panel ul {
     margin: 0;
@@ -260,16 +286,28 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
     text-decoration: none;
   }
   .mobil-panel a[aria-current='page'] {
-    font-style: italic;
     color: var(--messing-hell);
   }
   .mobil-panel .knopf {
     align-self: flex-start;
   }
+  .mobil-info {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #cfc5b4;
+  }
+  /* Logo bleibt über dem offenen Menü lesbar */
+  .kopf:has(.mobil[open]) .logo {
+    position: relative;
+    z-index: 3;
+    color: var(--creme);
+  }
+  .kopf:has(.mobil[open]) .kopf-leiste::before {
+    opacity: 0;
+  }
 
   @media (min-width: 72rem) {
-    .nav,
-    .kopf-knopf {
+    .nav {
       display: block;
     }
     .kopf-knopf {
