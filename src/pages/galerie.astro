@@ -3,8 +3,11 @@ import Basis from '../layouts/Basis.astro';
 import Bild from '../components/Bild.astro';
 import { getCollection } from 'astro:content';
 import { alleKuechen } from '../lib/kuechen';
+import reihenfolge from '../content/galerie.json';
 
-const bilder = await getCollection('galerie');
+// Reihenfolge wie in galerie.json, der Loader sortiert sonst nach id
+const ids = reihenfolge.map((b) => b.id);
+const bilder = (await getCollection('galerie')).sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
 const kuechen = await alleKuechen();
 const kuecheVon = (id?: string) => kuechen.find((k) => k.id === id);
 ---
