@@ -32,13 +32,13 @@ const heroFoto = await foto(heroId);
   schema={await kuecheSchema(k)}
   ogBild={url(heroFoto, 1600)}
 >
-  <SeitenHero foto={heroId} vorzeile={`${d.kueche} im Foodcourt47`} titel={d.name} satz={d.claim} hoch />
+  <SeitenHero foto={heroId} titel={d.name} satz={d.claim} hoch />
 
   <section class="wrap einleitung" aria-label={`Über ${d.name}`}>
     <div class="ein-text einblenden">
       <p class="ein-gross">{d.einleitung[0]}</p>
       {d.einleitung.slice(1).map((p) => <p>{p}</p>)}
-      <p class="ein-vegan"><em>Auf Wunsch bereiten wir jedes Gericht vegan zu.</em></p>
+      <p class="ein-vegan">Auf Wunsch bereiten wir jedes Gericht vegan zu.</p>
       <a class="weiter" href={d.website} target="_blank" rel="noopener">{domain}<span class="nur-sr"> (öffnet neues Fenster)</span></a>
     </div>
     {weitere.length > 0 && (
@@ -53,8 +53,9 @@ const heroFoto = await foto(heroId);
   {d.karten.map((c) => (
     <section class="karte-block" id={c.id} aria-labelledby={`${c.id}-titel`}>
       <header class="karte-kopf wrap">
-        <span class="vorzeile">{c.zeit}</span>
+
         <h2 id={`${c.id}-titel`}>{c.titel}</h2>
+        <p class="karte-zeit">{c.zeit}</p>
       </header>
       <div class="wrap">
         <Karte karte={c} spalten={c.sektionen.length > 2} />
@@ -64,9 +65,9 @@ const heroFoto = await foto(heroId);
 
   <section class="naechste" style={`--akzent: var(--k-${naechste.id})`} aria-label="Weitere Küche">
     <a class="naechste-link wrap" href={`/${naechste.id}`}>
-      <span class="vorzeile">Nebenan im Foodcourt47</span>
+
       <span class="naechste-name">{naechste.data.name}</span>
-      <span class="weiter">Zur Küche</span>
+      <span class="weiter">Nebenan im Foodcourt47</span>
     </a>
   </section>
 </Basis>
@@ -87,7 +88,8 @@ const heroFoto = await foto(heroId);
   }
   .ein-vegan {
     margin: 1.75rem 0 2rem;
-    font-size: 1.3rem;
+    font-family: var(--serif);
+    font-size: 1.4rem;
     color: var(--akzent);
   }
   .ein-bilder {
@@ -114,6 +116,11 @@ const heroFoto = await foto(heroId);
   .karte-kopf {
     margin-bottom: 3.5rem;
     text-align: center;
+  }
+  .karte-zeit {
+    margin: 0.9rem auto 0;
+    color: var(--rauch);
+    letter-spacing: 0.04em;
   }
 
   .naechste {

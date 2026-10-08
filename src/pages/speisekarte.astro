@@ -11,7 +11,7 @@ const kuechen = await alleKuechen();
   titel="Speisekarte"
   beschreibung="Speisekarte des Foodcourt47 Hammerbrook mit Preisen: Mittagskarten Mo–Fr 11–16 Uhr und Abendkarten von Cucino Italiano, Manju und Sushify."
 >
-  <SeitenHero foto="abend-tisch" vorzeile="Die Karte" titel="Speise<em>karte</em>" satz="Drei Küchen, eine Karte. Mittags gelten feste Preise, danach die Abendkarten." />
+  <SeitenHero foto="abend-tisch" titel="Speisekarte" satz="Drei Küchen, eine Karte. Mittags gelten feste Preise, danach die Abendkarten." />
 
   <nav class="wrap inhalt" aria-label="Küchen auf dieser Seite">
     {kuechen.map((k, i) => (
@@ -26,7 +26,7 @@ const kuechen = await alleKuechen();
     <section class="sk" id={k.id} style={`--akzent: var(--k-${k.id})`} aria-labelledby={`sk-${k.id}`}>
       <Bild id={k.data.fotos[0]} format="21 / 8" sizes="100vw" class="sk-band" />
       <header class="wrap sk-kopf">
-        <span class="vorzeile">{k.data.kueche}</span>
+
         <h2 id={`sk-${k.id}`}>{k.data.name}</h2>
         <a class="weiter" href={`/${k.id}`}>Mehr über {k.data.name}</a>
       </header>
@@ -34,7 +34,7 @@ const kuechen = await alleKuechen();
         {k.data.karten.map((c) => (
           <section class="sk-karte" aria-labelledby={`sk-${k.id}-${c.id}`}>
             <h3 id={`sk-${k.id}-${c.id}`} class="sk-karte-titel">
-              {c.titel} <em>{c.zeit}</em>
+              {c.titel} <span class="sk-zeit">{c.zeit}</span>
             </h3>
             <Karte karte={c} ebene="h4" spalten={c.sektionen.length > 2} />
           </section>
@@ -43,7 +43,7 @@ const kuechen = await alleKuechen();
     </section>
   ))}
 
-  <p class="wrap sk-fuss"><em>Jedes Gericht gibt es auf Wunsch vegan.</em> <span class="ph">[Hinweis auf Allergene und Zusatzstoffe]</span></p>
+  <p class="wrap sk-fuss"><span class="sk-vegan">Jedes Gericht gibt es auf Wunsch vegan.</span> <span class="ph">[Hinweis auf Allergene und Zusatzstoffe]</span></p>
 </Basis>
 
 <style>
@@ -91,7 +91,7 @@ const kuechen = await alleKuechen();
     font-size: clamp(1.9rem, 3vw, 2.5rem);
     text-align: center;
   }
-  .sk-karte-titel em {
+  .sk-karte-titel .sk-zeit {
     display: block;
     margin-top: 0.4rem;
     font-size: 0.55em;
@@ -102,7 +102,7 @@ const kuechen = await alleKuechen();
     text-align: center;
     font-size: 1.25rem;
   }
-  .sk-fuss em {
+  .sk-fuss .sk-vegan {
     display: block;
     margin-bottom: 0.75rem;
     font-size: 1.4rem;

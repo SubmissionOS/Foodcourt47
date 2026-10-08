@@ -17,7 +17,7 @@ const formate = ['4 / 5', '3 / 2', '1 / 1', '4 / 5', '3 / 2', '4 / 5', '1 / 1', 
   titel="Galerie"
   beschreibung="Fotos aus dem Foodcourt47 Hammerbrook: Currys von Manju, Sushi von Sushify und Pizza von Cucino Italiano."
 >
-  <SeitenHero foto="sushify-staebchen" vorzeile="Galerie" titel="Aus unseren <em>Küchen</em>" />
+  <SeitenHero foto="sushify-staebchen" titel="Aus unseren Küchen" />
 
   <section class="wrap g" aria-label="Fotos">
     <p class="g-hinweis"><span class="ph">[Fotos vom Gastraum und vom Team folgen]</span></p>
@@ -25,7 +25,7 @@ const formate = ['4 / 5', '3 / 2', '1 / 1', '4 / 5', '3 / 2', '4 / 5', '1 / 1', 
       {bilder.map((b, i) => (
         <li class={`g-${i + 1}`}>
           <Bild id={b.data.foto} format={formate[i % formate.length]} sizes="(min-width: 64rem) 45vw, 100vw" />
-          {name(b.data.kueche) && <p class="g-text" style={`--akzent: var(--k-${b.data.kueche})`}><em>{name(b.data.kueche)}</em></p>}
+          {name(b.data.kueche) && <p class="g-text" style={`--akzent: var(--k-${b.data.kueche})`}>{name(b.data.kueche)}</p>}
         </li>
       ))}
     </ul>

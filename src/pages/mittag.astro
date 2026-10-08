@@ -13,10 +13,10 @@ const ab = preis(abPreis(kuechen));
   titel="Mittagstisch Mo–Fr 11–16 Uhr"
   beschreibung={`Mittagstisch im Foodcourt47 Hammerbrook: Pizza, Curry und Sushi Mo–Fr 11–16 Uhr zum festen Preis, ab ${ab}.`}
 >
-  <SeitenHero foto="cucino-pasta" vorzeile="Mittagstisch" titel="Mittag in <em>Hammerbrook</em>" satz={`Montag bis Freitag, 11 bis 16 Uhr. Drei Küchen, feste Preise ab ${ab}.`} />
+  <SeitenHero foto="cucino-pasta" titel="Mittag in Hammerbrook" satz={`Montag bis Freitag, 11 bis 16 Uhr. Drei Küchen, feste Preise ab ${ab}.`} />
 
   <section class="wrap m-intro einblenden" aria-label="Einleitung">
-    <p>Für die Mittagspause zwischen zwei Terminen oder mit dem ganzen Team: Jede Küche hält mittags drei Gerichte bereit. <em>Auf Wunsch ist jedes davon vegan.</em></p>
+    <p>Für die Mittagspause zwischen zwei Terminen oder mit dem ganzen Team: Jede Küche hält mittags drei Gerichte bereit. Auf Wunsch ist jedes davon vegan.</p>
   </section>
 
   {kuechen.map((k, i) => {
@@ -25,7 +25,7 @@ const ab = preis(abPreis(kuechen));
       <section class:list={['m-kueche wrap', { 'm-kueche--rechts': i % 2 === 1 }]} style={`--akzent: var(--k-${k.id})`} aria-labelledby={`m-${k.id}`}>
         <Bild id={k.data.fotos[0]} format="4 / 5" sizes="(min-width: 64rem) 34vw, 100vw" class="m-bild" />
         <div class="m-karte">
-          <span class="vorzeile">{k.data.kueche}</span>
+
           <h2 id={`m-${k.id}`}>{k.data.name}</h2>
           <Karte karte={karte} />
           <a class="weiter" href={`/${k.id}`}>Ganze Karte von {k.data.name}</a>
@@ -35,7 +35,7 @@ const ab = preis(abPreis(kuechen));
   })}
 
   <section class="m-schluss wrap" aria-label="Reservieren">
-    <p class="m-schluss-satz">Mit mehreren Kollegen unterwegs? <em>Reservieren Sie vorab.</em></p>
+    <p class="m-schluss-satz">Mit mehreren Kollegen unterwegs? Reservieren Sie vorab.</p>
     <a class="knopf" href="/reservieren">Tisch reservieren</a>
   </section>
 </Basis>

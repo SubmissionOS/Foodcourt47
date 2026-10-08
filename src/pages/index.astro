@@ -1,5 +1,6 @@
 ---
 import Basis from '../layouts/Basis.astro';
+import HeroStart from '../components/HeroStart.astro';
 import Bild from '../components/Bild.astro';
 import { getCollection } from 'astro:content';
 import { alleKuechen, abPreis } from '../lib/kuechen';
@@ -25,32 +26,11 @@ const texte: Record<string, string> = {
 };
 ---
 <Basis titel="Start" beschreibung={site.beschreibung} schema={foodcourtSchema(kuechen)} ogBild={url(hero, 1600)}>
-  <section class="hero dunkel" aria-labelledby="hero-titel">
-    <div class="hero-bild" data-parallax data-placeholder-photo="PLACEHOLDER_PHOTO">
-      <img
-        src={url(hero, 2000)}
-        srcset={srcset(hero)}
-        sizes="100vw"
-        alt={hero.alt}
-        width={hero.breite}
-        height={hero.hoehe}
-        fetchpriority="high"
-      />
-    </div>
-    <div class="hero-text wrap">
-      <span class="vorzeile">Hammerbrook, Hamburg</span>
-      <h1 id="hero-titel">Drei Küchen.<br /><em>Ein Tisch.</em></h1>
-      <p class="hero-satz">Pizza von Cucino Italiano, Currys von Manju und Sushi von Sushify, gemeinsam unter einem Dach.</p>
-      <div class="hero-aktionen">
-        <a class="knopf knopf--hell" href="/reservieren">Tisch reservieren</a>
-        <a class="weiter" href="/speisekarte">Speisekarte</a>
-      </div>
-    </div>
-  </section>
+  <HeroStart variante="b" />
 
   <section class="intro wrap" aria-label="Willkommen">
     <p class="intro-satz einblenden">
-      Am selben Tisch bestellt der eine Pizza, die andere ein Curry und der Dritte Sushi. <em>Genau dafür gibt es Foodcourt47.</em>
+      Am selben Tisch bestellt der eine Pizza, die andere ein Curry und der Dritte Sushi. Genau dafür gibt es Foodcourt47.
     </p>
   </section>
 
@@ -59,7 +39,6 @@ const texte: Record<string, string> = {
       <section class:list={['kueche', `kueche--${i + 1}`]} style={`--akzent: var(--k-${k.id})`} aria-labelledby={`k-${k.id}`}>
         <Bild id={k.data.fotos[0]} format={i === 1 ? '4 / 5' : '5 / 4'} sizes="(min-width: 64rem) 55vw, 100vw" class="kueche-bild" />
         <div class="kueche-text einblenden">
-          <span class="vorzeile">{k.data.kueche}</span>
           <h2 id={`k-${k.id}`}>{k.data.name}</h2>
           <p>{texte[k.id]}</p>
           <a class="weiter" href={`/${k.id}`}>Zur Karte von {k.data.name}</a>
@@ -70,16 +49,15 @@ const texte: Record<string, string> = {
 
   <section class="mittag dunkel" aria-labelledby="mittag-titel">
     <div class="wrap mittag-innen einblenden">
-      <span class="vorzeile">Mittagstisch</span>
-      <h2 id="mittag-titel">Montag bis Freitag,<br /><em>11 bis 16 Uhr</em></h2>
-      <p class="lead">Jede Küche hat mittags drei Gerichte zum festen Preis, ab {ab}. Auf Wunsch ist jedes davon vegan.</p>
+      <h2 id="mittag-titel">Mittags von Montag bis Freitag</h2>
+      <p class="lead">Zwischen 11 und 16 Uhr hat jede Küche drei Gerichte zum festen Preis, ab {ab}. Auf Wunsch ist jedes davon vegan.</p>
       <a class="weiter" href="/mittag">Der Mittagstisch</a>
     </div>
   </section>
 
   <section class="streifen" aria-labelledby="streifen-titel">
     <div class="wrap streifen-kopf">
-      <h2 id="streifen-titel" class="streifen-titel">Aus unseren <em>Küchen</em></h2>
+      <h2 id="streifen-titel" class="streifen-titel">Aus unseren Küchen</h2>
       <a class="weiter" href="/galerie">Zur Galerie</a>
     </div>
     <ul class="streifen-liste" tabindex="0" aria-label="Fotos, seitlich scrollbar">
@@ -96,8 +74,7 @@ const texte: Record<string, string> = {
       <img src={url(abschluss, 2000)} srcset={srcset(abschluss)} sizes="100vw" alt={abschluss.alt} width={abschluss.breite} height={abschluss.hoehe} loading="lazy" decoding="async" />
     </div>
     <div class="wrap abschluss-text einblenden">
-      <span class="vorzeile">Reservierung</span>
-      <h2 id="abschluss-titel">Wir halten <em>Ihren Tisch</em> bereit.</h2>
+      <h2 id="abschluss-titel">Wir halten Ihren Tisch bereit.</h2>
       <p class="lead">Für die Mittagspause mit Kollegen, den Abend mit der Familie oder zu zweit.</p>
       <a class="knopf knopf--hell" href="/reservieren">Tisch reservieren</a>
       <p class="abschluss-adresse" set:html={markiere(`${site.adresse.strasse} · ${site.adresse.plz} ${site.adresse.ort}`)} />
@@ -106,61 +83,6 @@ const texte: Record<string, string> = {
 </Basis>
 
 <style>
-  /* Hero */
-  .hero {
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    min-height: 100svh;
-    overflow: hidden;
-    background: var(--kiefer);
-  }
-  .hero-bild {
-    position: absolute;
-    inset: -4% 0 0;
-    will-change: transform;
-    transform: scale(1.06);
-  }
-  .hero-bild img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(to top, #121815d9 0%, #1218158c 35%, #12181533 70%, #12181559 100%),
-      linear-gradient(to right, #12181580 0%, #12181500 60%);
-  }
-  .hero .vorzeile {
-    color: #e9dcc4;
-  }
-  .hero-text {
-    position: relative;
-    z-index: 1;
-    padding-block: 9rem clamp(3.5rem, 9vh, 7rem);
-  }
-  .hero h1 {
-    font-size: clamp(3.6rem, 11vw, 9rem);
-    line-height: 0.95;
-  }
-  .hero h1 em {
-    color: var(--creme);
-  }
-  .hero-satz {
-    margin: 1.75rem 0 2.25rem;
-    font-size: clamp(1.1rem, 1.7vw, 1.3rem);
-    max-width: 36ch;
-  }
-  .hero-aktionen {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1.25rem 2rem;
-  }
-
   /* Intro */
   .intro {
     padding-block: var(--luft);

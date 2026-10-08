@@ -69,3 +69,12 @@ Stockfotos sind im Code und in `src/content/fotos.json` mit `PLACEHOLDER_PHOTO` 
 | manju-samosa | Samosas mit Chili | images.unsplash.com/photo-1601050690597-df0568f70950 | [Fotograf:in eintragen] |
 | tisch-teilen | Gedeckter Tisch, mehrere Gerichte | images.unsplash.com/photo-1424847651672-bf20a4b0982b | [Fotograf:in eintragen] |
 | abend-tisch | Teller und Gläser am Abend | images.unsplash.com/photo-1414235077428-338989a2e8c0 | [Fotograf:in eintragen] |
+
+## Hero der Startseite (Runde 3)
+Das Muster „kleiner Ort über der Headline, Wechsel normal/kursiv, unten links Headline, Einzeiler und zwei Buttons“ ist entfernt, ebenso Überzeilen und kursive Schlusswörter auf allen Seiten.
+
+Zwei Varianten wurden gebaut und bei 1440 px und 390 px verglichen:
+- **A, zentriert:** „Drei Küchen unter einem Dach“ mittig, Button darunter. Ruhig, aber austauschbar: So könnte jedes Restaurant beginnen, und die dreizeilige Headline füllt die Bildmitte wie ein Plakat.
+- **B, asymmetrisch (gewählt):** „Pizza, Curry“ links oben, „und Sushi.“ rechts darunter, über die ganze Bildbreite gesetzt, der eine Button rechts unter der zweiten Zeile. Die Headline nennt sofort, was es gibt, die Diagonale führt das Auge durch das Foto zum Reservieren-Button, und das Layout funktioniert auch auf 390 px.
+
+Die Speisekarte erreicht man über die Navigation. Ein dezenter Hinweis „Entdecken“ am unteren Rand führt zum Inhalt.

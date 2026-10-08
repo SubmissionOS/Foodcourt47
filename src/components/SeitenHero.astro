@@ -4,13 +4,11 @@ import { foto, url, srcset } from '../lib/fotos';
 
 interface Props {
   foto: string;
-  vorzeile?: string;
-  /** darf <em> enthalten */
   titel: string;
   satz?: string;
   hoch?: boolean;
 }
-const { foto: fotoId, vorzeile, titel, satz, hoch = false } = Astro.props;
+const { foto: fotoId, titel, satz, hoch = false } = Astro.props;
 const f = await foto(fotoId);
 ---
 <section class:list={['s-hero dunkel', { 's-hero--hoch': hoch }]} aria-labelledby="s-hero-titel">
@@ -18,7 +16,6 @@ const f = await foto(fotoId);
     <img src={url(f, 2000)} srcset={srcset(f)} sizes="100vw" alt={f.alt} width={f.breite} height={f.hoehe} fetchpriority="high" />
   </div>
   <div class="wrap s-hero-text">
-    {vorzeile && <span class="vorzeile">{vorzeile}</span>}
     <h1 id="s-hero-titel" set:html={titel} />
     {satz && <p class="s-hero-satz">{satz}</p>}
     <slot />
@@ -59,12 +56,6 @@ const f = await foto(fotoId);
     position: relative;
     z-index: 1;
     padding-block: 9rem clamp(3rem, 8vh, 5.5rem);
-  }
-  .s-hero .vorzeile {
-    color: #e9dcc4;
-  }
-  .s-hero h1 :global(em) {
-    color: #e9dcc4;
   }
   .s-hero-satz {
     margin: 1.5rem 0 0;

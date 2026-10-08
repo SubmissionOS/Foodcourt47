@@ -1,0 +1,137 @@
+---
+// Hero der Startseite. Variante "a": zentriert. Variante "b": asymmetrisch über die Bildbreite.
+import { foto, url, srcset } from '../lib/fotos';
+
+interface Props {
+  variante?: 'a' | 'b';
+}
+const { variante = 'b' } = Astro.props;
+// PLACEHOLDER_PHOTO: Stockfoto, siehe DESIGN.md
+const hero = await foto('hero-gastraum');
+---
+<section class:list={['hero dunkel', `hero--${variante}`]} aria-labelledby="hero-titel">
+  <div class="hero-bild" data-parallax data-placeholder-photo="PLACEHOLDER_PHOTO">
+    <img src={url(hero, 2400)} srcset={srcset(hero)} sizes="100vw" alt={hero.alt} width={hero.breite} height={hero.hoehe} fetchpriority="high" />
+  </div>
+
+  {variante === 'a' ? (
+    <div class="hero-inhalt wrap">
+      <h1 id="hero-titel">Drei Küchen unter einem Dach</h1>
+      <a class="knopf knopf--hell hero-knopf" href="/reservieren">Tisch reservieren</a>
+    </div>
+  ) : (
+    <div class="hero-inhalt wrap">
+      <h1 id="hero-titel">
+        <span class="b-zeile b-zeile--1">Pizza, Curry</span>
+        <span class="b-zeile b-zeile--2">und Sushi.</span>
+      </h1>
+      <a class="knopf knopf--hell hero-knopf" href="/reservieren">Tisch reservieren</a>
+    </div>
+  )}
+
+  <a class="hero-scroll" href="#entdecken">
+    <span>Entdecken</span>
+    <span class="hero-scroll-linie" aria-hidden="true"></span>
+  </a>
+</section>
+<span id="entdecken"></span>
+
+<style>
+  .hero {
+    position: relative;
+    display: grid;
+    height: 100svh;
+    min-height: 34rem;
+    overflow: hidden;
+    background: var(--kiefer);
+    margin-top: -2rem;
+  }
+  .hero-bild {
+    position: absolute;
+    inset: -4% 0 0;
+    transform: scale(1.06);
+    will-change: transform;
+  }
+  .hero-bild img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, #1218158c 0%, #12181559 55%, #12181599 100%);
+  }
+  .hero-inhalt {
+    position: relative;
+    z-index: 1;
+  }
+  .hero h1 {
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+  }
+
+  /* Variante A: zentriert */
+  .hero--a .hero-inhalt {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    text-align: center;
+  }
+  .hero--a h1 {
+    max-width: 12ch;
+    font-size: clamp(3.4rem, 9vw, 8.75rem);
+  }
+  .hero--a .hero-knopf {
+    margin-top: 2.75rem;
+  }
+
+  /* Variante B: asymmetrisch über die Bildbreite */
+  .hero--b .hero-inhalt {
+    display: grid;
+    align-content: center;
+  }
+  .hero--b h1 {
+    display: grid;
+    font-size: clamp(3.4rem, 15vw, 11.5rem);
+  }
+  .b-zeile--2 {
+    justify-self: end;
+  }
+  .hero--b .hero-knopf {
+    justify-self: end;
+    margin-top: 2.5rem;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 1.75rem;
+    z-index: 1;
+    display: grid;
+    justify-items: center;
+    gap: 0.6rem;
+    transform: translateX(-50%);
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #f4eee4cc;
+  }
+  .hero-scroll-linie {
+    width: 1px;
+    height: 2.75rem;
+    background: linear-gradient(#f4eee4, #f4eee400);
+    animation: sinken 2.4s var(--weich) infinite;
+    transform-origin: top;
+  }
+  @keyframes sinken {
+    0% { transform: scaleY(0); opacity: 1; }
+    60% { transform: scaleY(1); opacity: 1; }
+    100% { transform: scaleY(1); opacity: 0; }
+  }
+</style>
