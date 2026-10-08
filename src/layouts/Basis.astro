@@ -1,0 +1,91 @@
+---
+import '@fontsource/overpass/400.css';
+import '@fontsource/overpass/600.css';
+import '@fontsource/overpass/800.css';
+import '@fontsource/overpass/900.css';
+import '@fontsource/overpass-mono/400.css';
+import '@fontsource/overpass-mono/600.css';
+import '../styles/global.css';
+import Kopf from '../components/Kopf.astro';
+import Fuss from '../components/Fuss.astro';
+import { site } from '../lib/site';
+
+interface Props {
+  titel: string;
+  beschreibung: string;
+  /** Linienfarbe der Seite, z. B. "manju" */
+  linie?: string;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+  ogBild?: string;
+}
+
+const { titel, beschreibung, linie, schema, ogBild } = Astro.props;
+const voll = Astro.url.pathname === '/' ? `${site.name} · Pizza, Curry und Sushi in Hamburg` : `${titel} · ${site.name}`;
+const kanonisch = new URL(Astro.url.pathname, Astro.site).href;
+const bild = ogBild ?? 'https://foodcourt47.de/wp-content/uploads/2023/02/2-1024x710.jpg';
+const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{voll}</title>
+    <meta name="description" content={beschreibung} />
+    <link rel="canonical" href={kanonisch} />
+    {/* Entwurf: nicht indexieren, damit die Live-Seite nicht doppelt auftaucht. Vor dem Livegang entfernen. */}
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#121a1f" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={voll} />
+    <meta property="og:description" content={beschreibung} />
+    <meta property="og:url" content={kanonisch} />
+    <meta property="og:image" content={bild} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+  </head>
+  <body class:list={[linie && `linie-${linie}`]}>
+    <a class="springen" href="#inhalt">Zum Inhalt springen</a>
+    <Kopf />
+    <main id="inhalt" tabindex="-1">
+      <slot />
+    </main>
+    <Fuss />
+    <script>
+      import { berlinJetzt, mittagStatus, abendLaeuft, TAGE } from '../lib/zeit';
+
+      // Alle Live-Anzeigen der Seite füllen: Uhr, Status, heutiger Tag.
+      function aktualisieren() {
+        const j = berlinJetzt();
+        const s = mittagStatus(j);
+        document.documentElement.dataset.mittag = s.phase;
+        document.documentElement.dataset.abend = abendLaeuft(j) ? 'ja' : 'nein';
+        document.querySelectorAll<HTMLElement>('[data-uhr]').forEach((el) => (el.textContent = j.uhrzeit));
+        document.querySelectorAll<HTMLElement>('[data-datum]').forEach((el) => (el.textContent = j.datum));
+        document.querySelectorAll<HTMLElement>('[data-mittag-satz]').forEach((el) => (el.textContent = s.satz));
+        document.querySelectorAll<HTMLElement>('[data-mittag-kurz]').forEach((el) => {
+          el.textContent = s.kurz;
+          el.dataset.phase = s.phase;
+        });
+        document.querySelectorAll<HTMLElement>('[data-wochentag]').forEach((el) => {
+          const heute = Number(el.dataset.wochentag) === j.tag;
+          el.classList.toggle('ist-heute', heute);
+          if (heute) el.setAttribute('aria-current', 'date');
+          else el.removeAttribute('aria-current');
+        });
+        document.querySelectorAll<HTMLElement>('[data-heute-name]').forEach((el) => {
+          el.textContent = TAGE[j.tag];
+        });
+      }
+
+      aktualisieren();
+      setInterval(aktualisieren, 30_000);
+    </script>
+  </body>
+</html>

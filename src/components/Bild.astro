@@ -1,0 +1,68 @@
+---
+// Bild mit lazy loading und sichtbarem Ersatz, falls die Altseite das Foto nicht mehr liefert.
+interface Props {
+  src?: string | null;
+  alt: string;
+  breite: number;
+  hoehe: number;
+  platzhalter?: string;
+  eager?: boolean;
+  class?: string;
+  sizes?: string;
+}
+const { src, alt, breite, hoehe, platzhalter = '[Foto folgt]', eager = false, class: klasse, sizes } = Astro.props;
+const fehlt = !src;
+---
+<figure class:list={['bild', klasse, { 'ist-fehlend': fehlt }]} style={`aspect-ratio: ${breite} / ${hoehe}`} data-bild>
+  {!fehlt && (
+    <img
+      src={src}
+      alt={alt}
+      width={breite}
+      height={hoehe}
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+      sizes={sizes}
+      onerror="var f=this.parentElement;f.classList.add('ist-fehlend');f.querySelector('.bild-ersatz').removeAttribute('aria-hidden');this.remove();"
+    />
+  )}
+  <span class="bild-ersatz" aria-hidden={fehlt ? undefined : 'true'}><span class="ph">{platzhalter}</span></span>
+</figure>
+
+<style>
+  .bild {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    background: var(--grund-tief);
+  }
+  .bild img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .bild-ersatz {
+    display: none;
+  }
+  .ist-fehlend {
+    background:
+      linear-gradient(to top right, transparent calc(50% - 1px), #12191f33 50%, transparent calc(50% + 1px)),
+      linear-gradient(to top left, transparent calc(50% - 1px), #12191f33 50%, transparent calc(50% + 1px)),
+      var(--grund-tief);
+    border: 2px dashed #12191f55;
+  }
+  .ist-fehlend .bild-ersatz {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.95rem;
+  }
+  .ist-fehlend .ph {
+    background: var(--grund);
+  }
+</style>

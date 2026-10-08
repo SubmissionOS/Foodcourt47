@@ -1,0 +1,233 @@
+---
+// Abfahrtstafel: das auffällige Element der Startseite.
+export interface TafelZeile {
+  zeit: string;
+  gleis: number;
+  linie: string;
+  ziel: string;
+  via: string;
+  preis: string;
+  href: string;
+}
+interface Props {
+  titel: string;
+  zeilen: TafelZeile[];
+}
+const { titel, zeilen } = Astro.props;
+---
+<section class="tafel" aria-labelledby="tafel-titel">
+  <header class="tafel-kopf">
+    <h2 id="tafel-titel" class="tafel-titel">{titel}</h2>
+    <p class="tafel-uhr mono" aria-label="Aktuelle Uhrzeit in Hamburg">
+      <span data-uhr>--:--</span>
+    </p>
+  </header>
+
+  <table class="tafel-tabelle">
+    <caption class="nur-sr">Mittagsangebote der drei Küchen mit Startzeit, Gleis, Preis und aktuellem Status</caption>
+    <thead>
+      <tr>
+        <th scope="col">Zeit</th>
+        <th scope="col">Gleis</th>
+        <th scope="col">Küche und Gerichte</th>
+        <th scope="col" class="r">ab</th>
+        <th scope="col" class="r">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {zeilen.map((z) => (
+        <tr class={`linie-${z.linie}`}>
+          <td class="t-zeit mono">{z.zeit}</td>
+          <td class="t-gleis"><span class="gleis">{z.gleis}</span></td>
+          <td class="t-ziel">
+            <a href={z.href}><span data-flap>{z.ziel}</span></a>
+            <span class="t-via">{z.via}</span>
+          </td>
+          <td class="t-preis mono r">{z.preis}</td>
+          <td class="t-status mono r"><span class="status" data-mittag-kurz>Mo–Fr</span></td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+
+  <p class="tafel-fuss"><span data-mittag-satz>Mittagsangebote Mo–Fr von 11 bis 16 Uhr.</span></p>
+</section>
+
+<script>
+  // Einmaliges Umblättern der Zielzeilen beim Laden. Entfällt bei reduzierter Bewegung.
+  const ZEICHEN = 'ABCDEFGHIJKLMNOPRSTUVWZ0123456789';
+  const ruhig = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!ruhig) {
+    document.querySelectorAll<HTMLElement>('[data-flap]').forEach((el, reihe) => {
+      const ziel = el.textContent ?? '';
+      el.setAttribute('aria-label', ziel);
+      let schritt = 0;
+      const start = performance.now() + reihe * 140;
+      const tick = (t: number) => {
+        if (t < start) return requestAnimationFrame(tick);
+        schritt += 1;
+        const fertig = Math.floor(schritt * 0.9);
+        el.textContent = [...ziel]
+          .map((c, i) => (i < fertig || c === ' ' ? c : ZEICHEN[(i * 7 + schritt * 3) % ZEICHEN.length]))
+          .join('');
+        if (fertig < ziel.length) requestAnimationFrame(tick);
+        else el.removeAttribute('aria-label');
+      };
+      requestAnimationFrame(tick);
+    });
+  }
+</script>
+
+<style>
+  .tafel {
+    background: var(--tafel);
+    color: var(--tafel-text);
+    padding: 1.25rem 1rem 1rem;
+    box-shadow: 0 0 0 var(--strich) var(--tinte);
+  }
+  .tafel-kopf {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 2px solid var(--tafel-text);
+  }
+  .tafel-titel {
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+  .tafel-uhr {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--signal);
+  }
+
+  .tafel-tabelle {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  thead {
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #a8b2b0;
+  }
+  th {
+    font-weight: 400;
+    text-align: left;
+    padding: 0.75rem 0.5rem 0.5rem 0;
+  }
+  .r {
+    text-align: right;
+  }
+  td {
+    padding: 0.9rem 0.6rem 0.8rem 0;
+    vertical-align: top;
+    border-top: 1px solid var(--tafel-linie);
+    /* Fuge der Fallblattanzeige */
+    background: linear-gradient(to bottom, transparent calc(50% - 0.5px), #00000055 calc(50% - 0.5px), #00000055 calc(50% + 0.5px), transparent calc(50% + 0.5px));
+  }
+  td:last-child,
+  th:last-child {
+    padding-right: 0;
+  }
+  .t-zeit {
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+  .t-gleis .gleis {
+    --g: 2rem;
+  }
+  .t-ziel a {
+    display: block;
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(1.05rem, 2.4vw, 1.5rem);
+    line-height: 1.15;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .t-ziel a:hover {
+    color: var(--signal);
+  }
+  .t-via {
+    display: block;
+    margin-top: 0.3rem;
+    font-size: 0.875rem;
+    color: #c3cbc9;
+  }
+  .t-preis {
+    white-space: nowrap;
+    font-size: 1.05rem;
+  }
+  .status {
+    display: inline-block;
+    white-space: nowrap;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.15rem 0.4rem 0.05rem;
+  }
+  .status[data-phase='laeuft'] {
+    background: var(--signal);
+    color: var(--tinte);
+  }
+
+  .tafel-fuss {
+    margin: 0;
+    padding-top: 0.9rem;
+    border-top: 2px solid var(--tafel-text);
+    font-size: 0.95rem;
+    max-width: none;
+  }
+
+  /* Schmal: Tabelle als Zeilenblöcke */
+  @media (max-width: 39.99rem) {
+    thead {
+      display: none;
+    }
+    .tafel-tabelle,
+    tbody {
+      display: block;
+    }
+    tr {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      grid-template-areas:
+        'zeit ziel status'
+        'gleis ziel preis';
+      column-gap: 0.75rem;
+      padding: 0.9rem 0;
+      border-top: 1px solid var(--tafel-linie);
+    }
+    td {
+      display: block;
+      padding: 0;
+      border: 0;
+      background: none;
+    }
+    .t-zeit { grid-area: zeit; }
+    .t-gleis { grid-area: gleis; margin-top: 0.4rem; }
+    .t-ziel { grid-area: ziel; }
+    .t-status { grid-area: status; }
+    .t-preis { grid-area: preis; margin-top: 0.4rem; font-size: 0.95rem; }
+  }
+
+  @media (min-width: 48rem) {
+    .tafel {
+      padding: 1.75rem 2rem 1.25rem;
+    }
+    .tafel-titel {
+      font-size: 1.15rem;
+    }
+    .tafel-uhr {
+      font-size: 2.25rem;
+    }
+  }
+</style>

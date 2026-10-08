@@ -1,0 +1,120 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { preis, markiere } from '../lib/format';
+
+type Karte = CollectionEntry<'kuechen'>['data']['karten'][number];
+interface Props {
+  karte: Karte;
+  /** Überschriftenebene der Sektionstitel */
+  ebene?: 'h3' | 'h4';
+  spalten?: boolean;
+}
+const { karte, ebene = 'h3', spalten = false } = Astro.props;
+const Titel = ebene;
+---
+<div class:list={['karte', { 'karte--spalten': spalten }]}>
+  {karte.hinweis && <p class="karte-hinweis" set:html={markiere(karte.hinweis)} />}
+  {karte.sektionen.map((s) => (
+    <section class="karte-sektion">
+      <Titel class="karte-titel" set:html={markiere(s.titel)} />
+      <ul>
+        {s.gerichte.map((g) => (
+          <li class="gericht">
+            <div class="gericht-zeile">
+              {g.nr && <span class="gericht-nr mono" aria-label={`Nummer ${g.nr}`}>{g.nr}</span>}
+              <span class="gericht-name" set:html={markiere(g.name)} />
+              <span class="gericht-punkte" aria-hidden="true"></span>
+              <span class:list={['gericht-preis mono', { 'ph-preis': g.preis === null }]} set:html={markiere(preis(g.preis))} />
+            </div>
+            {g.beschreibung && <p class="gericht-text" set:html={markiere(g.beschreibung)} />}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</div>
+
+<style>
+  .karte-hinweis {
+    margin-bottom: 1.5rem;
+    padding-left: 0.9rem;
+    border-left: var(--strich) solid var(--linie);
+    font-size: 0.95rem;
+  }
+  .karte-sektion + .karte-sektion {
+    margin-top: 2.25rem;
+  }
+  .karte-titel {
+    margin-bottom: 0.25rem;
+    padding-bottom: 0.4rem;
+    font-size: 0.8125rem;
+    font-family: var(--mono);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--linie);
+    border-bottom: 2px solid var(--linie);
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .gericht {
+    padding-block: 0.8rem 0.7rem;
+    border-bottom: 1px solid #12191f26;
+  }
+  .gericht-zeile {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  .gericht-nr {
+    flex: none;
+    min-width: 2.1rem;
+    font-size: 0.8rem;
+    color: var(--tinte-2);
+  }
+  .gericht-name {
+    font-weight: 800;
+    font-size: 1.1rem;
+    line-height: 1.25;
+  }
+  .gericht-punkte {
+    flex: 1;
+    min-width: 1rem;
+    border-bottom: 2px dotted #12191f59;
+    transform: translateY(-0.25em);
+  }
+  .gericht-preis {
+    flex: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+  .gericht-text {
+    margin: 0.2rem 0 0;
+    font-size: 0.95rem;
+    color: var(--tinte-2);
+    max-width: 52ch;
+  }
+  .gericht:has(.gericht-nr) .gericht-text {
+    padding-left: 2.6rem;
+  }
+
+  @media (min-width: 64rem) {
+    .karte--spalten {
+      columns: 2;
+      column-gap: 4rem;
+    }
+    .karte--spalten .karte-hinweis {
+      column-span: all;
+    }
+    .karte--spalten .karte-sektion {
+      break-inside: avoid;
+      padding-bottom: 2.25rem;
+    }
+    .karte--spalten .karte-sektion + .karte-sektion {
+      margin-top: 0;
+    }
+  }
+</style>

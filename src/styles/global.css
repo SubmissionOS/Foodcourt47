@@ -1,0 +1,290 @@
+/* Foodcourt47 · Fahrplanraster. Konzept in DESIGN.md */
+
+:root {
+  --grund: #e6e9e8;
+  --grund-tief: #d7dcda;
+  --tinte: #121a1f;
+  --tinte-2: #3c474e;
+  --tafel: #121a1f;
+  --tafel-linie: #2b363d;
+  --tafel-text: #e6e9e8;
+  --signal: #f2c230;
+
+  --cucino: #1e5a44;
+  --manju: #b7312a;
+  --sushify: #a3206f;
+  --linie: var(--tinte);
+
+  --text: 'Overpass', system-ui, sans-serif;
+  --mono: 'Overpass Mono', ui-monospace, monospace;
+
+  --rand: clamp(1rem, 4vw, 3rem);
+  --breite: 78rem;
+  --kenn: 5.5rem;
+  --strich: 3px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--grund);
+  color: var(--tinte);
+  font-family: var(--text);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  font-feature-settings: 'kern', 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.6rem, 8.5vw, 6.25rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 4.2vw, 3rem);
+}
+
+h3 {
+  font-size: 1.3rem;
+  letter-spacing: -0.005em;
+}
+
+p {
+  margin: 0 0 1em;
+  max-width: 62ch;
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  text-decoration-color: var(--linie);
+}
+
+:focus-visible {
+  outline: 3px solid var(--tinte);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 7px var(--signal);
+  border-radius: 1px;
+}
+
+.auf-dunkel :focus-visible,
+.tafel :focus-visible {
+  outline-color: var(--signal);
+  box-shadow: none;
+}
+
+::selection {
+  background: var(--signal);
+  color: var(--tinte);
+}
+
+.mono {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.nur-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.springen {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--signal);
+  color: var(--tinte);
+  font-weight: 700;
+}
+
+.springen:focus {
+  top: 1rem;
+}
+
+/* Platzhalter sichtbar markieren */
+.ph {
+  background: repeating-linear-gradient(-45deg, #f2c23055 0 6px, #f2c23022 6px 12px);
+  outline: 1px dashed #8a6d00;
+  outline-offset: 1px;
+  padding: 0 0.2em;
+  color: #4a3b00;
+  font-style: normal;
+}
+
+.auf-dunkel .ph,
+.tafel .ph {
+  color: var(--signal);
+  outline-color: var(--signal);
+  background: transparent;
+}
+
+/* Raster */
+.wrap {
+  width: 100%;
+  max-width: var(--breite);
+  margin-inline: auto;
+  padding-inline: var(--rand);
+}
+
+/* Fahrplanzeile: links Kennspalte, rechts Inhalt */
+.zeile {
+  display: grid;
+  gap: 0.5rem 2rem;
+  border-top: var(--strich) solid var(--tinte);
+  padding-block: 1.25rem 2.5rem;
+}
+
+.zeile > .kenn {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--tinte-2);
+}
+
+@media (min-width: 48rem) {
+  .zeile {
+    grid-template-columns: var(--kenn) minmax(0, 1fr);
+    padding-block: 1.5rem 4rem;
+  }
+}
+
+/* Gleisschild: Zahl im Farbquadrat */
+.gleis {
+  --g: 2.75rem;
+  display: inline-grid;
+  place-items: center;
+  inline-size: var(--g);
+  block-size: var(--g);
+  background: var(--linie);
+  color: #fff;
+  font-weight: 900;
+  font-size: calc(var(--g) * 0.62);
+  line-height: 1;
+  padding-top: 0.08em;
+  flex: none;
+}
+
+.linie-cucino-italiano {
+  --linie: var(--cucino);
+}
+.linie-manju {
+  --linie: var(--manju);
+}
+.linie-sushify {
+  --linie: var(--sushify);
+}
+
+/* Schalter */
+.knopf {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 3rem;
+  padding: 0.7rem 1.25rem 0.55rem;
+  background: var(--tinte);
+  color: var(--grund);
+  border: var(--strich) solid var(--tinte);
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.knopf:hover {
+  background: var(--signal);
+  color: var(--tinte);
+}
+
+.knopf--hell {
+  background: transparent;
+  color: var(--tinte);
+}
+
+.knopf--hell:hover {
+  background: var(--tinte);
+  color: var(--grund);
+}
+
+.knopf .pfeil {
+  font-family: var(--mono);
+  font-weight: 600;
+}
+
+/* Eyebrow über Überschriften */
+.marke {
+  display: block;
+  margin-bottom: 1rem;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lead {
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  line-height: 1.45;
+  max-width: 40ch;
+}
+
+/* Fließtext aus Markdown */
+.prosa h2 {
+  font-size: 1.4rem;
+  margin: 2.5rem 0 0.75rem;
+}
+
+.prosa ul {
+  padding-left: 1.2em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

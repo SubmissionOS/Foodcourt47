@@ -1,0 +1,251 @@
+---
+import { navigation, site } from '../lib/site';
+import { getCollection } from 'astro:content';
+
+const kuechen = await getCollection('kuechen');
+const gleisVon = (linie?: string) => kuechen.find((k) => k.id === linie)?.data.gleis;
+const pfad = Astro.url.pathname.replace(/\/$/, '') || '/';
+const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
+---
+<div class="entwurf auf-dunkel" role="note">
+  <div class="wrap entwurf-innen">
+    <span>Designentwurf von GuddiWeb · noch nicht live</span>
+    <span class="entwurf-rechts">Inhalte in [eckigen Klammern] fehlen noch</span>
+  </div>
+</div>
+
+<header class="kopf">
+  <div class="wrap kopf-innen">
+    <a class="wortmarke" href="/" aria-label={`${site.name}, zur Startseite`}>
+      <span class="wm-name">Foodcourt</span><span class="wm-nr">47</span>
+      <span class="wm-ort">Hammerbrook</span>
+    </a>
+
+    <nav class="nav-gross" aria-label="Hauptnavigation">
+      <ul>
+        {navigation.map((p) => (
+          <li class:list={[p.linie && `linie-${p.linie}`]}>
+            <a href={p.href} aria-current={aktiv(p.href)}>
+              {p.linie && <span class="mini-gleis" aria-hidden="true">{gleisVon(p.linie)}</span>}
+              {p.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <a class="knopf kopf-knopf" href="/reservieren" aria-current={aktiv('/reservieren')}>Reservieren</a>
+
+    <details class="nav-klein">
+      <summary>
+        <span class="nav-klein-label">Menü</span>
+        <span class="nav-klein-icon" aria-hidden="true"></span>
+      </summary>
+      <nav aria-label="Hauptnavigation mobil">
+        <ul>
+          <li><a href="/" aria-current={aktiv('/')}>Start</a></li>
+          {navigation.map((p) => (
+            <li class:list={[p.linie && `linie-${p.linie}`]}>
+              <a href={p.href} aria-current={aktiv(p.href)}>
+                {p.linie ? <span class="mini-gleis" aria-hidden="true">{gleisVon(p.linie)}</span> : <span class="mini-leer" aria-hidden="true"></span>}
+                {p.label}
+              </a>
+            </li>
+          ))}
+          <li><a href="/reservieren" aria-current={aktiv('/reservieren')}><span class="mini-leer" aria-hidden="true"></span>Tisch reservieren</a></li>
+        </ul>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<style>
+  .entwurf {
+    background: var(--tinte);
+    color: var(--signal);
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .entwurf-innen {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 0.45rem 0.35rem;
+  }
+  .entwurf-rechts {
+    display: none;
+    color: var(--tafel-text);
+    font-weight: 400;
+  }
+
+  .kopf {
+    position: relative;
+    border-bottom: var(--strich) solid var(--tinte);
+    background: var(--grund);
+  }
+  .kopf-innen {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-height: 4.5rem;
+  }
+
+  .wortmarke {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: end;
+    column-gap: 0.3rem;
+    margin-right: auto;
+    text-decoration: none;
+    line-height: 1;
+  }
+  .wm-name {
+    font-weight: 900;
+    font-size: 1.45rem;
+    letter-spacing: -0.03em;
+  }
+  .wm-nr {
+    background: var(--tinte);
+    color: var(--grund);
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 0.28rem 0.3rem 0.15rem;
+    align-self: center;
+  }
+  .wm-ort {
+    grid-column: 1 / -1;
+    margin-top: 0.3rem;
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--tinte-2);
+  }
+
+  .mini-gleis,
+  .mini-leer {
+    display: inline-grid;
+    place-items: center;
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    margin-right: 0.45rem;
+    background: var(--linie);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 900;
+    padding-top: 0.1em;
+    vertical-align: 0.1em;
+  }
+  .mini-leer {
+    background: transparent;
+  }
+
+  .nav-gross,
+  .kopf-knopf {
+    display: none;
+  }
+  .nav-gross ul,
+  .nav-klein ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-gross ul {
+    display: flex;
+    gap: 0.25rem 1.35rem;
+  }
+  .nav-gross a {
+    display: inline-block;
+    padding-block: 0.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border-bottom: var(--strich) solid transparent;
+  }
+  .nav-gross a:hover {
+    border-bottom-color: var(--linie);
+  }
+  .nav-gross a[aria-current='page'] {
+    border-bottom-color: var(--linie);
+  }
+
+  .nav-klein summary {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 3rem;
+    padding: 0.5rem 0.25rem 0.5rem 0.75rem;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 800;
+  }
+  .nav-klein summary::-webkit-details-marker {
+    display: none;
+  }
+  .nav-klein-icon {
+    position: relative;
+    inline-size: 1.4rem;
+    block-size: 3px;
+    background: var(--tinte);
+    box-shadow: 0 -7px 0 var(--tinte), 0 7px 0 var(--tinte);
+  }
+  .nav-klein[open] .nav-klein-icon {
+    box-shadow: none;
+    background: var(--tinte);
+    transform: rotate(45deg);
+  }
+  .nav-klein[open] .nav-klein-icon::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--tinte);
+    transform: rotate(90deg);
+  }
+  .nav-klein nav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    z-index: 20;
+    background: var(--grund);
+    border-bottom: var(--strich) solid var(--tinte);
+    padding: 0 var(--rand) 1.5rem;
+  }
+  .nav-klein li {
+    border-top: 1px solid #12191f33;
+  }
+  .nav-klein a {
+    display: flex;
+    align-items: center;
+    min-height: 3.25rem;
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-decoration: none;
+  }
+  .nav-klein a[aria-current='page'] {
+    text-decoration: underline;
+    text-decoration-color: var(--linie);
+  }
+
+  @media (min-width: 40rem) {
+    .entwurf-rechts {
+      display: inline;
+    }
+  }
+
+  @media (min-width: 68rem) {
+    .nav-gross,
+    .kopf-knopf {
+      display: block;
+    }
+    .nav-klein {
+      display: none;
+    }
+    .kopf-innen {
+      gap: 2rem;
+    }
+  }
+</style>
