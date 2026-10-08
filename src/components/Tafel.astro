@@ -61,20 +61,26 @@ const { titel, zeilen } = Astro.props;
   if (!ruhig) {
     document.querySelectorAll<HTMLElement>('[data-flap]').forEach((el, reihe) => {
       const ziel = el.textContent ?? '';
+      const zeichen = [...ziel];
       el.setAttribute('aria-label', ziel);
       let schritt = 0;
-      const start = performance.now() + reihe * 140;
-      const tick = (t: number) => {
-        if (t < start) return requestAnimationFrame(tick);
-        schritt += 1;
-        const fertig = Math.floor(schritt * 0.9);
-        el.textContent = [...ziel]
-          .map((c, i) => (i < fertig || c === ' ' ? c : ZEICHEN[(i * 7 + schritt * 3) % ZEICHEN.length]))
-          .join('');
-        if (fertig < ziel.length) requestAnimationFrame(tick);
-        else el.removeAttribute('aria-label');
+      const fertigMachen = () => {
+        el.textContent = ziel;
+        el.removeAttribute('aria-label');
       };
-      requestAnimationFrame(tick);
+      window.setTimeout(() => {
+        const takt = window.setInterval(() => {
+          schritt += 1;
+          const fertig = schritt - 4;
+          el.textContent = zeichen
+            .map((c, i) => (i < fertig || c === ' ' ? c : ZEICHEN[(i * 7 + schritt * 3) % ZEICHEN.length]))
+            .join('');
+          if (fertig >= zeichen.length) {
+            window.clearInterval(takt);
+            fertigMachen();
+          }
+        }, 45);
+      }, reihe * 160);
     });
   }
 </script>
@@ -198,7 +204,7 @@ const { titel, zeilen } = Astro.props;
     }
     tr {
       display: grid;
-      grid-template-columns: auto 1fr auto;
+      grid-template-columns: auto minmax(0, 1fr) auto;
       grid-template-areas:
         'zeit ziel status'
         'gleis ziel preis';

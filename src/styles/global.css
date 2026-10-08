@@ -168,6 +168,7 @@ a:hover {
 /* Fahrplanzeile: links Kennspalte, rechts Inhalt */
 .zeile {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.5rem 2rem;
   border-top: var(--strich) solid var(--tinte);
   padding-block: 1.25rem 2.5rem;
