@@ -1,0 +1,45 @@
+[
+  {
+    "id": "sushi-staebchen",
+    "src": "https://foodcourt47.de/wp-content/uploads/2023/02/2-1024x710.jpg",
+    "breite": 1024, "hoehe": 710,
+    "alt": "Sushi-Rolle mit Thunfisch und Avocado zwischen Essstäbchen, dahinter weitere Rollen mit Spicy Mayo und schwarzem Topping",
+    "kueche": "sushify"
+  },
+  {
+    "id": "curry-schale",
+    "src": "https://foodcourt47.de/wp-content/uploads/2023/02/3-1024x710.jpg",
+    "breite": 1024, "hoehe": 710,
+    "alt": "Cremiges Curry mit Fleischstücken in einer dunklen Schale, mit Sahne verziert, daneben Gewürzschälchen",
+    "kueche": "manju"
+  },
+  {
+    "id": "reis-teller",
+    "src": "https://foodcourt47.de/wp-content/uploads/2023/02/1-1024x710.jpg",
+    "breite": 1024, "hoehe": 710,
+    "alt": "Gelber Gewürzreis mit Hähnchen, Cashewkernen, Rosinen und Koriander auf einem türkisblauen Teller",
+    "kueche": "manju"
+  },
+  {
+    "id": "lachs-rolle",
+    "src": "https://foodcourt47.de/wp-content/uploads/2023/02/4-1024x710.jpg",
+    "breite": 1024, "hoehe": 710,
+    "alt": "Angeschnittene Sushi-Rollen mit Lachs, Avocado, Sesam und Kresse in Nahaufnahme",
+    "kueche": "sushify"
+  },
+  {
+    "id": "platzhalter-pizza",
+    "src": "",
+    "breite": 1024, "hoehe": 710,
+    "alt": "",
+    "platzhalter": "[Foto: Pizza von Cucino Italiano]",
+    "kueche": "cucino-italiano"
+  },
+  {
+    "id": "platzhalter-raum",
+    "src": "",
+    "breite": 1024, "hoehe": 710,
+    "alt": "",
+    "platzhalter": "[Foto: Gastraum des Foodcourt47]"
+  }
+]

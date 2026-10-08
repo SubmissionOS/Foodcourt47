@@ -1,0 +1,40 @@
+{
+  "name": "Foodcourt47 Hammerbrook",
+  "kurzname": "Foodcourt47",
+  "stadtteil": "Hammerbrook",
+  "stadt": "Hamburg",
+  "url": "https://foodcourt47.de",
+  "beschreibung": "Drei Küchen unter einem Dach in Hamburg-Hammerbrook: Pizza und Pasta von Cucino Italiano, indische Currys von Manju und Premium-Sushi von Sushify. Mittagsangebote Mo–Fr 11–16 Uhr.",
+  "adresse": {
+    "strasse": "[Straße und Hausnummer]",
+    "plz": "[PLZ]",
+    "ort": "Hamburg"
+  },
+  "telefon": "[Telefonnummer]",
+  "email": "[E-Mail-Adresse]",
+  "oeffnungszeiten": "[Reguläre Öffnungszeiten]",
+  "anfahrt": "[Anfahrt: nächste S-Bahn-Station, Buslinien, Parken]",
+  "mittag": { "tage": "Mo–Fr", "von": "11:00", "bis": "16:00" },
+  "abendkarteAb": "17:00",
+  "reservierungUrl": "https://mytools.aleno.me/reservations/v2.0/reservations.html?k=eyJrIjoid2l2dTVrM2lsNm15cnBiOWlwdzZ4bmViajhycnVkaWRpZ280bGZwODBsbzlhNGlweTEiLCJyIjoidHkyNFNtWFFGOTVMNzk4YkwiLCJzIjoiaHR0cHM6Ly9teXRvb2xzLmFsZW5vLm1lLyJ9",
+  "merkmale": [
+    "Alle Gerichte auf Wunsch vegan",
+    "Familienfreundlich",
+    "Mittagsangebote Mo–Fr 11–16 Uhr"
+  ],
+  "logo": {
+    "src": "https://foodcourt47.de/wp-content/uploads/2023/01/3.svg",
+    "alt": "Foodcourt-Logo: weißer Schriftzug „Food court“ in einem schwarzen Kreis mit rotem Ring, darunter „We love good food“"
+  },
+  "impressum": {
+    "firma": "Eat Manju Phönix GmbH",
+    "strasse": "Drosselstraße 11",
+    "plzOrt": "22147 Hamburg",
+    "vertreten": "Zalahuddin Nezam",
+    "register": "HRB 141475",
+    "gericht": "Amtsgericht Hamburg",
+    "ustId": "[USt-IdNr.]",
+    "telefon": "[Telefonnummer]",
+    "email": "[E-Mail-Adresse]"
+  }
+}

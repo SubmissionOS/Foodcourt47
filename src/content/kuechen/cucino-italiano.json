@@ -1,0 +1,59 @@
+{
+  "name": "Cucino Italiano",
+  "gleis": 1,
+  "reihenfolge": 1,
+  "kategorie": "Pizza & Pasta",
+  "kueche": "Italienisch",
+  "claim": "Pizza und Pasta wie in Venedig.",
+  "einleitung": [
+    "Cucino Italiano backt Pizza und kocht Pasta nach italienischem Vorbild. Saucen und Teig entstehen jeden Tag aus frischen Zutaten.",
+    "Mittags gibt es drei Pizzen zum festen Preis. Ab 17 Uhr gilt die Abendkarte."
+  ],
+  "website": "https://cucino-italiano.de",
+  "logo": {
+    "src": "https://foodcourt47.de/wp-content/uploads/2023/01/Cuccino-Italiano-278x300.png",
+    "alt": "Logo von Cucino Italiano: goldener Schriftzug in einem goldenen Rahmen",
+    "breite": 278, "hoehe": 300
+  },
+  "bild": null,
+  "bildPlatzhalter": "[Foto: Pizza von Cucino Italiano]",
+  "karten": [
+    {
+      "id": "mittag",
+      "titel": "Mittagskarte",
+      "zeit": "Mo–Fr 11–16 Uhr",
+      "sektionen": [
+        {
+          "titel": "Pizza",
+          "gerichte": [
+            { "name": "Pizza Thunfisch", "beschreibung": "mit Thunfisch und Zwiebeln", "preis": 8.5 },
+            { "name": "Pizza Salame", "beschreibung": null, "preis": 8.5 },
+            { "name": "Pizza Chicken", "beschreibung": "mit Hähnchen, Paprika, Mais und Jalapeños", "preis": 9.9 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "abend",
+      "titel": "Abendkarte",
+      "zeit": "ab 17 Uhr",
+      "hinweis": "[Abendkarte: Gerichte und Preise liefert das Restaurant nach]",
+      "sektionen": [
+        {
+          "titel": "[Pizza]",
+          "gerichte": [
+            { "name": "[Gericht]", "beschreibung": "[Zutaten]", "preis": null },
+            { "name": "[Gericht]", "beschreibung": "[Zutaten]", "preis": null }
+          ]
+        },
+        {
+          "titel": "[Pasta]",
+          "gerichte": [
+            { "name": "[Gericht]", "beschreibung": "[Zutaten]", "preis": null },
+            { "name": "[Gericht]", "beschreibung": "[Zutaten]", "preis": null }
+          ]
+        }
+      ]
+    }
+  ]
+}

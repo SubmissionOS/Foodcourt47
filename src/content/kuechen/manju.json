@@ -1,0 +1,67 @@
+{
+  "name": "Manju",
+  "gleis": 2,
+  "reihenfolge": 2,
+  "kategorie": "Indian Express",
+  "kueche": "Indisch",
+  "claim": "Your Indian Express. Seit 2009.",
+  "einleitung": [
+    "Manju kocht seit 2009 indische Currys in Hamburg. Angefangen hat alles in der Wandelhalle am Hauptbahnhof.",
+    "Mittags stehen drei Currys mit Basmatireis zum Einheitspreis bereit. Abends kommen Vorspeisen und weitere Currys mit Huhn, Rind, Kichererbsen und Paneer dazu."
+  ],
+  "website": "https://eatmanju.de",
+  "logo": {
+    "src": "https://foodcourt47.de/wp-content/uploads/2023/01/Manju-1-278x300.png",
+    "alt": "Logo von Manju: roter tanzender Elefant über dem Schriftzug „Manju – Your Indian Express“",
+    "breite": 278, "hoehe": 300
+  },
+  "bild": {
+    "src": "https://foodcourt47.de/wp-content/uploads/2023/02/3-1024x710.jpg",
+    "alt": "Cremiges Curry mit Fleischstücken in einer dunklen Schale, mit Sahne verziert",
+    "breite": 1024, "hoehe": 710
+  },
+  "karten": [
+    {
+      "id": "mittag",
+      "titel": "Mittagskarte",
+      "zeit": "Mo–Fr 11–16 Uhr",
+      "sektionen": [
+        {
+          "titel": "Currys mit Basmatireis",
+          "gerichte": [
+            { "name": "Chicken Makhan", "beschreibung": "mit Basmatireis", "preis": 9.9 },
+            { "name": "Palak Paneer", "beschreibung": "hausgemachter indischer Käse mit Tomaten in Curry-Spinat-Sauce, mit Basmatireis", "preis": 9.9 },
+            { "name": "Chicken Madras", "beschreibung": "Hähnchenfilet in pikanter Kokos-Curry-Sauce, mit Basmatireis", "preis": 9.9 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "abend",
+      "titel": "Abendkarte",
+      "zeit": "[Uhrzeit]",
+      "hinweis": "Beschreibungen aus der Manju-Speisekarte. [Preise der Abendkarte liefert das Restaurant nach]",
+      "sektionen": [
+        {
+          "titel": "Vorspeisen",
+          "gerichte": [
+            { "name": "Chicken Pakora", "beschreibung": "in Kichererbsenmehl gebackene Hähnchenfiletstreifen, dazu Dip nach Wahl", "preis": null },
+            { "name": "Samosa", "beschreibung": "gebackene Teigtaschen mit mariniertem Gemüse, dazu Dip nach Wahl", "preis": null },
+            { "name": "Veg. Pakora", "beschreibung": "in Kichererbsenmehl gebackenes Gemüse, dazu Dip nach Wahl", "preis": null }
+          ]
+        },
+        {
+          "titel": "Currys",
+          "gerichte": [
+            { "name": "Chicken Madras", "beschreibung": "angebratene Hähnchenfiletstücke in pikanter Kokos-Curry-Sauce, mit Basmatireis", "preis": null },
+            { "name": "Chicken Saag", "beschreibung": "Hähnchenfilet mit Tomaten und Ingwer in Spinat-Curry-Sauce", "preis": null },
+            { "name": "Beef Curry", "beschreibung": "Rindfleisch in Kokos-Curry-Sauce", "preis": null },
+            { "name": "Beef Saag", "beschreibung": "Rindfleisch mit Tomaten und Ingwer in Curry-Spinat-Sauce", "preis": null },
+            { "name": "Kicher Curry", "beschreibung": "Kichererbsen, Tomaten und Kartoffeln in Curry-Sauce", "preis": null },
+            { "name": "Palak Paneer", "beschreibung": "hausgemachter indischer Käse mit Tomaten in Curry-Spinat-Sauce", "preis": null }
+          ]
+        }
+      ]
+    }
+  ]
+}

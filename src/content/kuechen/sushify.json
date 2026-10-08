@@ -1,0 +1,136 @@
+{
+  "name": "Sushify",
+  "gleis": 3,
+  "reihenfolge": 3,
+  "kategorie": "Premium-Sushi",
+  "kueche": "Japanisch",
+  "claim": "Premium-Sushi aus täglich frischen Zutaten.",
+  "einleitung": [
+    "Sushify bereitet jedes Sushi einzeln zu, mit täglich frischen Zutaten und Fisch in Premiumqualität.",
+    "Mittags gibt es drei Rollen zum festen Preis. Die ganze Karte reicht von Maki über California Rolls bis zu Tatar und Sashimi."
+  ],
+  "website": "https://sushify.de",
+  "logo": {
+    "src": "https://foodcourt47.de/wp-content/uploads/2023/01/Zeichenflaeche-1-Kopie-1-278x300.jpg",
+    "alt": "Logo von Sushify: Schriftzug „Sushify“ auf einem leuchtenden Schild, daneben eine Katze im Kimono vor nächtlicher Skyline",
+    "breite": 278, "hoehe": 300
+  },
+  "bild": {
+    "src": "https://foodcourt47.de/wp-content/uploads/2023/02/4-1024x710.jpg",
+    "alt": "Angeschnittene Sushi-Rollen mit Lachs, Avocado, Sesam und Kresse",
+    "breite": 1024, "hoehe": 710
+  },
+  "karten": [
+    {
+      "id": "mittag",
+      "titel": "Mittagskarte",
+      "zeit": "Mo–Fr 11–16 Uhr",
+      "sektionen": [
+        {
+          "titel": "Rollen",
+          "gerichte": [
+            { "name": "Avocado Maki", "beschreibung": "8 Stück, Avocado gerollt", "preis": 7.5 },
+            { "name": "Simplify it", "beschreibung": "8 Stück, gebackenes Hähnchenbrustfilet, Frischkäse, Avocadocreme, Gurke, Sesam und Schnittlauch, mit Asia Chili", "preis": 12.9 },
+            { "name": "Goldify", "beschreibung": "8 Stück, Thunfischfilet, frische Trüffel, Avocado und Trüffel-Mayo", "preis": 18.5 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "karte",
+      "titel": "Sushi-Karte",
+      "zeit": "Stand Februar 2023",
+      "hinweis": "Preise laut Sushify-Speisekarte vom 02.02.2023. Sie können heute abweichen. [Aktuelle Preise bestätigen]",
+      "sektionen": [
+        {
+          "titel": "Maki · 8 Stück",
+          "gerichte": [
+            { "nr": "59", "name": "Lachs Maki", "beschreibung": "Lachsfilet", "preis": 8.9 },
+            { "nr": "60", "name": "Tuna Maki", "beschreibung": "Thunfischfilet", "preis": 9.4 },
+            { "nr": "61", "name": "Avocado Maki", "beschreibung": "Avocado gerollt", "preis": 7.5 },
+            { "nr": "62", "name": "Surimi Maki", "beschreibung": "Surimi gerollt", "preis": 6.4 },
+            { "nr": "63", "name": "Gurke Maki", "beschreibung": "Gurkenstreifen gerollt, vegan", "preis": 6.4 },
+            { "nr": "64", "name": "Tempura Garnelen Maki", "beschreibung": "gebackene Black-Tiger-Garnelen", "preis": 7.5 },
+            { "nr": "65", "name": "Tempura Chicken Maki", "beschreibung": "gebackenes Hähnchenbrustfilet mit Spicy Mayo", "preis": 7.5 }
+          ]
+        },
+        {
+          "titel": "California Rolls · 8 Stück",
+          "gerichte": [
+            { "nr": "49", "name": "No Need to Justify", "beschreibung": "Surimi, Avocado und Frischkäse mit Tobiko", "preis": 12.9 },
+            { "nr": "50", "name": "Qualify No. 1", "beschreibung": "Thunfisch, Gurke und Frischkäse mit Schnittlauch", "preis": 14.9 },
+            { "nr": "51", "name": "Purify Yourself", "beschreibung": "Lachsfilet, Avocado, Frischkäse und Sesam", "preis": 13.9 },
+            { "nr": "52", "name": "Simplify it", "beschreibung": "gebackenes Hähnchenbrustfilet, Frischkäse, Avocadocreme, Gurke, Sesam und Schnittlauch, mit Asia Chili", "preis": 12.9 },
+            { "nr": "53", "name": "Modify Yourself", "beschreibung": "gebackenes Entenbrustfilet, Gurke, Erdnusscreme, Röstzwiebeln und Kresse", "preis": 13.9 },
+            { "nr": "54", "name": "Detoxify", "beschreibung": "Avocado, Gurke, Frischkäse und Sesam", "preis": 11.9 }
+          ]
+        },
+        {
+          "titel": "Crispify · 5 Stück",
+          "gerichte": [
+            { "nr": "1", "name": "Crispify Tempura Chicken", "beschreibung": "gebackenes Hähnchenbrustfilet, Gurke, Avocado, Teriyaki und Spicy Mayo", "preis": 9.2 },
+            { "nr": "2", "name": "Crispify Tempura Lachs", "beschreibung": "gebackenes Lachsfilet, Gurke und Spicy Mayo", "preis": 9.7 },
+            { "nr": "3", "name": "Crispify Lachs", "beschreibung": "Lachsfilet, Avocado, Gurke und Frischkäse", "preis": 9.7 },
+            { "nr": "4", "name": "Crispify Tempura Ebi", "beschreibung": "gebackene Black-Tiger-Garnelen, Avocado, Schnittlauch und Sweet Chili", "preis": 9.7 },
+            { "nr": "5", "name": "Crispify Vegan", "beschreibung": "außen und innen gebacken, mit Avocado, Karotte und Spargel, Spicy Mayo on top", "preis": 9.5 }
+          ]
+        },
+        {
+          "titel": "Premium Fusion · 8 Stück",
+          "gerichte": [
+            { "nr": "10", "name": "Beautyfy", "beschreibung": "gebackener Spargel, Black-Tiger-Garnele, Gurke, Avocadocreme, Kimchi-Sesam und Spicy Mayo", "preis": 16.9 },
+            { "nr": "11", "name": "Stay Beefy", "beschreibung": "flambiertes Rinderfilet, Black-Tiger-Garnelen, Gurke, Sesam, Kresse und Avocadocreme mit Teriyaki", "preis": 17.9 },
+            { "nr": "12", "name": "Unify", "beschreibung": "marinierter Lachs und Thunfisch, gebackener Spargel, Kimchi-Sesam, Schnittlauch und Mangosauce", "preis": 13.9 },
+            { "nr": "13", "name": "Creamify", "beschreibung": "Avocado innen und on top, Gurke, Frischkäse und Avocadocreme", "preis": 14.5 },
+            { "nr": "14", "name": "Satisfy", "beschreibung": "Thunfisch- und Lachsfilet, Black-Tiger-Garnelen, Trüffel-Mayo und Kaviar", "preis": 17.5 },
+            { "nr": "15", "name": "Intensify it", "beschreibung": "flambiertes Lachsfilet, Black-Tiger-Garnele, Gurke, Avocado und Sweet-Chili-Koriander-Sauce", "preis": 15.9 },
+            { "nr": "16", "name": "Goldify", "beschreibung": "Thunfischfilet, frische Trüffel, Avocado und Trüffel-Mayo", "preis": 18.5 },
+            { "nr": "17", "name": "Signify Vegan", "beschreibung": "gebackener Tofu, Avocado und Spargel, Avocado und vegane Mayo on top", "preis": 14.9 },
+            { "nr": "18", "name": "Colourfy Vegan", "beschreibung": "gebackene Karotte, Spargel, Rucola und Paprika mit Teriyaki, Kimchi-Sesam und Mayo", "preis": 15.5 }
+          ]
+        },
+        {
+          "titel": "Nigiri, Gunkan, Sashimi",
+          "gerichte": [
+            { "nr": "43", "name": "Tuna Nigiri", "beschreibung": "2 Stück, Thunfischfilet", "preis": 8.9 },
+            { "nr": "44", "name": "Lachs Nigiri", "beschreibung": "2 Stück, Lachsfilet", "preis": 8.9 },
+            { "nr": "30", "name": "Gunkan Lachs", "beschreibung": "2 Stück", "preis": 7.9 },
+            { "nr": "31", "name": "Gunkan Tuna", "beschreibung": "2 Stück", "preis": 8.9 },
+            { "nr": "32", "name": "Gunkan Tobiko", "beschreibung": "2 Stück, Fischrogen", "preis": 8.9 },
+            { "nr": "23", "name": "Sashimi Lachs", "beschreibung": "5 Stück", "preis": 16.9 },
+            { "nr": "24", "name": "Sashimi Tuna", "beschreibung": "5 Stück", "preis": 17.9 },
+            { "nr": "25", "name": "Sashimi Mix", "beschreibung": "6 Stück, Lachs und Thunfisch", "preis": 18.9 }
+          ]
+        },
+        {
+          "titel": "Tatar und Rocketfy Rolls",
+          "gerichte": [
+            { "nr": "37", "name": "Tuna Tatar", "beschreibung": "mit Tobiko und Kaviar, inklusive Sushi-Reis", "preis": 21.9 },
+            { "nr": "38", "name": "Lachs Tatar", "beschreibung": "mit Tobiko und Kaviar, inklusive Sushi-Reis", "preis": 19.9 },
+            { "nr": "70", "name": "Rocketfy Thunfisch", "beschreibung": "6 Stück in Reispapier, Thunfisch, Gurke, Frischkäse und Sushi-Reis", "preis": 15.9 },
+            { "nr": "71", "name": "Rocketfy Lachs", "beschreibung": "6 Stück in Reispapier, Lachs, Avocado, Gurke, Frischkäse, Rucola, Tobiko und Kaviar", "preis": 14.9 }
+          ]
+        },
+        {
+          "titel": "Menüs · je drei Rollen",
+          "gerichte": [
+            { "nr": "100", "name": "Happyfy Menü", "beschreibung": "Simplify it, Beautify, Purify Yourself", "preis": 39.9 },
+            { "nr": "101", "name": "Crispify Menü", "beschreibung": "Crispify Tempura Lachs, Tempura Chicken, Tempura Ebi", "preis": 29.9 },
+            { "nr": "102", "name": "Detoxify Menü", "beschreibung": "Detoxify, Creamify, Gurke Maki", "preis": 32.9 },
+            { "nr": "103", "name": "Luxury Menü", "beschreibung": "Stay Beefy, Goldify, Satisfy", "preis": 42.9 }
+          ]
+        },
+        {
+          "titel": "Vorspeisen und Dessert",
+          "gerichte": [
+            { "nr": "82", "name": "Tempura Garnele", "beschreibung": "5 Stück, Black-Tiger-Garnelen im Tempurateig, Dip nach Wahl", "preis": 9.9 },
+            { "nr": "83", "name": "Edamame", "beschreibung": "250 g, gekochte Sojabohnen mit Meersalz", "preis": 6.9 },
+            { "nr": "84", "name": "Tempura Lachs", "beschreibung": "5 Stück, Lachsfilet im Tempurateig, Dip nach Wahl", "preis": 8.9 },
+            { "nr": "76", "name": "Mochi Schokolade", "beschreibung": "2 Stück, Reiskuchen mit Füllung", "preis": 6.5 },
+            { "nr": "77", "name": "Mochi Strawberry Cheesecake", "beschreibung": "2 Stück, Reiskuchen mit Füllung", "preis": 6.5 }
+          ]
+        }
+      ]
+    }
+  ]
+}
