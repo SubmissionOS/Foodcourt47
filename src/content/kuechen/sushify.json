@@ -46,8 +46,7 @@
     {
       "id": "karte",
       "titel": "Sushi-Karte",
-      "zeit": "Stand Juli 2023",
-      "hinweis": "Preise laut Sushify-Speisekarte vom Juli 2023. Sie können heute abweichen. [Aktuelle Preise bestätigen]",
+      "zeit": "täglich",
       "sektionen": [
         {
           "titel": "Maki · 8 Stück",

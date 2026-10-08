@@ -6,14 +6,43 @@
   "url": "https://foodcourt47.de",
   "beschreibung": "Drei Küchen unter einem Dach in Hamburg-Hammerbrook: Pizza und Pasta von Cucino Italiano, indische Currys von Manju und Premium-Sushi von Sushify. Mittagsangebote Mo–Fr 11–16 Uhr.",
   "adresse": {
-    "strasse": "Hammerbrookstraße 47 [bestätigen]",
-    "plz": "20097 [bestätigen]",
+    "strasse": "Hammerbrookstraße 47",
+    "plz": "20097",
     "ort": "Hamburg"
   },
-  "telefon": "[Telefonnummer]",
-  "email": "[E-Mail-Adresse]",
-  "oeffnungszeiten": "[Reguläre Öffnungszeiten]",
-  "anfahrt": "[Anfahrt: nächste S-Bahn-Station, Buslinien, Parken]",
+  "telefon": "040 22 68 99999",
+  "email": "info@foodcourt47.de",
+  "oeffnungszeiten": [
+    {
+      "tage": "Montag bis Freitag",
+      "von": "11:00",
+      "bis": "22:30",
+      "schemaTage": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ]
+    },
+    {
+      "tage": "Samstag",
+      "von": "16:30",
+      "bis": "22:30",
+      "schemaTage": [
+        "Saturday"
+      ]
+    },
+    {
+      "tage": "Sonntag",
+      "von": "13:00",
+      "bis": "22:30",
+      "schemaTage": [
+        "Sunday"
+      ]
+    }
+  ],
+  "anfahrt": "Die S-Bahn-Station Hammerbrook (S3 und S5) liegt wenige Gehminuten entfernt. Parkplätze finden Sie in den umliegenden Straßen und Parkhäusern.",
   "mittag": {
     "tage": "Mo–Fr",
     "von": "11:00",
@@ -36,9 +65,6 @@
     "plzOrt": "22147 Hamburg",
     "vertreten": "Zalahuddin Nezam",
     "register": "HRB 141475",
-    "gericht": "Amtsgericht Hamburg",
-    "ustId": "[USt-IdNr.]",
-    "telefon": "[Telefonnummer]",
-    "email": "[E-Mail-Adresse]"
+    "gericht": "Amtsgericht Hamburg"
   }
 }

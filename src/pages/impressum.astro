@@ -1,31 +1,23 @@
 ---
 import Basis from '../layouts/Basis.astro';
 import { site } from '../lib/site';
-import { markiere } from '../lib/format';
 
 const i = site.impressum;
 ---
 <Basis titel="Impressum" kopf="solide" beschreibung="Impressum des Foodcourt47 Hammerbrook, betrieben von der Eat Manju Phönix GmbH, Hamburg.">
   <article class="wrap recht">
     <h1>Impressum</h1>
-    <p class="recht-hinweis"><em>Entwurf.</em> Angaben übernommen von foodcourt47.de/impressum. Vor dem Livegang prüfen und Platzhalter ergänzen.</p>
+    <p class="recht-hinweis"><em>Entwurf.</em> Angaben übernommen von foodcourt47.de/impressum. Vor dem Livegang prüfen und um die fehlenden Pflichtangaben ergänzen.</p>
 
     <h2>Angaben gemäß § 5 DDG</h2>
     <p>{i.firma}<br />{i.strasse}<br />{i.plzOrt}</p>
     <p>Vertreten durch den Geschäftsführer {i.vertreten}</p>
 
-    <h2>Kontakt</h2>
-    <p>Telefon: <Fragment set:html={markiere(i.telefon)} /><br />E-Mail: <Fragment set:html={markiere(i.email)} /></p>
-
     <h2>Registereintrag</h2>
     <p>Registergericht: {i.gericht}<br />Registernummer: {i.register}</p>
 
-    <h2>Umsatzsteuer</h2>
-    <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: <Fragment set:html={markiere(i.ustId)} /></p>
-
     <h2>Verantwortlich für den Inhalt</h2>
     <p>{i.vertreten}, Anschrift wie oben</p>
-    <p><span class="ph">[Hinweise zur Streitschlichtung und Haftung ergänzen]</span></p>
   </article>
 </Basis>
 

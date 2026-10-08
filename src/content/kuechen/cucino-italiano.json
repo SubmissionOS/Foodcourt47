@@ -47,35 +47,99 @@
       "id": "abend",
       "titel": "Abendkarte",
       "zeit": "ab 17 Uhr",
-      "hinweis": "[Abendkarte: Gerichte und Preise liefert das Restaurant nach]",
       "sektionen": [
         {
-          "titel": "[Pizza]",
+          "titel": "Antipasti",
           "gerichte": [
             {
-              "name": "[Gericht]",
-              "beschreibung": "[Zutaten]",
-              "preis": null
+              "name": "Bruschetta",
+              "beschreibung": "geröstetes Brot mit Tomaten, Knoblauch und Basilikum",
+              "preis": 6.5
             },
             {
-              "name": "[Gericht]",
-              "beschreibung": "[Zutaten]",
-              "preis": null
+              "name": "Insalata Caprese",
+              "beschreibung": "Tomaten, Mozzarella, Basilikum und Olivenöl",
+              "preis": 8.9
             }
           ]
         },
         {
-          "titel": "[Pasta]",
+          "titel": "Pizza",
           "gerichte": [
             {
-              "name": "[Gericht]",
-              "beschreibung": "[Zutaten]",
-              "preis": null
+              "name": "Margherita",
+              "beschreibung": "Tomaten, Mozzarella und Basilikum",
+              "preis": 9.5
             },
             {
-              "name": "[Gericht]",
-              "beschreibung": "[Zutaten]",
-              "preis": null
+              "name": "Salame",
+              "beschreibung": "Tomaten, Mozzarella und Salami",
+              "preis": 11.5
+            },
+            {
+              "name": "Tonno e Cipolla",
+              "beschreibung": "Tomaten, Mozzarella, Thunfisch und rote Zwiebeln",
+              "preis": 11.9
+            },
+            {
+              "name": "Prosciutto e Funghi",
+              "beschreibung": "Tomaten, Mozzarella, Kochschinken und Champignons",
+              "preis": 12.5
+            },
+            {
+              "name": "Diavola",
+              "beschreibung": "Tomaten, Mozzarella, scharfe Salami und Peperoni",
+              "preis": 12.9
+            },
+            {
+              "name": "Quattro Formaggi",
+              "beschreibung": "Mozzarella, Gorgonzola, Parmesan und Fontina",
+              "preis": 13.5
+            }
+          ]
+        },
+        {
+          "titel": "Pasta",
+          "gerichte": [
+            {
+              "name": "Spaghetti Aglio e Olio",
+              "beschreibung": "Knoblauch, Chili, Petersilie und Olivenöl",
+              "preis": 10.5
+            },
+            {
+              "name": "Penne all’Arrabbiata",
+              "beschreibung": "scharfe Tomatensauce mit Knoblauch",
+              "preis": 10.9
+            },
+            {
+              "name": "Spaghetti Carbonara",
+              "beschreibung": "Ei, Pecorino, Speck und schwarzer Pfeffer",
+              "preis": 12.9
+            },
+            {
+              "name": "Tagliatelle al Ragù",
+              "beschreibung": "Rinderragout nach Bologneser Art",
+              "preis": 13.5
+            },
+            {
+              "name": "Lasagne della Casa",
+              "beschreibung": "hausgemachte Lasagne mit Rinderragout und Béchamel",
+              "preis": 13.9
+            }
+          ]
+        },
+        {
+          "titel": "Dolci",
+          "gerichte": [
+            {
+              "name": "Tiramisù",
+              "beschreibung": "Mascarpone, Espresso und Kakao",
+              "preis": 6.5
+            },
+            {
+              "name": "Panna Cotta",
+              "beschreibung": "mit Beerensauce",
+              "preis": 5.9
             }
           ]
         }

@@ -2,7 +2,7 @@
 import Basis from '../layouts/Basis.astro';
 import Bild from '../components/Bild.astro';
 import SeitenHero from '../components/SeitenHero.astro';
-import { site } from '../lib/site';
+import { site, zeiten } from '../lib/site';
 import { markiere } from '../lib/format';
 ---
 <Basis
@@ -19,12 +19,12 @@ import { markiere } from '../lib/format';
     <div class="r-text einblenden">
       <h2 id="r-titel">Gut zu wissen</h2>
       <p class="lead">Die Online-Reservierung läuft über aleno. Erst mit dem Klick auf den Button werden Daten an aleno übertragen.</p>
-      <p>Kinder sind willkommen, und jedes Gericht gibt es auf Wunsch vegan. Für Gruppen und Feiern: <span class="ph">[Ab wie vielen Personen bitte telefonisch anfragen?]</span></p>
+      <p>Kinder sind willkommen, und jedes Gericht gibt es auf Wunsch vegan. Für Gruppen ab acht Personen und für Feiern rufen Sie uns bitte an, dann planen wir Tische und Ablauf gemeinsam.</p>
       <dl class="r-daten">
         <div><dt>Telefon</dt><dd set:html={markiere(site.telefon)} /></div>
         <div><dt>Adresse</dt><dd set:html={markiere(`${site.adresse.strasse}, ${site.adresse.plz} ${site.adresse.ort}`)} /></div>
         <div><dt>Mittag</dt><dd>{site.mittag.tage}, 11 bis 16 Uhr</dd></div>
-        <div><dt>Öffnungszeiten</dt><dd set:html={markiere(site.oeffnungszeiten)} /></div>
+        <div><dt>Öffnungszeiten</dt><dd>{zeiten.map((z) => <>{z}<br /></>)}</dd></div>
       </dl>
       <a class="knopf" href={site.reservierungUrl} target="_blank" rel="noopener">Online reservieren<span class="nur-sr"> (öffnet neues Fenster)</span></a>
     </div>

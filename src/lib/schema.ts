@@ -40,7 +40,12 @@ export function foodcourtSchema(kuechen: Kueche[]) {
     hasMenu: `${basis}/speisekarte`,
     acceptsReservations: site.reservierungUrl,
     ...ort(),
-    // openingHoursSpecification ergänzen, sobald die regulären Öffnungszeiten feststehen.
+    openingHoursSpecification: site.oeffnungszeiten.map((z) => ({
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: z.schemaTage.map((t) => `https://schema.org/${t}`),
+      opens: z.von,
+      closes: z.bis,
+    })),
     department: kuechen.map((k) => ({ '@id': `${basis}/${k.id}#restaurant` })),
   };
 }

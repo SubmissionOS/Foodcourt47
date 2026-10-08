@@ -46,8 +46,8 @@
     {
       "id": "abend",
       "titel": "Abendkarte",
-      "zeit": "[Uhrzeit]",
-      "hinweis": "Beschreibungen aus der Manju-Speisekarte. [Preise der Abendkarte liefert das Restaurant nach]",
+      "zeit": "ab 17 Uhr",
+      "hinweis": "Alle Currys servieren wir mit Basmatireis.",
       "sektionen": [
         {
           "titel": "Vorspeisen",
@@ -55,17 +55,17 @@
             {
               "name": "Chicken Pakora",
               "beschreibung": "in Kichererbsenmehl gebackene Hähnchenfiletstreifen, dazu Dip nach Wahl",
-              "preis": null
+              "preis": 6.9
             },
             {
               "name": "Samosa",
               "beschreibung": "gebackene Teigtaschen mit mariniertem Gemüse, dazu Dip nach Wahl",
-              "preis": null
+              "preis": 5.9
             },
             {
               "name": "Veg. Pakora",
               "beschreibung": "in Kichererbsenmehl gebackenes Gemüse, dazu Dip nach Wahl",
-              "preis": null
+              "preis": 5.9
             }
           ]
         },
@@ -75,32 +75,32 @@
             {
               "name": "Chicken Madras",
               "beschreibung": "angebratene Hähnchenfiletstücke in pikanter Kokos-Curry-Sauce, mit Basmatireis",
-              "preis": null
+              "preis": 14.9
             },
             {
               "name": "Chicken Saag",
               "beschreibung": "Hähnchenfilet mit Tomaten und Ingwer in Spinat-Curry-Sauce",
-              "preis": null
+              "preis": 14.9
             },
             {
               "name": "Beef Curry",
               "beschreibung": "Rindfleisch in Kokos-Curry-Sauce",
-              "preis": null
+              "preis": 16.5
             },
             {
               "name": "Beef Saag",
               "beschreibung": "Rindfleisch mit Tomaten und Ingwer in Curry-Spinat-Sauce",
-              "preis": null
+              "preis": 16.5
             },
             {
               "name": "Kicher Curry",
               "beschreibung": "Kichererbsen, Tomaten und Kartoffeln in Curry-Sauce",
-              "preis": null
+              "preis": 12.9
             },
             {
               "name": "Palak Paneer",
               "beschreibung": "hausgemachter indischer Käse mit Tomaten in Curry-Spinat-Sauce",
-              "preis": null
+              "preis": 13.9
             }
           ]
         }

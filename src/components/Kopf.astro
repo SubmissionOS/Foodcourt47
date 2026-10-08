@@ -18,7 +18,7 @@ const links = [
 const pfad = Astro.url.pathname.replace(/\/$/, '') || '/';
 const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
 ---
-<div class="entwurf">Designentwurf von GuddiWeb · noch nicht live · Angaben in [Klammern] fehlen noch</div>
+<div class="entwurf">Designentwurf von GuddiWeb · noch nicht live</div>
 
 <header class:list={['kopf', `kopf--${modus}`]} data-kopf>
   <div class="kopf-innen">

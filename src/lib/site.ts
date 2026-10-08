@@ -24,3 +24,10 @@ export function adresseBelegt(): boolean {
   const a = site.adresse;
   return !istPlatzhalter(a.strasse) && !istPlatzhalter(a.plz);
 }
+
+/** Öffnungszeiten als Zeilen, z. B. "Montag bis Freitag 11:00–22:30" */
+export const zeiten: string[] = site.oeffnungszeiten.map((z) => `${z.tage} ${z.von}–${z.bis}`);
+
+export const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  `${site.adresse.strasse}, ${site.adresse.plz} ${site.adresse.ort}`,
+)}`;

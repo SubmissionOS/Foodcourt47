@@ -1,5 +1,5 @@
 ---
-import { site } from '../lib/site';
+import { site, zeiten } from '../lib/site';
 import { markiere } from '../lib/format';
 
 const i = site.impressum;
@@ -17,7 +17,7 @@ const a = site.adresse;
       </div>
       <div>
         <h2 class="fuss-titel">Zeiten</h2>
-        <p>Mittag {site.mittag.tage}, 11 bis 16 Uhr<br /><Fragment set:html={markiere(site.oeffnungszeiten)} /></p>
+        <p>{zeiten.map((z) => <>{z}<br /></>)}Mittagstisch Mo–Fr 11–16 Uhr</p>
       </div>
       <div>
         <h2 class="fuss-titel">Kontakt</h2>

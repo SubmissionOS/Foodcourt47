@@ -32,7 +32,7 @@ const verhaeltnis = format ?? `${f.breite} / ${f.hoehe}`;
     decoding="async"
     onerror="this.parentElement.classList.add('ist-fehlend');"
   />
-  <span class="bild-ersatz" aria-hidden="true"><span class="ph">[Foto: {f.alt}]</span></span>
+  <span class="bild-ersatz" aria-hidden="true">{f.alt}</span>
 </figure>
 
 <style>

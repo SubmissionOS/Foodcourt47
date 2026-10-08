@@ -1,8 +1,11 @@
 ---
 import Basis from '../layouts/Basis.astro';
 import SeitenHero from '../components/SeitenHero.astro';
-import { site } from '../lib/site';
+import Bild from '../components/Bild.astro';
+import { site, zeiten, mapsUrl } from '../lib/site';
 import { markiere } from '../lib/format';
+
+const tel = 'tel:+49' + site.telefon.replace(/^0/, '').replace(/\s/g, '');
 ---
 <Basis
   titel="Kontakt und Anfahrt"
@@ -18,24 +21,23 @@ import { markiere } from '../lib/format';
         <Fragment set:html={markiere(site.adresse.strasse)} /><br />
         <Fragment set:html={markiere(`${site.adresse.plz} ${site.adresse.ort}`)} />
       </p>
-      <p set:html={markiere(site.anfahrt)} />
+      <p>{site.anfahrt}</p>
+      <a class="weiter" href={mapsUrl} target="_blank" rel="noopener">Route planen<span class="nur-sr"> (Google Maps, neues Fenster)</span></a>
     </div>
     <div class="k-spalte einblenden">
       <h2 class="k-h">Zeiten</h2>
-      <p class="k-gross">Mittag {site.mittag.tage}<br />11 bis 16 Uhr</p>
-      <p set:html={markiere(site.oeffnungszeiten)} />
+      <p class="k-gross">Mittagstisch<br />Mo–Fr 11–16 Uhr</p>
+      <p>{zeiten.map((z) => <>{z}<br /></>)}Abendkarte ab 17 Uhr</p>
     </div>
     <div class="k-spalte einblenden">
       <h2 class="k-h">Kontakt</h2>
-      <p class="k-gross"><Fragment set:html={markiere(site.telefon)} /><br /><Fragment set:html={markiere(site.email)} /></p>
+      <p class="k-gross"><a href={tel}>{site.telefon}</a><br /><a href={`mailto:${site.email}`}>{site.email}</a></p>
       <a class="knopf" href="/reservieren">Tisch reservieren</a>
     </div>
   </section>
 
   <div class="wrap">
-    <div class="k-karte">
-      <span class="ph">[Karte: Kartenausschnitt erst nach Einwilligung laden oder als statisches Bild einbinden]</span>
-    </div>
+    <Bild id="hero-gastraum" format="21 / 9" sizes="100vw" />
   </div>
 </Basis>
 
@@ -56,14 +58,6 @@ import { markiere } from '../lib/format';
     font-family: var(--serif);
     font-size: clamp(1.6rem, 2.4vw, 2rem);
     line-height: 1.3;
-  }
-  .k-karte {
-    display: grid;
-    place-items: center;
-    min-height: 26rem;
-    padding: 2rem;
-    text-align: center;
-    background: var(--leinen);
   }
   @media (min-width: 64rem) {
     .k {
