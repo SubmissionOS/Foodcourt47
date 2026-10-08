@@ -1,0 +1,19 @@
+{
+  "name": "foodcourt47-entwurf",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource/overpass": "^5.3.0",
+    "@fontsource/overpass-mono": "^5.3.0",
+    "astro": "^7.3.8",
+    "typescript": "^6.0.3"
+  }
+}
