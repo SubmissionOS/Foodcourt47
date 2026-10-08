@@ -1,27 +1,27 @@
-/* Foodcourt47 · Fahrplanraster. Konzept in DESIGN.md */
+/* Foodcourt47 · Konzept in DESIGN.md */
 
 :root {
-  --grund: #e6e9e8;
-  --grund-tief: #d7dcda;
-  --tinte: #121a1f;
-  --tinte-2: #3c474e;
-  --tafel: #121a1f;
-  --tafel-linie: #2b363d;
-  --tafel-text: #e6e9e8;
-  --signal: #f2c230;
+  --kiefer: #1e2a24;
+  --kiefer-hell: #2b3a32;
+  --creme: #f4eee4;
+  --leinen: #e8dfd0;
+  --tinte: #1d1b18;
+  --rauch: #5f584e;
+  --messing: #9c7a4b;
+  --messing-hell: #c9a978;
 
-  --cucino: #1e5a44;
-  --manju: #b7312a;
-  --sushify: #a3206f;
-  --linie: var(--tinte);
+  --akzent: var(--messing);
+  --k-cucino-italiano: #6f7748;
+  --k-manju: #a8692c;
+  --k-sushify: #7e4058;
 
-  --text: 'Overpass', system-ui, sans-serif;
-  --mono: 'Overpass Mono', ui-monospace, monospace;
+  --serif: 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
+  --sans: 'Jost', system-ui, sans-serif;
 
-  --rand: clamp(1rem, 4vw, 3rem);
-  --breite: 78rem;
-  --kenn: 5.5rem;
-  --strich: 3px;
+  --rand: clamp(1.25rem, 5vw, 4.5rem);
+  --breite: 84rem;
+  --luft: clamp(5rem, 12vw, 10rem);
+  --weich: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 *,
@@ -40,12 +40,12 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: var(--grund);
+  background: var(--creme);
   color: var(--tinte);
-  font-family: var(--text);
+  font-family: var(--sans);
+  font-weight: 300;
   font-size: 1.0625rem;
-  line-height: 1.55;
-  font-feature-settings: 'kern', 'liga';
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -61,66 +61,63 @@ img {
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
   margin: 0;
-  font-weight: 800;
-  line-height: 1.02;
-  letter-spacing: -0.015em;
+  font-family: var(--serif);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
   text-wrap: balance;
 }
 
 h1 {
-  font-size: clamp(2.6rem, 8.5vw, 6.25rem);
-  font-weight: 900;
-  letter-spacing: -0.03em;
+  font-size: clamp(3.25rem, 9vw, 7.5rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
 }
 
 h2 {
-  font-size: clamp(1.75rem, 4.2vw, 3rem);
+  font-size: clamp(2.4rem, 5.5vw, 4.5rem);
+  font-weight: 400;
 }
 
 h3 {
-  font-size: 1.3rem;
-  letter-spacing: -0.005em;
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+}
+
+em,
+.kursiv {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+h1 em,
+h2 em {
+  color: inherit;
 }
 
 p {
-  margin: 0 0 1em;
-  max-width: 62ch;
+  margin: 0 0 1.1em;
+  max-width: 58ch;
   text-wrap: pretty;
 }
 
 a {
   color: inherit;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.2em;
-}
-
-a:hover {
-  text-decoration-color: var(--linie);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
 }
 
 :focus-visible {
-  outline: 3px solid var(--tinte);
-  outline-offset: 3px;
-  box-shadow: 0 0 0 7px var(--signal);
-  border-radius: 1px;
-}
-
-.auf-dunkel :focus-visible,
-.tafel :focus-visible {
-  outline-color: var(--signal);
-  box-shadow: none;
+  outline: 2px solid var(--messing);
+  outline-offset: 4px;
 }
 
 ::selection {
-  background: var(--signal);
+  background: var(--messing-hell);
   color: var(--tinte);
-}
-
-.mono {
-  font-family: var(--mono);
-  font-variant-numeric: tabular-nums;
 }
 
 .nur-sr {
@@ -135,12 +132,12 @@ a:hover {
 .springen {
   position: absolute;
   left: 1rem;
-  top: -4rem;
+  top: -5rem;
   z-index: 100;
-  padding: 0.75rem 1rem;
-  background: var(--signal);
+  padding: 0.75rem 1.25rem;
+  background: var(--creme);
   color: var(--tinte);
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .springen:focus {
@@ -149,22 +146,24 @@ a:hover {
 
 /* Platzhalter sichtbar markieren */
 .ph {
-  background: repeating-linear-gradient(-45deg, #f2c23055 0 6px, #f2c23022 6px 12px);
-  outline: 1px dashed #8a6d00;
+  background: #9c7a4b26;
+  outline: 1px dashed #7d6038;
   outline-offset: 1px;
-  padding: 0 0.2em;
-  color: #4a3b00;
+  padding: 0 0.25em;
+  color: #5a4426;
+  font-family: var(--sans);
   font-style: normal;
+  font-weight: 400;
+  font-size: 0.85em;
+  letter-spacing: 0;
 }
 
-.auf-dunkel .ph,
-.tafel .ph {
-  color: var(--signal);
-  outline-color: var(--signal);
-  background: transparent;
+.dunkel .ph {
+  background: #ffffff14;
+  outline-color: var(--messing-hell);
+  color: var(--messing-hell);
 }
 
-/* Raster */
 .wrap {
   width: 100%;
   max-width: var(--breite);
@@ -172,120 +171,127 @@ a:hover {
   padding-inline: var(--rand);
 }
 
-/* Fahrplanzeile: links Kennspalte, rechts Inhalt */
-.zeile {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 0.5rem 2rem;
-  border-top: var(--strich) solid var(--tinte);
-  padding-block: 1.25rem 2.5rem;
+.dunkel {
+  background: var(--kiefer);
+  color: var(--creme);
 }
 
-.zeile > .kenn {
-  font-family: var(--mono);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--tinte-2);
+/* Kleine Überzeile in Kursiv, nie in Großbuchstaben */
+.vorzeile {
+  display: block;
+  margin-bottom: 1.1rem;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.2rem, 1.8vw, 1.45rem);
+  color: var(--akzent);
 }
 
-@media (min-width: 48rem) {
-  .zeile {
-    grid-template-columns: var(--kenn) minmax(0, 1fr);
-    padding-block: 1.5rem 4rem;
-  }
+.dunkel .vorzeile {
+  color: var(--messing-hell);
 }
 
-/* Gleisschild: Zahl im Farbquadrat */
-.gleis {
-  --g: 2.75rem;
-  display: inline-grid;
-  place-items: center;
-  inline-size: var(--g);
-  block-size: var(--g);
-  background: var(--linie);
-  color: #fff;
-  font-weight: 900;
-  font-size: calc(var(--g) * 0.62);
-  line-height: 1;
-  padding-top: 0.08em;
-  flex: none;
+.lead {
+  font-size: clamp(1.15rem, 1.6vw, 1.3rem);
+  line-height: 1.65;
 }
 
-.linie-cucino-italiano {
-  --linie: var(--cucino);
-}
-.linie-manju {
-  --linie: var(--manju);
-}
-.linie-sushify {
-  --linie: var(--sushify);
-}
-
-/* Schalter */
+/* Buttons */
 .knopf {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  min-height: 3rem;
-  padding: 0.7rem 1.25rem 0.55rem;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3.25rem;
+  padding: 0.85rem 1.9rem;
+  border: 1px solid var(--tinte);
+  border-radius: 999px;
   background: var(--tinte);
-  color: var(--grund);
-  border: var(--strich) solid var(--tinte);
-  font-weight: 800;
-  font-size: 1rem;
-  letter-spacing: 0.01em;
+  color: var(--creme);
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 120ms ease, color 120ms ease;
+  transition: background-color 300ms var(--weich), color 300ms var(--weich), border-color 300ms var(--weich);
 }
 
 .knopf:hover {
-  background: var(--signal);
-  color: var(--tinte);
+  background: var(--messing);
+  border-color: var(--messing);
+  color: #fff;
 }
 
 .knopf--hell {
-  background: transparent;
+  background: var(--creme);
+  border-color: var(--creme);
   color: var(--tinte);
 }
 
 .knopf--hell:hover {
+  background: transparent;
+  color: var(--creme);
+  border-color: var(--creme);
+}
+
+.knopf--linie {
+  background: transparent;
+  color: inherit;
+  border-color: currentColor;
+}
+
+.knopf--linie:hover {
   background: var(--tinte);
-  color: var(--grund);
+  color: var(--creme);
+  border-color: var(--tinte);
 }
 
-.knopf .pfeil {
-  font-family: var(--mono);
-  font-weight: 600;
+.dunkel .knopf--linie:hover {
+  background: var(--creme);
+  color: var(--tinte);
+  border-color: var(--creme);
 }
 
-/* Eyebrow über Überschriften */
-.marke {
-  display: block;
-  margin-bottom: 1rem;
-  font-family: var(--mono);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+/* Textlink mit Linie */
+.weiter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid currentColor;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: gap 300ms var(--weich), color 300ms var(--weich);
 }
 
-.lead {
-  font-size: clamp(1.15rem, 2vw, 1.4rem);
-  line-height: 1.45;
-  max-width: 40ch;
+.weiter:hover {
+  gap: 1.1rem;
+  color: var(--akzent);
+}
+
+.weiter::after {
+  content: '→';
+  font-family: var(--sans);
+}
+
+/* Weiches Einblenden beim Scrollen */
+.js .einblenden {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity 1100ms var(--weich), transform 1100ms var(--weich);
+}
+
+.js .einblenden.ist-sichtbar {
+  opacity: 1;
+  transform: none;
 }
 
 /* Fließtext aus Markdown */
 .prosa h2 {
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   margin: 2.5rem 0 0.75rem;
-}
-
-.prosa ul {
-  padding-left: 1.2em;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -294,5 +300,9 @@ a:hover {
   *::after {
     transition: none !important;
     animation: none !important;
+  }
+  .js .einblenden {
+    opacity: 1;
+    transform: none;
   }
 }

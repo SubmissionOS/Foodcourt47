@@ -1,412 +1,333 @@
 ---
 import Basis from '../layouts/Basis.astro';
-import Tafel, { type TafelZeile } from '../components/Tafel.astro';
 import Bild from '../components/Bild.astro';
-import { alleKuechen, mittagsgerichte, abPreis } from '../lib/kuechen';
+import { getCollection } from 'astro:content';
+import { alleKuechen, abPreis } from '../lib/kuechen';
 import { preis, markiere } from '../lib/format';
 import { site } from '../lib/site';
 import { foodcourtSchema } from '../lib/schema';
+import { foto, url, srcset } from '../lib/fotos';
 
 const kuechen = await alleKuechen();
-const guenstigster = abPreis(kuechen);
+const ab = preis(abPreis(kuechen));
 
-const zeilen: TafelZeile[] = kuechen.map((k) => {
-  const gerichte = mittagsgerichte(k);
-  return {
-    zeit: site.mittag.von,
-    gleis: k.data.gleis,
-    linie: k.id,
-    ziel: k.data.name,
-    via: gerichte.map((g) => g.name).join(' · '),
-    preis: preis(abPreis([k])),
-    href: `/${k.id}`,
-  };
-});
+// PLACEHOLDER_PHOTO: Hero und Abschluss sind Stockfotos, siehe DESIGN.md
+const hero = await foto('hero-gastraum');
+const abschluss = await foto('tisch-teilen');
+
+const reihenfolge = (await import('../content/galerie.json')).default.map((g) => g.id);
+const streifen = (await getCollection('galerie')).sort((a, b) => reihenfolge.indexOf(a.id) - reihenfolge.indexOf(b.id));
+
+const texte: Record<string, string> = {
+  'cucino-italiano': 'Pizza und Pasta wie in Venedig. Saucen und Teig entstehen jeden Tag frisch.',
+  manju: 'Indische Currys, seit 2009 in Hamburg zu Hause. Angefangen hat alles in der Wandelhalle am Hauptbahnhof.',
+  sushify: 'Premium-Sushi, einzeln zubereitet aus täglich frischen Zutaten. Von Maki bis Trüffel.',
+};
 ---
-<Basis
-  titel="Start"
-  beschreibung={site.beschreibung}
-  schema={foodcourtSchema(kuechen)}
->
-  <div class="wrap">
-    <section class="start" aria-labelledby="start-titel">
-      <div class="start-text">
-        <span class="marke">Hammerbrook · Hamburg</span>
-        <h1 id="start-titel">
-          <span class="h1-zeile">Foodcourt<span class="h1-nr">47</span></span>
-        </h1>
-        <p class="lead">
-          Pizza von Cucino Italiano, Currys von Manju, Sushi von Sushify. Drei Küchen unter einem Dach, mittags {site.mittag.tage} ab {preis(guenstigster)}.
-        </p>
-        <div class="start-knoepfe">
-          <a class="knopf" href="/reservieren">Tisch reservieren <span class="pfeil" aria-hidden="true">→</span></a>
-          <a class="knopf knopf--hell" href="/speisekarte">Speisekarte</a>
+<Basis titel="Start" beschreibung={site.beschreibung} schema={foodcourtSchema(kuechen)} ogBild={url(hero, 1600)}>
+  <section class="hero dunkel" aria-labelledby="hero-titel">
+    <div class="hero-bild" data-parallax data-placeholder-photo="PLACEHOLDER_PHOTO">
+      <img
+        src={url(hero, 2000)}
+        srcset={srcset(hero)}
+        sizes="100vw"
+        alt={hero.alt}
+        width={hero.breite}
+        height={hero.hoehe}
+        fetchpriority="high"
+      />
+    </div>
+    <div class="hero-text wrap">
+      <span class="vorzeile">Hammerbrook, Hamburg</span>
+      <h1 id="hero-titel">Drei Küchen.<br /><em>Ein Tisch.</em></h1>
+      <p class="hero-satz">Pizza von Cucino Italiano, Currys von Manju und Sushi von Sushify, gemeinsam unter einem Dach.</p>
+      <div class="hero-aktionen">
+        <a class="knopf knopf--hell" href="/reservieren">Tisch reservieren</a>
+        <a class="weiter" href="/speisekarte">Speisekarte</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro wrap" aria-label="Willkommen">
+    <p class="intro-satz einblenden">
+      Am selben Tisch bestellt der eine Pizza, die andere ein Curry und der Dritte Sushi. <em>Genau dafür gibt es Foodcourt47.</em>
+    </p>
+  </section>
+
+  <div class="kuechen">
+    {kuechen.map((k, i) => (
+      <section class:list={['kueche', `kueche--${i + 1}`]} style={`--akzent: var(--k-${k.id})`} aria-labelledby={`k-${k.id}`}>
+        <Bild id={k.data.fotos[0]} format={i === 1 ? '4 / 5' : '5 / 4'} sizes="(min-width: 64rem) 55vw, 100vw" class="kueche-bild" />
+        <div class="kueche-text einblenden">
+          <span class="vorzeile">{k.data.kueche}</span>
+          <h2 id={`k-${k.id}`}>{k.data.name}</h2>
+          <p>{texte[k.id]}</p>
+          <a class="weiter" href={`/${k.id}`}>Zur Karte von {k.data.name}</a>
         </div>
-      </div>
-      <div class="start-tafel">
-        <Tafel titel="Abfahrt Mittag · Gleis 1 bis 3" zeilen={zeilen} />
-      </div>
-    </section>
+      </section>
+    ))}
   </div>
 
-  <div class="wrap">
-    <section class="zeile heute" aria-labelledby="heute-titel">
-      <span class="kenn">Heute</span>
-      <div>
-        <div class="heute-kopf">
-          <h2 id="heute-titel">Mittag am <span data-heute-name>Werktag</span></h2>
-          <p class="heute-status"><span data-mittag-satz>Mittagsangebote {site.mittag.tage} von 11 bis 16 Uhr.</span></p>
-        </div>
-        <div class="heute-raster">
-          {kuechen.map((k) => (
-            <section class={`heute-kueche linie-${k.id}`} aria-labelledby={`heute-${k.id}`}>
-              <h3 id={`heute-${k.id}`}>
-                <span class="gleis" aria-hidden="true">{k.data.gleis}</span>
-                <a href={`/${k.id}`}>{k.data.name}</a>
-              </h3>
-              <ul>
-                {mittagsgerichte(k).map((g) => (
-                  <li>
-                    <span class="hk-name">{g.name}</span>
-                    <span class="hk-preis mono" set:html={markiere(preis(g.preis))} />
-                    {g.beschreibung && <span class="hk-text">{g.beschreibung}</span>}
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ))}
-        </div>
-        <p class="heute-mehr"><a href="/mittag">Alle Mittagsangebote der Woche</a></p>
-      </div>
-    </section>
+  <section class="mittag dunkel" aria-labelledby="mittag-titel">
+    <div class="wrap mittag-innen einblenden">
+      <span class="vorzeile">Mittagstisch</span>
+      <h2 id="mittag-titel">Montag bis Freitag,<br /><em>11 bis 16 Uhr</em></h2>
+      <p class="lead">Jede Küche hat mittags drei Gerichte zum festen Preis, ab {ab}. Auf Wunsch ist jedes davon vegan.</p>
+      <a class="weiter" href="/mittag">Der Mittagstisch</a>
+    </div>
+  </section>
 
-    <section class="zeile" aria-labelledby="gleise-titel">
-      <span class="kenn">Gleise</span>
-      <div>
-        <h2 id="gleise-titel" class="gleise-titel">Drei Küchen, drei Gleise</h2>
-        <ol class="gleise">
-          {kuechen.map((k, i) => (
-            <li class:list={['gleis-band', `linie-${k.id}`, { 'gleis-band--rechts': i % 2 === 1 }]}>
-              <div class="gb-text">
-                <div class="gb-kopf">
-                  <span class="gleis gb-gleis" aria-hidden="true">{k.data.gleis}</span>
-                  <div>
-                    <span class="gb-kategorie mono">Gleis {k.data.gleis} · {k.data.kategorie}</span>
-                    <h3 class="gb-name">{k.data.name}</h3>
-                  </div>
-                </div>
-                <p class="gb-claim">{k.data.claim}</p>
-                <p>{k.data.einleitung[0]}</p>
-                <a class="knopf knopf--hell" href={`/${k.id}`}>Karte von {k.data.name} <span class="pfeil" aria-hidden="true">→</span></a>
-              </div>
-              <Bild
-                class="gb-bild"
-                src={k.data.bild?.src}
-                alt={k.data.bild?.alt ?? ''}
-                breite={k.data.bild?.breite ?? 1024}
-                hoehe={k.data.bild?.hoehe ?? 710}
-                platzhalter={k.data.bildPlatzhalter}
-                sizes="(min-width: 64rem) 40rem, 100vw"
-              />
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
+  <section class="streifen" aria-labelledby="streifen-titel">
+    <div class="wrap streifen-kopf">
+      <h2 id="streifen-titel" class="streifen-titel">Aus unseren <em>Küchen</em></h2>
+      <a class="weiter" href="/galerie">Zur Galerie</a>
+    </div>
+    <ul class="streifen-liste" tabindex="0" aria-label="Fotos, seitlich scrollbar">
+      {streifen.map((g, i) => (
+        <li>
+          <Bild id={g.data.foto} format={i % 3 === 1 ? '3 / 4' : '4 / 5'} sizes="(min-width: 64rem) 26vw, 70vw" einblenden={false} />
+        </li>
+      ))}
+    </ul>
+  </section>
 
-    <section class="zeile" aria-labelledby="wissen-titel">
-      <span class="kenn">Gut zu wissen</span>
-      <div>
-        <h2 id="wissen-titel" class="nur-sr">Gut zu wissen</h2>
-        <dl class="wissen">
-          <div>
-            <dt>Vegan</dt>
-            <dd>Jedes Gericht bekommen Sie auf Wunsch vegan. Sagen Sie es bei der Bestellung.</dd>
-          </div>
-          <div>
-            <dt>Familien</dt>
-            <dd>Kinder sind willkommen. Bei drei Küchen findet jeder am Tisch etwas.</dd>
-          </div>
-          <div>
-            <dt>Mittag</dt>
-            <dd>{site.mittag.tage} von 11 bis 16 Uhr gelten feste Mittagspreise in allen drei Küchen.</dd>
-          </div>
-        </dl>
-      </div>
-    </section>
-  </div>
-
-  <section class="reservieren" aria-labelledby="res-titel">
-    <div class="wrap res-innen">
-      <div>
-        <span class="marke">Reservierung</span>
-        <h2 id="res-titel">Platz für Ihr Team, Ihre Familie oder zwei.</h2>
-      </div>
-      <div class="res-rechts">
-        <p>Reservieren Sie online. Die Buchung läuft über das Reservierungssystem aleno.</p>
-        <a class="knopf res-knopf" href={site.reservierungUrl} target="_blank" rel="noopener">
-          Tisch reservieren <span class="pfeil" aria-hidden="true">↗</span>
-          <span class="nur-sr">(öffnet neues Fenster)</span>
-        </a>
-        <p class="res-adresse">
-          <span set:html={markiere(`${site.adresse.strasse}, ${site.adresse.plz} ${site.adresse.ort}`)} /><br />
-          Telefon <span set:html={markiere(site.telefon)} />
-        </p>
-      </div>
+  <section class="abschluss dunkel" aria-labelledby="abschluss-titel">
+    <div class="abschluss-bild" data-placeholder-photo="PLACEHOLDER_PHOTO">
+      <img src={url(abschluss, 2000)} srcset={srcset(abschluss)} sizes="100vw" alt={abschluss.alt} width={abschluss.breite} height={abschluss.hoehe} loading="lazy" decoding="async" />
+    </div>
+    <div class="wrap abschluss-text einblenden">
+      <span class="vorzeile">Reservierung</span>
+      <h2 id="abschluss-titel">Wir halten <em>Ihren Tisch</em> bereit.</h2>
+      <p class="lead">Für die Mittagspause mit Kollegen, den Abend mit der Familie oder zu zweit.</p>
+      <a class="knopf knopf--hell" href="/reservieren">Tisch reservieren</a>
+      <p class="abschluss-adresse" set:html={markiere(`${site.adresse.strasse} · ${site.adresse.plz} ${site.adresse.ort}`)} />
     </div>
   </section>
 </Basis>
 
 <style>
-  /* Start */
-  .start {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 2.5rem;
-    padding-block: 2.5rem 4rem;
+  /* Hero */
+  .hero {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: 100svh;
+    overflow: hidden;
+    background: var(--kiefer);
   }
-  h1 {
-    margin-bottom: 1.5rem;
+  .hero-bild {
+    position: absolute;
+    inset: -4% 0 0;
+    will-change: transform;
+    transform: scale(1.06);
   }
-  .h1-nr {
-    display: inline-block;
-    margin-left: 0.08em;
-    padding: 0.12em 0.12em 0;
-    background: var(--tinte);
-    color: var(--grund);
-    font-family: var(--mono);
-    font-weight: 600;
-    font-size: 0.72em;
-    letter-spacing: -0.04em;
-    line-height: 1;
-    vertical-align: 0.12em;
+  .hero-bild img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
-  .start-knoepfe {
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, #121815d9 0%, #1218158c 35%, #12181533 70%, #12181559 100%),
+      linear-gradient(to right, #12181580 0%, #12181500 60%);
+  }
+  .hero .vorzeile {
+    color: #e9dcc4;
+  }
+  .hero-text {
+    position: relative;
+    z-index: 1;
+    padding-block: 9rem clamp(3.5rem, 9vh, 7rem);
+  }
+  .hero h1 {
+    font-size: clamp(3.6rem, 11vw, 9rem);
+    line-height: 0.95;
+  }
+  .hero h1 em {
+    color: var(--creme);
+  }
+  .hero-satz {
+    margin: 1.75rem 0 2.25rem;
+    font-size: clamp(1.1rem, 1.7vw, 1.3rem);
+    max-width: 36ch;
+  }
+  .hero-aktionen {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: 2rem;
+    align-items: center;
+    gap: 1.25rem 2rem;
   }
 
-  @media (min-width: 64rem) {
-    .start {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-      align-items: end;
-      gap: 3.5rem;
-      padding-block: 4.5rem 6rem;
-    }
-    h1 {
-      font-size: clamp(3.25rem, 5.5vw, 5.5rem);
-    }
+  /* Intro */
+  .intro {
+    padding-block: var(--luft);
+  }
+  .intro-satz {
+    max-width: 30ch;
+    margin: 0 auto;
+    font-family: var(--serif);
+    font-size: clamp(1.9rem, 3.6vw, 3rem);
+    line-height: 1.2;
+    text-align: center;
+  }
+  .intro-satz em {
+    color: var(--messing);
   }
 
-  /* Heute */
-  .heute-kopf {
+  /* Küchen im Wechsel */
+  .kuechen {
     display: grid;
-    gap: 0.75rem;
-    margin-bottom: 2rem;
+    gap: var(--luft);
+    max-width: var(--breite);
+    margin-inline: auto;
+    padding-inline: var(--rand);
   }
-  .heute-status {
-    margin: 0;
-    font-size: 1.1rem;
-  }
-  :global(html[data-mittag='laeuft']) .heute-status span {
-    background: var(--signal);
-    padding: 0.1em 0.3em 0;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-  }
-  .heute-raster {
+  .kueche {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 2rem;
-  }
-  .heute-kueche h3 {
-    display: flex;
+    gap: 2.25rem;
     align-items: center;
-    gap: 0.75rem;
-    padding-bottom: 0.75rem;
-    border-bottom: var(--strich) solid var(--linie);
   }
-  .heute-kueche h3 a {
-    text-decoration: none;
-  }
-  .heute-kueche h3 a:hover {
-    text-decoration: underline;
-  }
-  .heute-kueche .gleis {
-    --g: 2rem;
-  }
-  .heute-kueche ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .heute-kueche li {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 0 1rem;
-    padding-block: 0.75rem;
-    border-bottom: 1px solid #12191f26;
-  }
-  .hk-name {
-    font-weight: 800;
-  }
-  .hk-preis {
-    font-weight: 600;
-  }
-  .hk-text {
-    grid-column: 1 / -1;
-    font-size: 0.9rem;
-    color: var(--tinte-2);
-  }
-  .heute-mehr {
-    margin: 1.75rem 0 0;
-    font-weight: 700;
-  }
-
-  @media (min-width: 64rem) {
-    .heute-raster {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0;
-    }
-    .heute-kueche {
-      padding-inline: 1.5rem;
-      border-left: 1px solid #12191f33;
-    }
-    .heute-kueche:first-child {
-      padding-left: 0;
-      border-left: 0;
-    }
-    .heute-kueche:last-child {
-      padding-right: 0;
-    }
-  }
-
-  /* Gleise */
-  .gleise-titel {
-    margin-bottom: 2.5rem;
-  }
-  .gleise {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .gleis-band {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.75rem;
-    padding-block: 2.5rem;
-    border-top: 1px solid #12191f33;
-  }
-  .gleis-band:first-child {
-    border-top: 0;
-    padding-top: 0;
-  }
-  .gb-kopf {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+  .kueche h2 {
     margin-bottom: 1.25rem;
   }
-  .gb-gleis {
-    --g: 4.25rem;
-  }
-  .gb-kategorie {
-    display: block;
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--linie);
-    font-weight: 600;
-  }
-  .gb-name {
-    font-size: clamp(2rem, 5vw, 3.4rem);
-    font-weight: 900;
-    letter-spacing: -0.03em;
-  }
-  .gb-claim {
-    font-size: 1.25rem;
-    font-weight: 600;
-    line-height: 1.35;
-  }
-
-  @media (min-width: 64rem) {
-    .gleis-band {
-      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-      align-items: center;
-      gap: 4rem;
-      padding-block: 3.5rem;
-    }
-    .gleis-band--rechts {
-      grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-    }
-    .gleis-band--rechts .gb-text {
-      order: 2;
-    }
-  }
-
-  /* Gut zu wissen */
-  .wissen {
-    display: grid;
-    gap: 1.5rem;
-    margin: 0;
-  }
-  .wissen div {
-    border-left: var(--strich) solid var(--tinte);
-    padding-left: 1rem;
-  }
-  .wissen dt {
-    font-family: var(--mono);
-    font-size: 0.8125rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 0.3rem;
-  }
-  .wissen dd {
-    margin: 0;
-    font-size: 1.1rem;
+  .kueche p {
+    font-size: 1.12rem;
     max-width: 34ch;
   }
-  @media (min-width: 48rem) {
-    .wissen {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 2rem;
+  .kueche .weiter {
+    margin-top: 0.75rem;
+  }
+
+  @media (min-width: 64rem) {
+    .kueche {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+      gap: 6rem;
+    }
+    .kueche--2 {
+      grid-template-columns: minmax(0, 4fr) minmax(0, 5fr);
+    }
+    .kueche--2 :global(.kueche-bild) {
+      order: 2;
+    }
+    .kueche--2 .kueche-text {
+      justify-self: end;
+    }
+    .kueche--3 {
+      grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+    }
+    .kueche--3 :global(.kueche-bild) {
+      margin-left: calc(var(--rand) * -1);
     }
   }
 
-  /* Reservieren */
-  .reservieren {
-    margin-top: 2rem;
-    margin-bottom: -6rem;
-    background: var(--grund-tief);
-    border-top: var(--strich) solid var(--tinte);
+  /* Mittag */
+  .mittag {
+    margin-top: var(--luft);
+    padding-block: var(--luft);
+    text-align: center;
   }
-  .res-innen {
+  .mittag-innen {
     display: grid;
-    gap: 2rem;
-    padding-block: 3.5rem 4.5rem;
+    justify-items: center;
   }
-  .res-innen h2 {
-    font-size: clamp(2rem, 5vw, 3.75rem);
-    font-weight: 900;
-    letter-spacing: -0.03em;
+  .mittag h2 {
+    margin-bottom: 1.75rem;
+  }
+  .mittag h2 em {
+    color: var(--messing-hell);
+  }
+  .mittag .lead {
+    max-width: 40ch;
+    margin-bottom: 2rem;
+    color: #e6ddcd;
+  }
+
+  /* Galerie-Streifen */
+  .streifen {
+    padding-top: var(--luft);
+  }
+  .streifen-kopf {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .streifen-titel em {
+    color: var(--messing);
+  }
+  .streifen-liste {
+    display: flex;
+    align-items: flex-end;
+    gap: clamp(0.75rem, 1.5vw, 1.5rem);
+    margin: 0;
+    padding: 0 var(--rand) 1rem;
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--rand);
+    scrollbar-width: thin;
+    scrollbar-color: var(--messing) transparent;
+  }
+  .streifen-liste li {
+    flex: 0 0 clamp(15rem, 70vw, 24rem);
+    scroll-snap-align: start;
+  }
+  .streifen-liste li:nth-child(3n + 2) {
+    flex-basis: clamp(13rem, 58vw, 19rem);
+  }
+
+  /* Abschluss */
+  .abschluss {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 90svh;
+    margin-top: var(--luft);
+    overflow: hidden;
+  }
+  .abschluss-bild {
+    position: absolute;
+    inset: 0;
+  }
+  .abschluss-bild img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .abschluss::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #121815a6;
+  }
+  .abschluss-text {
+    position: relative;
+    z-index: 1;
+    padding-block: var(--luft);
+    text-align: center;
+    display: grid;
+    justify-items: center;
+  }
+  .abschluss h2 {
+    margin-bottom: 1.5rem;
     max-width: 14ch;
   }
-  .res-rechts p {
-    font-size: 1.1rem;
+  .abschluss h2 em {
+    color: var(--messing-hell);
   }
-  .res-adresse {
-    margin-top: 1.75rem;
-    font-size: 0.95rem !important;
+  .abschluss .lead {
+    max-width: 38ch;
+    margin-bottom: 2.25rem;
   }
-  @media (min-width: 64rem) {
-    .res-innen {
-      grid-template-columns: 7fr 5fr;
-      align-items: end;
-      gap: 4rem;
-      padding-block: 5rem 6rem;
-    }
+  .abschluss-adresse {
+    margin: 2rem 0 0;
+    font-size: 0.92rem;
+    color: #e6ddcd;
   }
 </style>

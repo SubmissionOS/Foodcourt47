@@ -1,32 +1,38 @@
 ---
-// Bild mit lazy loading und sichtbarem Ersatz, falls die Altseite das Foto nicht mehr liefert.
+// Foto aus src/content/fotos.json. Stockfotos tragen data-placeholder-photo (PLACEHOLDER_PHOTO).
+import { foto, url, srcset } from '../lib/fotos';
+
 interface Props {
-  src?: string | null;
-  alt: string;
-  breite: number;
-  hoehe: number;
-  platzhalter?: string;
-  eager?: boolean;
-  class?: string;
+  id: string;
+  /** Seitenverhältnis des Ausschnitts, z. B. "4 / 5". Standard: Original */
+  format?: string;
   sizes?: string;
+  eager?: boolean;
+  einblenden?: boolean;
+  class?: string;
 }
-const { src, alt, breite, hoehe, platzhalter = '[Foto folgt]', eager = false, class: klasse, sizes } = Astro.props;
-const fehlt = !src;
+const { id, format, sizes = '100vw', eager = false, einblenden = true, class: klasse } = Astro.props;
+const f = await foto(id);
+const verhaeltnis = format ?? `${f.breite} / ${f.hoehe}`;
 ---
-<figure class:list={['bild', klasse, { 'ist-fehlend': fehlt }]} style={`aspect-ratio: ${breite} / ${hoehe}`} data-bild>
-  {!fehlt && (
-    <img
-      src={src}
-      alt={alt}
-      width={breite}
-      height={hoehe}
-      loading={eager ? 'eager' : 'lazy'}
-      decoding="async"
-      sizes={sizes}
-      onerror="var f=this.parentElement;f.classList.add('ist-fehlend');f.querySelector('.bild-ersatz').removeAttribute('aria-hidden');this.remove();"
-    />
-  )}
-  <span class="bild-ersatz" aria-hidden={fehlt ? undefined : 'true'}><span class="ph">{platzhalter}</span></span>
+<figure
+  class:list={['bild', klasse, { einblenden }]}
+  style={`aspect-ratio: ${verhaeltnis}`}
+  data-placeholder-photo={f.stock ? 'PLACEHOLDER_PHOTO' : undefined}
+>
+  <img
+    src={url(f, 1600)}
+    srcset={srcset(f)}
+    sizes={sizes}
+    alt={f.alt}
+    width={f.breite}
+    height={f.hoehe}
+    loading={eager ? 'eager' : 'lazy'}
+    fetchpriority={eager ? 'high' : undefined}
+    decoding="async"
+    onerror="this.parentElement.classList.add('ist-fehlend');"
+  />
+  <span class="bild-ersatz" aria-hidden="true"><span class="ph">[Foto: {f.alt}]</span></span>
 </figure>
 
 <style>
@@ -34,7 +40,7 @@ const fehlt = !src;
     position: relative;
     margin: 0;
     overflow: hidden;
-    background: var(--grund-tief);
+    background: var(--leinen);
   }
   .bild img {
     position: absolute;
@@ -46,23 +52,15 @@ const fehlt = !src;
   .bild-ersatz {
     display: none;
   }
-  .ist-fehlend {
-    background:
-      linear-gradient(to top right, transparent calc(50% - 1px), #12191f33 50%, transparent calc(50% + 1px)),
-      linear-gradient(to top left, transparent calc(50% - 1px), #12191f33 50%, transparent calc(50% + 1px)),
-      var(--grund-tief);
-    border: 2px dashed #12191f55;
+  .ist-fehlend img {
+    visibility: hidden;
   }
   .ist-fehlend .bild-ersatz {
     position: absolute;
     inset: 0;
     display: grid;
     place-items: center;
-    padding: 1rem;
+    padding: 1.5rem;
     text-align: center;
-    font-size: 0.95rem;
-  }
-  .ist-fehlend .ph {
-    background: var(--grund);
   }
 </style>

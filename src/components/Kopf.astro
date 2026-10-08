@@ -1,251 +1,282 @@
 ---
-import { navigation, site } from '../lib/site';
-import { getCollection } from 'astro:content';
+import { site } from '../lib/site';
 
-const kuechen = await getCollection('kuechen');
-const gleisVon = (linie?: string) => kuechen.find((k) => k.id === linie)?.data.gleis;
+interface Props {
+  modus: 'transparent' | 'solide';
+}
+const { modus } = Astro.props;
+
+const links = [
+  { href: '/cucino-italiano', label: 'Cucino Italiano' },
+  { href: '/manju', label: 'Manju' },
+  { href: '/sushify', label: 'Sushify' },
+  { href: '/speisekarte', label: 'Speisekarte' },
+  { href: '/mittag', label: 'Mittag' },
+  { href: '/galerie', label: 'Galerie' },
+  { href: '/kontakt', label: 'Kontakt' },
+];
 const pfad = Astro.url.pathname.replace(/\/$/, '') || '/';
 const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
 ---
-<div class="entwurf auf-dunkel" role="note">
-  <div class="wrap entwurf-innen">
-    <span>Designentwurf von GuddiWeb · noch nicht live</span>
-    <span class="entwurf-rechts">Inhalte in [eckigen Klammern] fehlen noch</span>
-  </div>
-</div>
+<div class="entwurf">Designentwurf von GuddiWeb · noch nicht live · Angaben in [Klammern] fehlen noch</div>
 
-<header class="kopf">
-  <div class="wrap kopf-innen">
-    <a class="wortmarke" href="/" aria-label={`${site.name}, zur Startseite`}>
-      <span class="wm-name">Foodcourt</span><span class="wm-nr">47</span>
-      <span class="wm-ort">Hammerbrook</span>
+<header class:list={['kopf', `kopf--${modus}`]} data-kopf>
+  <div class="kopf-innen">
+    <a class="logo" href="/" aria-label={`${site.name}, zur Startseite`}>
+      Foodcourt<span class="logo-nr">47</span>
+      <span class="logo-ort">Hammerbrook</span>
     </a>
 
-    <nav class="nav-gross" aria-label="Hauptnavigation">
+    <nav class="nav" aria-label="Hauptnavigation">
       <ul>
-        {navigation.map((p) => (
-          <li class:list={[p.linie && `linie-${p.linie}`]}>
-            <a href={p.href} aria-current={aktiv(p.href)}>
-              {p.linie && <span class="mini-gleis" aria-hidden="true">{gleisVon(p.linie)}</span>}
-              {p.label}
-            </a>
-          </li>
+        {links.map((l) => (
+          <li><a href={l.href} aria-current={aktiv(l.href)}>{l.label}</a></li>
         ))}
       </ul>
     </nav>
 
-    <a class="knopf kopf-knopf" href="/reservieren" aria-current={aktiv('/reservieren')}>Reservieren</a>
+    <a class="knopf kopf-knopf" href="/reservieren">Tisch reservieren</a>
 
-    <details class="nav-klein">
-      <summary>
-        <span class="nav-klein-label">Menü</span>
-        <span class="nav-klein-icon" aria-hidden="true"></span>
+    <details class="mobil">
+      <summary aria-label="Menü öffnen">
+        <span class="mobil-linien" aria-hidden="true"></span>
       </summary>
-      <nav aria-label="Hauptnavigation mobil">
-        <ul>
-          <li><a href="/" aria-current={aktiv('/')}>Start</a></li>
-          {navigation.map((p) => (
-            <li class:list={[p.linie && `linie-${p.linie}`]}>
-              <a href={p.href} aria-current={aktiv(p.href)}>
-                {p.linie ? <span class="mini-gleis" aria-hidden="true">{gleisVon(p.linie)}</span> : <span class="mini-leer" aria-hidden="true"></span>}
-                {p.label}
-              </a>
-            </li>
-          ))}
-          <li><a href="/reservieren" aria-current={aktiv('/reservieren')}><span class="mini-leer" aria-hidden="true"></span>Tisch reservieren</a></li>
-        </ul>
-      </nav>
+      <div class="mobil-panel">
+        <nav aria-label="Hauptnavigation mobil">
+          <ul>
+            <li><a href="/" aria-current={aktiv('/')}>Start</a></li>
+            {links.map((l) => (
+              <li><a href={l.href} aria-current={aktiv(l.href)}>{l.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+        <a class="knopf knopf--hell" href="/reservieren">Tisch reservieren</a>
+      </div>
     </details>
   </div>
 </header>
 
 <style>
   .entwurf {
+    position: relative;
+    z-index: 31;
+    padding: 0.4rem var(--rand);
     background: var(--tinte);
-    color: var(--signal);
-    font-family: var(--mono);
+    color: #d9cdb8;
+    height: 2rem;
     font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-  }
-  .entwurf-innen {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    padding-block: 0.45rem 0.35rem;
-  }
-  .entwurf-rechts {
-    display: none;
-    color: var(--tafel-text);
-    font-weight: 400;
+    line-height: 1.2rem;
+    letter-spacing: 0.03em;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .kopf {
-    position: relative;
-    border-bottom: var(--strich) solid var(--tinte);
-    background: var(--grund);
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    color: var(--tinte);
+    background: var(--creme);
+    transition: background-color 400ms var(--weich), color 400ms var(--weich), box-shadow 400ms var(--weich);
   }
+  .kopf--transparent {
+    position: fixed;
+    top: 2rem;
+    left: 0;
+    right: 0;
+    background: transparent;
+    color: var(--creme);
+  }
+  .kopf--transparent::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 -3rem;
+    background: linear-gradient(#0000004d, #0000);
+    pointer-events: none;
+    transition: opacity 400ms var(--weich);
+  }
+  .kopf--transparent:global(.ist-gescrollt) {
+    top: 0;
+    background: var(--creme);
+    color: var(--tinte);
+    box-shadow: 0 1px 0 #1d1b1814;
+  }
+  .kopf--transparent:global(.ist-gescrollt)::before {
+    opacity: 0;
+  }
+
   .kopf-innen {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    min-height: 4.5rem;
+    gap: 2rem;
+    max-width: var(--breite);
+    margin-inline: auto;
+    padding: 1.1rem var(--rand);
   }
 
-  .wortmarke {
+  .logo {
     display: grid;
     grid-template-columns: auto auto;
-    align-items: end;
-    column-gap: 0.3rem;
+    justify-content: start;
     margin-right: auto;
-    text-decoration: none;
+    font-family: var(--serif);
+    font-size: 1.75rem;
+    font-weight: 500;
     line-height: 1;
+    letter-spacing: -0.01em;
+    text-decoration: none;
   }
-  .wm-name {
-    font-weight: 900;
-    font-size: 1.45rem;
-    letter-spacing: -0.03em;
+  .logo-nr {
+    font-style: italic;
+    margin-left: 0.05em;
   }
-  .wm-nr {
-    background: var(--tinte);
-    color: var(--grund);
-    font-family: var(--mono);
-    font-weight: 600;
-    font-size: 1.05rem;
-    padding: 0.28rem 0.3rem 0.15rem;
-    align-self: center;
-  }
-  .wm-ort {
+  .logo-ort {
     grid-column: 1 / -1;
     margin-top: 0.3rem;
-    font-family: var(--mono);
-    font-size: 0.6875rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--tinte-2);
+    font-family: var(--sans);
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.32em;
+    opacity: 0.8;
   }
 
-  .mini-gleis,
-  .mini-leer {
-    display: inline-grid;
-    place-items: center;
-    inline-size: 1.25rem;
-    block-size: 1.25rem;
-    margin-right: 0.45rem;
-    background: var(--linie);
-    color: #fff;
-    font-size: 0.75rem;
-    font-weight: 900;
-    padding-top: 0.1em;
-    vertical-align: 0.1em;
-  }
-  .mini-leer {
-    background: transparent;
-  }
-
-  .nav-gross,
+  .nav,
   .kopf-knopf {
     display: none;
   }
-  .nav-gross ul,
-  .nav-klein ul {
-    list-style: none;
+  .nav ul {
+    display: flex;
+    gap: 1.75rem;
     margin: 0;
     padding: 0;
-  }
-  .nav-gross ul {
-    display: flex;
-    gap: 0.25rem 1.35rem;
-  }
-  .nav-gross a {
-    display: inline-block;
-    padding-block: 0.5rem;
-    font-weight: 600;
-    font-size: 0.95rem;
-    text-decoration: none;
-    border-bottom: var(--strich) solid transparent;
-  }
-  .nav-gross a:hover {
-    border-bottom-color: var(--linie);
-  }
-  .nav-gross a[aria-current='page'] {
-    border-bottom-color: var(--linie);
-  }
-
-  .nav-klein summary {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    min-height: 3rem;
-    padding: 0.5rem 0.25rem 0.5rem 0.75rem;
-    cursor: pointer;
     list-style: none;
-    font-weight: 800;
   }
-  .nav-klein summary::-webkit-details-marker {
-    display: none;
-  }
-  .nav-klein-icon {
+  .nav a {
     position: relative;
-    inline-size: 1.4rem;
-    block-size: 3px;
-    background: var(--tinte);
-    box-shadow: 0 -7px 0 var(--tinte), 0 7px 0 var(--tinte);
+    font-size: 0.92rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-decoration: none;
   }
-  .nav-klein[open] .nav-klein-icon {
-    box-shadow: none;
-    background: var(--tinte);
-    transform: rotate(45deg);
-  }
-  .nav-klein[open] .nav-klein-icon::after {
+  .nav a::after {
     content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--tinte);
-    transform: rotate(90deg);
-  }
-  .nav-klein nav {
     position: absolute;
     left: 0;
     right: 0;
-    top: 100%;
-    z-index: 20;
-    background: var(--grund);
-    border-bottom: var(--strich) solid var(--tinte);
-    padding: 0 var(--rand) 1.5rem;
+    bottom: -0.35rem;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 400ms var(--weich);
   }
-  .nav-klein li {
-    border-top: 1px solid #12191f33;
+  .nav a:hover::after,
+  .nav a[aria-current='page']::after {
+    transform: scaleX(1);
   }
-  .nav-klein a {
+  .kopf--transparent .kopf-knopf {
+    background: transparent;
+    border-color: currentColor;
+    color: inherit;
+  }
+  .kopf--transparent .kopf-knopf:hover,
+  .kopf--transparent:global(.ist-gescrollt) .kopf-knopf {
+    background: var(--tinte);
+    border-color: var(--tinte);
+    color: var(--creme);
+  }
+  .kopf-knopf {
+    min-height: 2.75rem;
+    padding: 0.6rem 1.4rem;
+    font-size: 0.88rem;
+  }
+
+  .mobil summary {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    list-style: none;
+  }
+  .mobil summary::-webkit-details-marker {
+    display: none;
+  }
+  .mobil-linien,
+  .mobil-linien::before {
+    display: block;
+    width: 1.6rem;
+    height: 1px;
+    background: currentColor;
+    transition: transform 300ms var(--weich);
+  }
+  .mobil-linien {
+    position: relative;
+    transform: translateY(-4px);
+  }
+  .mobil-linien::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+  }
+  .mobil[open] .mobil-linien {
+    transform: rotate(45deg);
+  }
+  .mobil[open] .mobil-linien::before {
+    top: 0;
+    transform: rotate(-90deg);
+  }
+  .mobil-panel {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
     display: flex;
-    align-items: center;
-    min-height: 3.25rem;
-    font-size: 1.2rem;
-    font-weight: 800;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2.5rem;
+    padding: 6rem var(--rand) 3rem;
+    background: var(--kiefer);
+    color: var(--creme);
+  }
+  .mobil[open] summary {
+    position: relative;
+    z-index: 2;
+    color: var(--creme);
+  }
+  .mobil-panel ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .mobil-panel a:not(.knopf) {
+    display: block;
+    padding-block: 0.3rem;
+    font-family: var(--serif);
+    font-size: 2.1rem;
+    line-height: 1.2;
     text-decoration: none;
   }
-  .nav-klein a[aria-current='page'] {
-    text-decoration: underline;
-    text-decoration-color: var(--linie);
+  .mobil-panel a[aria-current='page'] {
+    font-style: italic;
+    color: var(--messing-hell);
+  }
+  .mobil-panel .knopf {
+    align-self: flex-start;
   }
 
-  @media (min-width: 40rem) {
-    .entwurf-rechts {
-      display: inline;
-    }
-  }
-
-  @media (min-width: 68rem) {
-    .nav-gross,
+  @media (min-width: 72rem) {
+    .nav,
     .kopf-knopf {
       display: block;
     }
-    .nav-klein {
-      display: none;
+    .kopf-knopf {
+      display: inline-flex;
     }
-    .kopf-innen {
-      gap: 2rem;
+    .mobil {
+      display: none;
     }
   }
 </style>

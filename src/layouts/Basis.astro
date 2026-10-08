@@ -1,10 +1,12 @@
 ---
-import '@fontsource/overpass/400.css';
-import '@fontsource/overpass/600.css';
-import '@fontsource/overpass/800.css';
-import '@fontsource/overpass/900.css';
-import '@fontsource/overpass-mono/400.css';
-import '@fontsource/overpass-mono/600.css';
+import '@fontsource/cormorant-garamond/400.css';
+import '@fontsource/cormorant-garamond/400-italic.css';
+import '@fontsource/cormorant-garamond/500.css';
+import '@fontsource/cormorant-garamond/500-italic.css';
+import '@fontsource/cormorant-garamond/600.css';
+import '@fontsource/jost/300.css';
+import '@fontsource/jost/400.css';
+import '@fontsource/jost/500.css';
 import '../styles/global.css';
 import Kopf from '../components/Kopf.astro';
 import Fuss from '../components/Fuss.astro';
@@ -13,16 +15,18 @@ import { site } from '../lib/site';
 interface Props {
   titel: string;
   beschreibung: string;
-  /** Linienfarbe der Seite, z. B. "manju" */
-  linie?: string;
+  /** Küchen-id für den leisen Akzent, z. B. "manju" */
+  akzent?: string;
+  /** "transparent": Header liegt über einem Hero-Foto */
+  kopf?: 'transparent' | 'solide';
   schema?: Record<string, unknown> | Record<string, unknown>[];
   ogBild?: string;
 }
 
-const { titel, beschreibung, linie, schema, ogBild } = Astro.props;
+const { titel, beschreibung, akzent, kopf = 'transparent', schema, ogBild } = Astro.props;
 const voll = Astro.url.pathname === '/' ? `${site.name} · Pizza, Curry und Sushi in Hamburg` : `${titel} · ${site.name}`;
 const kanonisch = new URL(Astro.url.pathname, Astro.site).href;
-const bild = ogBild ?? 'https://foodcourt47.de/wp-content/uploads/2023/02/2-1024x710.jpg';
+const bild = ogBild ?? 'https://foodcourt47.de/wp-content/uploads/2023/02/2.jpg';
 const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 ---
 <!doctype html>
@@ -33,11 +37,12 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     <title>{voll}</title>
     <meta name="description" content={beschreibung} />
     <link rel="canonical" href={kanonisch} />
-    {/* Entwurf: nicht indexieren, damit die Live-Seite nicht doppelt auftaucht. Vor dem Livegang entfernen. */}
+    {/* Entwurf: nicht indexieren. Vor dem Livegang entfernen. */}
     <meta name="robots" content="noindex, nofollow" />
-    <meta name="theme-color" content="#121a1f" />
+    <meta name="theme-color" content="#1e2a24" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="preconnect" href="https://images.unsplash.com" />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="de_DE" />
@@ -48,52 +53,62 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     <meta property="og:image" content={bild} />
     <meta name="twitter:card" content="summary_large_image" />
 
+    <script is:inline>document.documentElement.classList.add('js');</script>
     {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
   </head>
-  <body class:list={[linie && `linie-${linie}`]}>
+  <body style={akzent ? `--akzent: var(--k-${akzent})` : undefined}>
     <a class="springen" href="#inhalt">Zum Inhalt springen</a>
-    <Kopf />
+    <Kopf modus={kopf} />
     <main id="inhalt" tabindex="-1">
       <slot />
     </main>
     <Fuss />
     <script>
-      import { berlinJetzt, mittagStatus, abendLaeuft, TAGE } from '../lib/zeit';
+      const ruhig = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      // Alle Live-Anzeigen der Seite füllen: Uhr, Status, heutiger Tag.
-      function aktualisieren() {
-        const j = berlinJetzt();
-        const s = mittagStatus(j);
-        document.documentElement.dataset.mittag = s.phase;
-        document.documentElement.dataset.abend = abendLaeuft(j) ? 'ja' : 'nein';
-        document.querySelectorAll<HTMLElement>('[data-uhr]').forEach((el) => (el.textContent = j.uhrzeit));
-        document.querySelectorAll<HTMLElement>('[data-datum]').forEach((el) => (el.textContent = j.datum));
-        document.querySelectorAll<HTMLElement>('[data-mittag-satz]').forEach((el) => (el.textContent = s.satz));
-        document.querySelectorAll<HTMLElement>('[data-mittag-kurz]').forEach((el) => {
-          el.textContent = s.kurz;
-          el.dataset.phase = s.phase;
-        });
-        document.querySelectorAll<HTMLElement>('[data-wochentag]').forEach((el) => {
-          const heute = Number(el.dataset.wochentag) === j.tag;
-          el.classList.toggle('ist-heute', heute);
-          if (heute) el.setAttribute('aria-current', 'date');
-          else el.removeAttribute('aria-current');
-        });
-        document.querySelectorAll<HTMLElement>('[data-heute-name]').forEach((el) => {
-          el.textContent = TAGE[j.tag];
-        });
-        document.querySelectorAll<HTMLElement>('[data-zeitleiste]').forEach((el) => {
-          const von = Number(el.dataset.von);
-          const bis = Number(el.dataset.bis);
-          const werktag = j.tag >= 1 && j.tag <= 5;
-          const sichtbar = werktag && j.minuten >= von && j.minuten <= bis;
-          el.classList.toggle('zeigt-jetzt', sichtbar);
-          if (sichtbar) el.style.setProperty('--jetzt', `${((j.minuten - von) / (bis - von)) * 100}%`);
-        });
+      // Header wird beim Scrollen solide
+      const kopf = document.querySelector<HTMLElement>('[data-kopf]');
+      const pruefen = () => kopf?.classList.toggle('ist-gescrollt', window.scrollY > 40);
+      pruefen();
+      window.addEventListener('scroll', pruefen, { passive: true });
+
+      // Bilder blenden beim Scrollen weich ein (?shot: sofort sichtbar, nur für Screenshots)
+      if (new URLSearchParams(location.search).has('shot')) document.querySelectorAll('.einblenden').forEach((el) => el.classList.add('ist-sichtbar'));
+      const beobachter = new IntersectionObserver(
+        (eintraege) => {
+          for (const e of eintraege) {
+            if (e.isIntersecting) {
+              e.target.classList.add('ist-sichtbar');
+              beobachter.unobserve(e.target);
+            }
+          }
+        },
+        { rootMargin: '0px 0px -8% 0px' },
+      );
+      document.querySelectorAll('.einblenden').forEach((el) => beobachter.observe(el));
+
+      // Leichter Parallax im Hero
+      const parallax = document.querySelectorAll<HTMLElement>('[data-parallax]');
+      if (!ruhig && parallax.length) {
+        let geplant = false;
+        const bewegen = () => {
+          geplant = false;
+          const y = window.scrollY;
+          parallax.forEach((el) => {
+            if (y < window.innerHeight * 1.2) el.style.transform = `translate3d(0, ${y * 0.18}px, 0) scale(1.06)`;
+          });
+        };
+        window.addEventListener(
+          'scroll',
+          () => {
+            if (!geplant) {
+              geplant = true;
+              requestAnimationFrame(bewegen);
+            }
+          },
+          { passive: true },
+        );
       }
-
-      aktualisieren();
-      setInterval(aktualisieren, 30_000);
     </script>
   </body>
 </html>

@@ -54,7 +54,7 @@ export function kuecheSchema(k: Kueche) {
     url: `${basis}/${k.id}`,
     sameAs: [k.data.website],
     logo: k.data.logo.src,
-    image: k.data.bild?.src,
+    image: k.data.fotos[0],
     servesCuisine: k.data.kueche,
     containedInPlace: { '@id': `${basis}/#foodcourt` },
     acceptsReservations: site.reservierungUrl,

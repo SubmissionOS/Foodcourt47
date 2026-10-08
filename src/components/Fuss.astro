@@ -1,172 +1,118 @@
 ---
-import { getCollection } from 'astro:content';
 import { site } from '../lib/site';
 import { markiere } from '../lib/format';
 
-const kuechen = (await getCollection('kuechen')).sort((a, b) => a.data.reihenfolge - b.data.reihenfolge);
 const i = site.impressum;
 const a = site.adresse;
 ---
-<footer class="fuss auf-dunkel">
+<footer class="fuss dunkel">
   <div class="wrap">
     <div class="fuss-raster">
-      <section aria-labelledby="f-gleise">
-        <h2 id="f-gleise" class="fuss-titel">Gleise</h2>
-        <ul class="fuss-gleise">
-          {kuechen.map((k) => (
-            <li class={`linie-${k.id}`}>
-              <a href={`/${k.id}`}>
-                <span class="gleis" aria-hidden="true">{k.data.gleis}</span>
-                <span>
-                  <strong>{k.data.name}</strong>
-                  <span class="fuss-klein">{k.data.kategorie}</span>
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section aria-labelledby="f-besuch">
-        <h2 id="f-besuch" class="fuss-titel">Besuch</h2>
+      <div>
+        <h2 class="fuss-titel">Besuch</h2>
         <address>
-          {site.name}<br />
           <Fragment set:html={markiere(a.strasse)} /><br />
           <Fragment set:html={markiere(`${a.plz} ${a.ort}`)} />
         </address>
-        <p class="fuss-zeilen">
-          <span>Telefon <Fragment set:html={markiere(site.telefon)} /></span>
-          <span>E-Mail <Fragment set:html={markiere(site.email)} /></span>
-        </p>
-        <p class="fuss-zeilen">
-          <span>Mittag {site.mittag.tage} {site.mittag.von}–{site.mittag.bis} Uhr</span>
-          <span><Fragment set:html={markiere(site.oeffnungszeiten)} /></span>
-        </p>
-      </section>
-
-      <section aria-labelledby="f-seiten">
-        <h2 id="f-seiten" class="fuss-titel">Seiten</h2>
-        <ul class="fuss-links">
+      </div>
+      <div>
+        <h2 class="fuss-titel">Zeiten</h2>
+        <p>Mittag {site.mittag.tage}, 11 bis 16 Uhr<br /><Fragment set:html={markiere(site.oeffnungszeiten)} /></p>
+      </div>
+      <div>
+        <h2 class="fuss-titel">Kontakt</h2>
+        <p><Fragment set:html={markiere(site.telefon)} /><br /><Fragment set:html={markiere(site.email)} /></p>
+      </div>
+      <nav aria-label="Küchen und Seiten">
+        <h2 class="fuss-titel">Entdecken</h2>
+        <ul>
+          <li><a href="/cucino-italiano">Cucino Italiano</a></li>
+          <li><a href="/manju">Manju</a></li>
+          <li><a href="/sushify">Sushify</a></li>
           <li><a href="/speisekarte">Speisekarte</a></li>
-          <li><a href="/mittag">Mittag</a></li>
           <li><a href="/galerie">Galerie</a></li>
-          <li><a href="/reservieren">Reservieren</a></li>
-          <li><a href="/kontakt">Kontakt</a></li>
-          <li><a href="/impressum">Impressum</a></li>
-          <li><a href="/datenschutz">Datenschutz</a></li>
         </ul>
-      </section>
-
-      <section aria-labelledby="f-anbieter">
-        <h2 id="f-anbieter" class="fuss-titel">Anbieter</h2>
-        <p class="fuss-zeilen">
-          <span>{i.firma}</span>
-          <span>{i.strasse}, {i.plzOrt}</span>
-          <span>Geschäftsführer: {i.vertreten}</span>
-          <span>{i.gericht}, {i.register}</span>
-        </p>
-      </section>
+      </nav>
     </div>
 
     <div class="fuss-unten">
-      <span>© {new Date().getFullYear()} {i.firma}</span>
-      <span>Entwurf: GuddiWeb</span>
+      <span class="fuss-logo">Foodcourt<em>47</em></span>
+      <span>{i.firma} · {i.strasse}, {i.plzOrt} · {i.gericht} {i.register}</span>
+      <span class="fuss-recht">
+        <a href="/impressum">Impressum</a>
+        <a href="/datenschutz">Datenschutz</a>
+      </span>
     </div>
   </div>
 </footer>
 
 <style>
   .fuss {
-    margin-top: 6rem;
-    background: var(--tafel);
-    color: var(--tafel-text);
+    padding-top: 4.5rem;
+    border-top: 1px solid #f4eee41f;
     font-size: 0.95rem;
-  }
-  .fuss a {
-    color: inherit;
   }
   .fuss-raster {
     display: grid;
-    gap: 2.5rem;
-    padding-block: 3.5rem 3rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.25rem;
+    padding-block: 0 3.5rem;
   }
   .fuss-titel {
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--tafel-linie);
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #a8b2b0;
-  }
-  .fuss ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .fuss-gleise li + li {
-    margin-top: 0.75rem;
-  }
-  .fuss-gleise a {
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-    text-decoration: none;
-  }
-  .fuss-gleise a:hover strong {
-    text-decoration: underline;
-  }
-  .fuss-gleise .gleis {
-    --g: 2.25rem;
-  }
-  .fuss-gleise strong {
-    display: block;
-    font-weight: 800;
-  }
-  .fuss-klein {
-    display: block;
-    font-size: 0.85rem;
-    color: #a8b2b0;
+    margin-bottom: 0.6rem;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--messing-hell);
   }
   address {
     font-style: normal;
-    margin-bottom: 1rem;
   }
-  .fuss-zeilen span {
-    display: block;
+  .fuss p {
+    margin: 0;
   }
-  .fuss-links li + li {
-    margin-top: 0.35rem;
+  .fuss ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
-  .fuss-links a {
+  .fuss li + li {
+    margin-top: 0.2rem;
+  }
+  .fuss a:not(.knopf) {
     text-decoration: none;
   }
-  .fuss-links a:hover {
+  .fuss a:not(.knopf):hover {
     text-decoration: underline;
   }
   .fuss-unten {
     display: flex;
     flex-wrap: wrap;
+    align-items: baseline;
     justify-content: space-between;
-    gap: 0.5rem 2rem;
-    padding-block: 1.25rem 2rem;
-    border-top: 1px solid var(--tafel-linie);
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: #a8b2b0;
+    gap: 0.75rem 2rem;
+    padding-block: 1.75rem 2.25rem;
+    border-top: 1px solid #f4eee426;
+    font-size: 0.82rem;
+    color: #cfc5b4;
   }
-
+  .fuss-logo {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    color: var(--creme);
+  }
+  .fuss-recht {
+    display: flex;
+    gap: 1.5rem;
+  }
   @media (min-width: 40rem) {
     .fuss-raster {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
   @media (min-width: 64rem) {
     .fuss-raster {
-      grid-template-columns: 1.2fr 1.2fr 0.8fr 1.2fr;
-      gap: 3rem;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
 </style>

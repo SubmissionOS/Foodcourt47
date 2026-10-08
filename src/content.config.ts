@@ -2,13 +2,6 @@ import { defineCollection } from 'astro:content';
 import { glob, file } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-const bild = z.object({
-  src: z.string(),
-  alt: z.string(),
-  breite: z.number(),
-  hoehe: z.number(),
-});
-
 const gericht = z.object({
   nr: z.string().optional(),
   name: z.string(),
@@ -28,30 +21,35 @@ const kuechen = defineCollection({
   loader: glob({ pattern: '*.json', base: './src/content/kuechen' }),
   schema: z.object({
     name: z.string(),
-    gleis: z.number(),
     reihenfolge: z.number(),
     kategorie: z.string(),
     kueche: z.string(),
     claim: z.string(),
     einleitung: z.array(z.string()),
     website: z.url(),
-    logo: bild,
-    bild: bild.nullable(),
-    bildPlatzhalter: z.string().optional(),
+    logo: z.object({ src: z.string(), alt: z.string(), breite: z.number(), hoehe: z.number() }),
+    /** Schlüssel aus fotos.json, das erste ist das Hero-Foto */
+    fotos: z.array(z.string()).min(1),
     karten: z.array(karte),
   }),
 });
 
-const galerie = defineCollection({
-  loader: file('./src/content/galerie.json'),
+const fotos = defineCollection({
+  loader: file('./src/content/fotos.json'),
   schema: z.object({
     src: z.string(),
     breite: z.number(),
     hoehe: z.number(),
     alt: z.string(),
-    platzhalter: z.string().optional(),
-    kueche: z.string().optional(),
+    /** Stockfoto, später durch eigenes Foto ersetzen (PLACEHOLDER_PHOTO) */
+    stock: z.boolean(),
+    hinweis: z.string().optional(),
   }),
+});
+
+const galerie = defineCollection({
+  loader: file('./src/content/galerie.json'),
+  schema: z.object({ foto: z.string(), kueche: z.string().optional() }),
 });
 
 const seiten = defineCollection({
@@ -59,4 +57,4 @@ const seiten = defineCollection({
   schema: z.object({ titel: z.string(), stand: z.string() }),
 });
 
-export const collections = { kuechen, galerie, seiten };
+export const collections = { kuechen, fotos, galerie, seiten };
