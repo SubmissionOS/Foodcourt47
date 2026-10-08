@@ -1,0 +1,320 @@
+---
+import Basis from '../layouts/Basis.astro';
+import { alleKuechen, mittagsgerichte } from '../lib/kuechen';
+import { preis } from '../lib/format';
+import { site } from '../lib/site';
+import { TAGE_KURZ } from '../lib/zeit';
+
+const kuechen = await alleKuechen();
+const alle = kuechen
+  .flatMap((k) => mittagsgerichte(k).map((g) => ({ ...g, k })))
+  .sort((a, b) => (a.preis ?? 999) - (b.preis ?? 999) || a.name.localeCompare(b.name, 'de'));
+
+// Zeitleiste von 10 bis 17 Uhr
+const LEISTE_VON = 10 * 60;
+const LEISTE_BIS = 17 * 60;
+const pos = (min: number) => `${((min - LEISTE_VON) / (LEISTE_BIS - LEISTE_VON)) * 100}%`;
+const stunden = [10, 11, 12, 13, 14, 15, 16, 17];
+const woche = [1, 2, 3, 4, 5, 6, 0];
+---
+<Basis
+  titel="Mittagstisch Mo–Fr 11–16 Uhr"
+  beschreibung="Mittagstisch im Foodcourt47 Hammerbrook: alle Mittagsangebote von Cucino Italiano, Manju und Sushify Mo–Fr 11–16 Uhr auf einen Blick, ab 7,50 €."
+>
+  <div class="wrap">
+    <header class="m-kopf">
+      <span class="marke">Mittagstisch · {site.mittag.tage} 11–16 Uhr</span>
+      <h1>Mittag</h1>
+      <p class="lead"><span data-mittag-satz>Mittagsangebote {site.mittag.tage} von 11 bis 16 Uhr.</span></p>
+    </header>
+
+    <section class="fahrplan" aria-labelledby="fp-titel">
+      <h2 id="fp-titel" class="nur-sr">Wann gilt das Mittagsangebot?</h2>
+
+      <ol class="woche" aria-label="Wochentage">
+        {woche.map((t) => (
+          <li class:list={['wt', { 'wt--frei': t === 0 || t === 6 }]} data-wochentag={t}>
+            <span class="wt-tag">{TAGE_KURZ[t]}</span>
+            <span class="wt-info mono">{t === 0 || t === 6 ? 'kein Mittag' : '11–16'}</span>
+          </li>
+        ))}
+      </ol>
+
+      <div class="leiste" data-zeitleiste data-von={LEISTE_VON} data-bis={LEISTE_BIS} aria-hidden="true">
+        <div class="leiste-spur">
+          <div class="leiste-mittag" style={`left:${pos(11 * 60)};right:calc(100% - ${pos(16 * 60)})`}>
+            <span>Mittagsangebot</span>
+          </div>
+          <div class="leiste-jetzt"><span class="mono" data-uhr>--:--</span></div>
+        </div>
+        <ol class="leiste-skala">
+          {stunden.map((h) => (
+            <li class="mono" style={`left:${pos(h * 60)}`}>{h}</li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="zeile" aria-labelledby="alle-titel">
+      <span class="kenn">{alle.length} Gerichte</span>
+      <div>
+        <h2 id="alle-titel">Alle Mittagsgerichte, nach Preis</h2>
+        <table class="m-tabelle">
+          <caption class="nur-sr">Mittagsgerichte aller drei Küchen, aufsteigend nach Preis sortiert</caption>
+          <thead>
+            <tr>
+              <th scope="col">Gericht</th>
+              <th scope="col">Küche</th>
+              <th scope="col" class="r">Preis</th>
+            </tr>
+          </thead>
+          <tbody>
+            {alle.map((g) => (
+              <tr class={`linie-${g.k.id}`}>
+                <th scope="row">
+                  <span class="mt-name">{g.name}</span>
+                  {g.beschreibung && <span class="mt-text">{g.beschreibung}</span>}
+                </th>
+                <td class="mt-kueche">
+                  <a href={`/${g.k.id}`}><span class="gleis" aria-hidden="true">{g.k.data.gleis}</span>{g.k.data.name}</a>
+                </td>
+                <td class="mono r mt-preis">{preis(g.preis)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p class="m-vegan">Jedes Gericht gibt es auf Wunsch vegan.</p>
+      </div>
+    </section>
+  </div>
+</Basis>
+
+<style>
+  .m-kopf {
+    padding-block: 3rem 2rem;
+  }
+  .m-kopf h1 {
+    margin-bottom: 1rem;
+  }
+  :global(html[data-mittag='laeuft']) .m-kopf .lead span {
+    background: var(--signal);
+    padding: 0.05em 0.3em 0;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  /* Wochenfahrplan mit Zeitleiste: das auffällige Element der Seite */
+  .fahrplan {
+    margin-bottom: 4rem;
+    padding: 1.25rem 1rem 1.5rem;
+    background: var(--tafel);
+    color: var(--tafel-text);
+  }
+  .woche {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 2px;
+    margin: 0 0 2rem;
+    padding: 0;
+    list-style: none;
+  }
+  .wt {
+    display: grid;
+    gap: 0.2rem;
+    padding: 0.6rem 0.4rem 0.5rem;
+    border-top: 3px solid var(--tafel-text);
+  }
+  .wt--frei {
+    border-top-color: var(--tafel-linie);
+    color: #a8b2b0;
+  }
+  .wt-tag {
+    font-size: 1.25rem;
+    font-weight: 900;
+  }
+  .wt-info {
+    font-size: 0.7rem;
+  }
+  .wt:global(.ist-heute) {
+    background: var(--signal);
+    color: var(--tinte);
+    border-top-color: var(--signal);
+  }
+
+  .leiste {
+    position: relative;
+    padding-bottom: 1.75rem;
+  }
+  .leiste-spur {
+    position: relative;
+    height: 3.5rem;
+    border-block: 1px solid var(--tafel-linie);
+  }
+  .leiste-mittag {
+    position: absolute;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    padding-inline: 0.75rem;
+    background: var(--tafel-text);
+    color: var(--tinte);
+    font-weight: 800;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .leiste-jetzt {
+    position: absolute;
+    top: -0.5rem;
+    bottom: -0.5rem;
+    left: var(--jetzt, 0%);
+    width: 3px;
+    background: var(--signal);
+    display: none;
+  }
+  .leiste-jetzt span {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 0.25rem;
+    padding: 0.05rem 0.3rem 0;
+    background: var(--signal);
+    color: var(--tinte);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  .leiste:global(.zeigt-jetzt) .leiste-jetzt {
+    display: block;
+  }
+  .leiste:global(.zeigt-jetzt) .leiste-spur {
+    margin-top: 1.75rem;
+  }
+  .leiste-skala {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    height: 1.25rem;
+  }
+  .leiste-skala li {
+    position: absolute;
+    top: 0.4rem;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    color: #a8b2b0;
+  }
+  .leiste-skala li:first-child {
+    transform: none;
+  }
+  .leiste-skala li:last-child {
+    transform: translateX(-100%);
+  }
+
+  @media (min-width: 48rem) {
+    .fahrplan {
+      padding: 2rem 2rem 2.25rem;
+    }
+    .wt {
+      padding: 0.75rem 0.75rem 0.6rem;
+    }
+    .wt-tag {
+      font-size: 1.75rem;
+    }
+    .wt-info {
+      font-size: 0.8rem;
+    }
+  }
+
+  /* Tabelle */
+  .zeile h2 {
+    margin-bottom: 1.5rem;
+  }
+  .m-tabelle {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .m-tabelle thead th {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 0 0.75rem 0.6rem 0;
+    border-bottom: 2px solid var(--tinte);
+  }
+  .m-tabelle .r {
+    text-align: right;
+    padding-right: 0;
+  }
+  .m-tabelle tbody th,
+  .m-tabelle td {
+    padding: 0.9rem 0.75rem 0.8rem 0;
+    border-bottom: 1px solid #12191f26;
+    text-align: left;
+    vertical-align: top;
+    font-weight: 400;
+  }
+  .mt-name {
+    display: block;
+    font-weight: 800;
+    font-size: 1.1rem;
+  }
+  .mt-text {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--tinte-2);
+    max-width: 48ch;
+  }
+  .mt-kueche a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .mt-kueche a:hover {
+    text-decoration: underline;
+  }
+  .mt-kueche .gleis {
+    --g: 1.5rem;
+    font-size: 0.9rem;
+  }
+  .mt-preis {
+    font-weight: 600;
+    font-size: 1.1rem;
+    white-space: nowrap;
+  }
+  .m-vegan {
+    margin-top: 1.5rem;
+    font-weight: 600;
+  }
+
+  @media (max-width: 39.99rem) {
+    .m-tabelle thead {
+      display: none;
+    }
+    .m-tabelle tbody tr {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      border-bottom: 1px solid #12191f26;
+      padding-block: 0.8rem;
+    }
+    .m-tabelle tbody th,
+    .m-tabelle td {
+      border: 0;
+      padding: 0;
+    }
+    .mt-kueche {
+      grid-row: 2;
+      margin-top: 0.4rem;
+    }
+    .mt-preis {
+      grid-row: 1;
+      grid-column: 2;
+    }
+  }
+</style>

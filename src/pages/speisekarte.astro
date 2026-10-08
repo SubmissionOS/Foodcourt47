@@ -1,0 +1,181 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Karte from '../components/Karte.astro';
+import { alleKuechen } from '../lib/kuechen';
+import { site } from '../lib/site';
+
+const kuechen = await alleKuechen();
+---
+<Basis
+  titel="Speisekarte"
+  beschreibung="Speisekarte des Foodcourt47 Hammerbrook mit Preisen: Mittagskarten Mo–Fr 11–16 Uhr und Abendkarten von Cucino Italiano, Manju und Sushify."
+>
+  <div class="wrap">
+    <header class="sk-kopf">
+      <span class="marke">Gleis 1 bis 3 · Mittag und Abend</span>
+      <h1>Speisekarte</h1>
+      <p class="lead">
+        Mittags {site.mittag.tage} von 11 bis 16 Uhr gelten feste Preise in allen drei Küchen. Danach geht es mit den Abendkarten weiter.
+      </p>
+    </header>
+
+    <nav class="gleiswahl" aria-label="Küche wählen">
+      {kuechen.map((k) => (
+        <a class={`gw linie-${k.id}`} href={`#${k.id}`}>
+          <span class="gw-nr">{k.data.gleis}</span>
+          <span class="gw-name">{k.data.name}</span>
+          <span class="gw-kat mono">{k.data.kategorie}</span>
+        </a>
+      ))}
+    </nav>
+
+    {kuechen.map((k) => (
+      <section class={`zeile sk-kueche linie-${k.id}`} id={k.id} aria-labelledby={`sk-${k.id}`}>
+        <span class="kenn"><span class="gleis">{k.data.gleis}</span></span>
+        <div>
+          <div class="sk-titel">
+            <h2 id={`sk-${k.id}`}>{k.data.name}</h2>
+            <a href={`/${k.id}`}>Mehr über {k.data.name}</a>
+          </div>
+          <div class="sk-karten">
+            {k.data.karten.map((c) => (
+              <section class:list={['sk-karte', { 'sk-karte--breit': c.id !== 'mittag' }]} aria-label={`${c.titel} ${k.data.name}`}>
+                <h3 class="sk-karte-titel">
+                  {c.titel}
+                  <span class="mono">{c.zeit}</span>
+                </h3>
+                <Karte karte={c} ebene="h4" />
+              </section>
+            ))}
+          </div>
+        </div>
+      </section>
+    ))}
+
+    <p class="sk-vegan">Alle Gerichte gibt es auf Wunsch vegan. <span class="ph">[Hinweis auf Allergene und Zusatzstoffe]</span></p>
+  </div>
+</Basis>
+
+<style>
+  .sk-kopf {
+    padding-block: 3rem 2.5rem;
+  }
+  .sk-kopf h1 {
+    margin-bottom: 1.25rem;
+  }
+
+  /* Gleiswahl: drei Schilder nebeneinander, das auffällige Element der Seite */
+  .gleiswahl {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3px;
+    margin-bottom: 4rem;
+    background: var(--tinte);
+    border: var(--strich) solid var(--tinte);
+  }
+  .gw {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas: 'nr name' 'nr kat';
+    align-items: center;
+    column-gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--linie);
+    color: #fff;
+    text-decoration: none;
+  }
+  .gw-nr {
+    grid-area: nr;
+    font-size: 3.25rem;
+    font-weight: 900;
+    line-height: 1;
+    padding-top: 0.08em;
+  }
+  .gw-name {
+    grid-area: name;
+    font-size: 1.4rem;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+  .gw-kat {
+    grid-area: kat;
+    font-size: 0.8rem;
+    opacity: 0.9;
+  }
+  .gw:hover .gw-name {
+    text-decoration: underline;
+  }
+  .gw:focus-visible {
+    outline-color: var(--signal);
+    outline-offset: -6px;
+    box-shadow: none;
+  }
+  @media (min-width: 48rem) {
+    .gleiswahl {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .gw {
+      padding: 1.5rem;
+    }
+    .gw-nr {
+      font-size: 4.5rem;
+    }
+  }
+
+  .sk-kueche {
+    scroll-margin-top: 1rem;
+    border-top-color: var(--linie);
+  }
+  .sk-kueche .kenn .gleis {
+    --g: 3rem;
+  }
+  .sk-titel {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    margin-bottom: 2rem;
+  }
+  .sk-titel a {
+    font-weight: 700;
+  }
+  .sk-karten {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3rem;
+  }
+  .sk-karte-titel {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 1rem;
+    margin-bottom: 1.25rem;
+    font-size: 1.5rem;
+    font-weight: 900;
+  }
+  .sk-karte-titel .mono {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--linie);
+  }
+  .sk-karte :global(.karte) {
+    max-width: none;
+  }
+  @media (min-width: 64rem) {
+    .sk-karten {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: 4rem;
+      align-items: start;
+    }
+  }
+
+  .sk-vegan {
+    margin-top: 1rem;
+    padding-top: 1.25rem;
+    border-top: var(--strich) solid var(--tinte);
+    font-weight: 600;
+    max-width: none;
+  }
+</style>

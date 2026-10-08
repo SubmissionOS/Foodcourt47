@@ -34,7 +34,7 @@ const kuechen = defineCollection({
     kueche: z.string(),
     claim: z.string(),
     einleitung: z.array(z.string()),
-    website: z.string().url(),
+    website: z.url(),
     logo: bild,
     bild: bild.nullable(),
     bildPlatzhalter: z.string().optional(),

@@ -82,6 +82,14 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
         document.querySelectorAll<HTMLElement>('[data-heute-name]').forEach((el) => {
           el.textContent = TAGE[j.tag];
         });
+        document.querySelectorAll<HTMLElement>('[data-zeitleiste]').forEach((el) => {
+          const von = Number(el.dataset.von);
+          const bis = Number(el.dataset.bis);
+          const werktag = j.tag >= 1 && j.tag <= 5;
+          const sichtbar = werktag && j.minuten >= von && j.minuten <= bis;
+          el.classList.toggle('zeigt-jetzt', sichtbar);
+          if (sichtbar) el.style.setProperty('--jetzt', `${((j.minuten - von) / (bis - von)) * 100}%`);
+        });
       }
 
       aktualisieren();

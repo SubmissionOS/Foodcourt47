@@ -1,0 +1,33 @@
+---
+import Basis from '../layouts/Basis.astro';
+import { getEntry, render } from 'astro:content';
+
+const seite = await getEntry('seiten', 'datenschutz');
+if (!seite) throw new Error('Inhalt src/content/seiten/datenschutz.md fehlt');
+const { Content } = await render(seite);
+---
+<Basis titel="Datenschutz" beschreibung="Datenschutzerklärung des Foodcourt47 Hammerbrook (Entwurf).">
+  <div class="wrap">
+    <header class="d-kopf">
+      <span class="marke">Rechtliches · Stand <span class="ph">{seite.data.stand}</span></span>
+      <h1>{seite.data.titel}</h1>
+    </header>
+    <div class="zeile">
+      <span class="kenn">Entwurf</span>
+      <div class="prosa">
+        <Content />
+      </div>
+    </div>
+  </div>
+</Basis>
+
+<style>
+  .d-kopf {
+    padding-block: 3rem 2.5rem;
+  }
+  .prosa :global(p:first-child) {
+    padding: 0.75rem 1rem;
+    border-left: var(--strich) solid var(--signal);
+    background: #fff;
+  }
+</style>
