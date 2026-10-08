@@ -32,7 +32,7 @@ const heroFoto = await foto(heroId);
   schema={await kuecheSchema(k)}
   ogBild={url(heroFoto, 1600)}
 >
-  <SeitenHero foto={heroId} titel={d.name} satz={d.claim} hoch />
+  <SeitenHero foto={heroId} titel={d.name} satz={d.claim} />
 
   <section class="wrap einleitung" aria-label={`Über ${d.name}`}>
     <div class="ein-text einblenden">
