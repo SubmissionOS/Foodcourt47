@@ -262,15 +262,29 @@ a {
   font-family: var(--sans);
 }
 
-/* Weiches Einblenden beim Scrollen */
-.js .einblenden {
+/* Weiches Einblenden beim Scrollen: Texte, Überschriften und Bilder. Braucht kein Hover. */
+.js .einblenden,
+.js main section h2:not(.einblenden *) {
   opacity: 0;
-  transform: translateY(1.5rem);
-  transition: opacity 1100ms var(--weich), transform 1100ms var(--weich);
+  transform: translateY(1.25rem);
+  transition: opacity 900ms var(--weich), transform 900ms var(--weich);
 }
 
-.js .einblenden.ist-sichtbar {
+.js .einblenden.ist-sichtbar,
+.js main section h2.ist-sichtbar {
   opacity: 1;
+  transform: none;
+}
+
+/* Bilder zoomen beim Einblenden leicht heraus */
+.js .bild.einblenden img,
+.js .zoom img {
+  transform: scale(1.12);
+  transition: transform 1600ms var(--weich);
+}
+
+.js .bild.einblenden.ist-sichtbar img,
+.js .zoom.ist-sichtbar img {
   transform: none;
 }
 
@@ -287,7 +301,10 @@ a {
     transition: none !important;
     animation: none !important;
   }
-  .js .einblenden {
+  .js .einblenden,
+  .js main section h2,
+  .js .bild.einblenden img,
+  .js .zoom img {
     opacity: 1;
     transform: none;
   }

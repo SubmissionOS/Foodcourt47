@@ -78,7 +78,10 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
       window.addEventListener('scroll', pruefen, { passive: true });
 
       // Bilder blenden beim Scrollen weich ein (?shot: sofort sichtbar, nur für Screenshots)
-      if (new URLSearchParams(location.search).has('shot')) document.querySelectorAll('.einblenden').forEach((el) => el.classList.add('ist-sichtbar'));
+      const einblenden = document.querySelectorAll('.einblenden, main section h2, .zoom');
+      if (new URLSearchParams(location.search).has('shot') || !('IntersectionObserver' in window)) {
+        einblenden.forEach((el) => el.classList.add('ist-sichtbar'));
+      }
       const beobachter = new IntersectionObserver(
         (eintraege) => {
           for (const e of eintraege) {
@@ -90,7 +93,7 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
         },
         { rootMargin: '0px 0px -8% 0px' },
       );
-      document.querySelectorAll('.einblenden').forEach((el) => beobachter.observe(el));
+      einblenden.forEach((el) => beobachter.observe(el));
 
       // Leichter Parallax im Hero
       const parallax = document.querySelectorAll<HTMLElement>('[data-parallax]');

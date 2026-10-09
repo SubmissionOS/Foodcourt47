@@ -105,3 +105,8 @@ Die Cormorant-Serif ist komplett ersetzt, auf allen 12 Seiten. Eine Familie für
 - **Jost** (300 bis 500) bleibt für Fließtext, Navigation und Buttons.
 - Keine Kursivschnitte mehr. Betonungen (`<em>`) sind halbfett statt kursiv.
 - Rechtsseiten (Impressum, Datenschutz) setzen die Überschrift in Normalschreibung, weil „DATENSCHUTZERKLÄRUNG“ in Versalien auf 390 px überlaufen würde.
+
+## Bewegung und Mobil (Runde 6)
+- Der Küchen-Abschnitt der Startseite ist wieder der klassische Block (großes Foto, Name, zwei Sätze, Button „Zur Karte“, mobil volle Breite). Der Hover-Wechsel (Variante C) ist entfernt, weil die Seite fast nur mobil genutzt wird. Nichts auf der Seite setzt Hover voraus; Hover-Effekte sind nur Zugabe.
+- Scroll-Einblenden per IntersectionObserver: Bilder und Textblöcke (`.einblenden`) sowie alle Abschnitts-Überschriften (`main section h2`) blenden kurz und weich ein, Bilder zoomen dabei von 112 % auf 100 %. Hero-Bereiche bleiben unberührt. Mit `prefers-reduced-motion` entfällt alles, ohne `IntersectionObserver` ist sofort alles sichtbar.
+- Schrift: Archivo auch für Navigation, Buttons und Textlinks, große Zwischenüberschriften in Black (900). Fließtext bleibt Jost.
