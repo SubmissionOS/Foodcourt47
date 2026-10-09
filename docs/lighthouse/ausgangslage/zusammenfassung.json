@@ -1,0 +1,1964 @@
+[
+  {
+    "seite": "/",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 98,
+      "accessibility": 100,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 2191.4742,
+    "cls": 0.007141316304289291,
+    "tbt": 0,
+    "fcp": 1666.4741999999999,
+    "si": 1666.4741999999999,
+    "fehler": [
+      {
+        "id": "first-contentful-paint",
+        "titel": "First Contentful Paint",
+        "score": 0.93,
+        "anzeige": "1.7 s"
+      },
+      {
+        "id": "largest-contentful-paint",
+        "titel": "Largest Contentful Paint",
+        "score": 0.95,
+        "anzeige": "2.2 s"
+      },
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "interactive",
+        "titel": "Time to Interactive",
+        "score": 0.99,
+        "anzeige": "2.2 s"
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 910 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 523.9904,
+    "cls": 0.008396596577371757,
+    "tbt": 0,
+    "fcp": 371.98720000000003,
+    "si": 371.98720000000003,
+    "fehler": [
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 170 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/cucino-italiano",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 98,
+      "accessibility": 95,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1884.3312,
+    "cls": 0.01433468601475697,
+    "tbt": 0,
+    "fcp": 1809.3312,
+    "si": 1809.3312,
+    "fehler": [
+      {
+        "id": "first-contentful-paint",
+        "titel": "First Contentful Paint",
+        "score": 0.89,
+        "anzeige": "1.8 s"
+      },
+      {
+        "id": "largest-contentful-paint",
+        "titel": "Largest Contentful Paint",
+        "score": 0.98,
+        "anzeige": "1.9 s"
+      },
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "color-contrast",
+        "titel": "Background and foreground colors do not have a sufficient contrast ratio.",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 1,060 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/cucino-italiano",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 95,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 439.46150000000006,
+    "cls": 0.01088054992966895,
+    "tbt": 0,
+    "fcp": 367.13840000000005,
+    "si": 367.13840000000005,
+    "fehler": [
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "color-contrast",
+        "titel": "Background and foreground colors do not have a sufficient contrast ratio.",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 160 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/manju",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 98,
+      "accessibility": 95,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1884.1182,
+    "cls": 0.008045980745299566,
+    "tbt": 0,
+    "fcp": 1809.1182,
+    "si": 1809.1182,
+    "fehler": [
+      {
+        "id": "first-contentful-paint",
+        "titel": "First Contentful Paint",
+        "score": 0.89,
+        "anzeige": "1.8 s"
+      },
+      {
+        "id": "largest-contentful-paint",
+        "titel": "Largest Contentful Paint",
+        "score": 0.98,
+        "anzeige": "1.9 s"
+      },
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "color-contrast",
+        "titel": "Background and foreground colors do not have a sufficient contrast ratio.",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 1,060 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/manju",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 95,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 447.71139999999997,
+    "cls": 0.01110878961213616,
+    "tbt": 0,
+    "fcp": 367.71139999999997,
+    "si": 367.71139999999997,
+    "fehler": [
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "color-contrast",
+        "titel": "Background and foreground colors do not have a sufficient contrast ratio.",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 160 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/sushify",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 98,
+      "accessibility": 100,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1887.1453999999999,
+    "cls": 0.01422276366619787,
+    "tbt": 0,
+    "fcp": 1812.1453999999999,
+    "si": 1812.1453999999999,
+    "fehler": [
+      {
+        "id": "first-contentful-paint",
+        "titel": "First Contentful Paint",
+        "score": 0.89,
+        "anzeige": "1.8 s"
+      },
+      {
+        "id": "largest-contentful-paint",
+        "titel": "Largest Contentful Paint",
+        "score": 0.98,
+        "anzeige": "1.9 s"
+      },
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "forced-reflow-insight",
+        "titel": "Forced reflow",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 1,060 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/sushify",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 440.983125,
+    "cls": 0.0105657651220698,
+    "tbt": 0,
+    "fcp": 369.573,
+    "si": 369.573,
+    "fehler": [
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 170 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/speisekarte",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 98,
+      "accessibility": 95,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1961.4012,
+    "cls": 0.0032688003677444496,
+    "tbt": 0,
+    "fcp": 1811.4011999999998,
+    "si": 1811.4011999999998,
+    "fehler": [
+      {
+        "id": "first-contentful-paint",
+        "titel": "First Contentful Paint",
+        "score": 0.89,
+        "anzeige": "1.8 s"
+      },
+      {
+        "id": "largest-contentful-paint",
+        "titel": "Largest Contentful Paint",
+        "score": 0.97,
+        "anzeige": "2.0 s"
+      },
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "interactive",
+        "titel": "Time to Interactive",
+        "score": 0.99,
+        "anzeige": "2.0 s"
+      },
+      {
+        "id": "color-contrast",
+        "titel": "Background and foreground colors do not have a sufficient contrast ratio.",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 1,060 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/speisekarte",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 448.85400000000004,
+    "cls": 0.007023846969318474,
+    "tbt": 0,
+    "fcp": 368.85400000000004,
+    "si": 368.85400000000004,
+    "fehler": [
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 160 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/mittag",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 98,
+      "accessibility": 100,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1960.0337999999997,
+    "cls": 0.012484088163147167,
+    "tbt": 0,
+    "fcp": 1810.0337999999997,
+    "si": 1810.0337999999997,
+    "fehler": [
+      {
+        "id": "first-contentful-paint",
+        "titel": "First Contentful Paint",
+        "score": 0.89,
+        "anzeige": "1.8 s"
+      },
+      {
+        "id": "largest-contentful-paint",
+        "titel": "Largest Contentful Paint",
+        "score": 0.97,
+        "anzeige": "2.0 s"
+      },
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "interactive",
+        "titel": "Time to Interactive",
+        "score": 0.99,
+        "anzeige": "2.0 s"
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 1,060 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/mittag",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 440.275625,
+    "cls": 0.01404240825402624,
+    "tbt": 0,
+    "fcp": 368.44100000000003,
+    "si": 368.44100000000003,
+    "fehler": [
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 160 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/galerie",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 99,
+      "accessibility": 95,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1896.16325,
+    "cls": 0.003929006399738024,
+    "tbt": 0,
+    "fcp": 1507.3959,
+    "si": 1507.3959,
+    "fehler": [
+      {
+        "id": "first-contentful-paint",
+        "titel": "First Contentful Paint",
+        "score": 0.96,
+        "anzeige": "1.5 s"
+      },
+      {
+        "id": "largest-contentful-paint",
+        "titel": "Largest Contentful Paint",
+        "score": 0.98,
+        "anzeige": "1.9 s"
+      },
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "interactive",
+        "titel": "Time to Interactive",
+        "score": 0.99,
+        "anzeige": "1.9 s"
+      },
+      {
+        "id": "color-contrast",
+        "titel": "Background and foreground colors do not have a sufficient contrast ratio.",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 750 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/galerie",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 95,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 461.4325,
+    "cls": 0.006109391690192423,
+    "tbt": 0,
+    "fcp": 370.292,
+    "si": 370.292,
+    "fehler": [
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "color-contrast",
+        "titel": "Background and foreground colors do not have a sufficient contrast ratio.",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 170 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/reservieren",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 96,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1582.1985,
+    "cls": 0.003921495010090104,
+    "tbt": 0,
+    "fcp": 1357.1985,
+    "si": 1357.1985,
+    "fehler": [
+      {
+        "id": "first-contentful-paint",
+        "titel": "First Contentful Paint",
+        "score": 0.98,
+        "anzeige": "1.4 s"
+      },
+      {
+        "id": "largest-contentful-paint",
+        "titel": "Largest Contentful Paint",
+        "score": 0.99,
+        "anzeige": "1.6 s"
+      },
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "color-contrast",
+        "titel": "Background and foreground colors do not have a sufficient contrast ratio.",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 600 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/reservieren",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 96,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 440.37325,
+    "cls": 0.007539042011494716,
+    "tbt": 0,
+    "fcp": 368.5972,
+    "si": 368.5972,
+    "fehler": [
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "color-contrast",
+        "titel": "Background and foreground colors do not have a sufficient contrast ratio.",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 160 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/kontakt",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 98,
+      "accessibility": 95,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1879.2826,
+    "cls": 0.006525382353159978,
+    "tbt": 0,
+    "fcp": 1804.2826,
+    "si": 1804.2826,
+    "fehler": [
+      {
+        "id": "first-contentful-paint",
+        "titel": "First Contentful Paint",
+        "score": 0.89,
+        "anzeige": "1.8 s"
+      },
+      {
+        "id": "largest-contentful-paint",
+        "titel": "Largest Contentful Paint",
+        "score": 0.98,
+        "anzeige": "1.9 s"
+      },
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "color-contrast",
+        "titel": "Background and foreground colors do not have a sufficient contrast ratio.",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 1,050 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/kontakt",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 95,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 445.07399999999996,
+    "cls": 0.01229393720436115,
+    "tbt": 0,
+    "fcp": 405.074,
+    "si": 405.074,
+    "fehler": [
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "color-contrast",
+        "titel": "Background and foreground colors do not have a sufficient contrast ratio.",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 200 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/impressum",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1504.0584,
+    "cls": 0.005043806546264455,
+    "tbt": 0,
+    "fcp": 1504.0584,
+    "si": 1504.0584,
+    "fehler": [
+      {
+        "id": "first-contentful-paint",
+        "titel": "First Contentful Paint",
+        "score": 0.96,
+        "anzeige": "1.5 s"
+      },
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 750 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/impressum",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 403.39300000000003,
+    "cls": 0.0115903918997082,
+    "tbt": 0,
+    "fcp": 363.39300000000003,
+    "si": 363.39300000000003,
+    "fehler": [
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 150 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/datenschutz",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1502.82855,
+    "cls": 0.01805555157890531,
+    "tbt": 0,
+    "fcp": 1502.82855,
+    "si": 1502.82855,
+    "fehler": [
+      {
+        "id": "first-contentful-paint",
+        "titel": "First Contentful Paint",
+        "score": 0.96,
+        "anzeige": "1.5 s"
+      },
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 750 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/datenschutz",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 364.132,
+    "cls": 0.008020071152542706,
+    "tbt": 0,
+    "fcp": 364.132,
+    "si": 364.132,
+    "fehler": [
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 160 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/404",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 98,
+      "accessibility": 100,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1803.9004,
+    "cls": 0.008337991393059234,
+    "tbt": 0,
+    "fcp": 1803.9004,
+    "si": 1803.9004,
+    "fehler": [
+      {
+        "id": "first-contentful-paint",
+        "titel": "First Contentful Paint",
+        "score": 0.89,
+        "anzeige": "1.8 s"
+      },
+      {
+        "id": "largest-contentful-paint",
+        "titel": "Largest Contentful Paint",
+        "score": 0.98,
+        "anzeige": "1.8 s"
+      },
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 1,050 ms"
+      }
+    ]
+  },
+  {
+    "seite": "/404",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 92,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "fail"
+      },
+      {
+        "id": "llms-txt",
+        "status": "n/a"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 403.972,
+    "cls": 0.0436018606897382,
+    "tbt": 0,
+    "fcp": 403.972,
+    "si": 403.972,
+    "fehler": [
+      {
+        "id": "cumulative-layout-shift",
+        "titel": "Cumulative Layout Shift",
+        "score": 0.99,
+        "anzeige": "0.044"
+      },
+      {
+        "id": "errors-in-console",
+        "titel": "Browser errors were logged to the console",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "inspector-issues",
+        "titel": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      },
+      {
+        "id": "render-blocking-insight",
+        "titel": "Render-blocking requests",
+        "score": 0,
+        "anzeige": "Est savings of 200 ms"
+      }
+    ]
+  }
+]
