@@ -9,7 +9,7 @@ const fotos = await Promise.all(serie.map(async (s) => ({ ...s, f: await foto(s.
 <section class="hero dunkel" aria-labelledby="hero-titel">
   <div class="tripel" aria-hidden="true">
     {fotos.map(({ id, f }) => (
-      <div class="feld" data-placeholder-photo={f.stock ? 'PLACEHOLDER_PHOTO' : undefined} data-kueche={id}>
+      <div class="feld serie-foto" data-placeholder-photo={f.stock ? 'PLACEHOLDER_PHOTO' : undefined} data-kueche={id}>
         <img src={url(f, 1000)} srcset={srcset(f)} sizes="34vw" alt="" width={f.breite} height={f.hoehe} fetchpriority="high" />
       </div>
     ))}
@@ -41,17 +41,6 @@ const fotos = await Promise.all(serie.map(async (s) => ({ ...s, f: await foto(s.
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 2px;
     background: #0b0d0c;
-  }
-  .feld {
-    position: relative;
-    overflow: hidden;
-    background: #000;
-  }
-  .feld img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
   }
   .verlauf {
     position: absolute;

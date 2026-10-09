@@ -21,7 +21,7 @@ const eintraege = await Promise.all(
 <section class="wahl dunkel" aria-labelledby="wahl-titel" data-wahl data-aktiv="0">
   <div class="ebenen" aria-hidden="true">
     {eintraege.map(({ id, f }, i) => (
-      <div class:list={['ebene', { 'ist-aktiv': i === 0 }]} data-ebene={i} data-kueche={id} data-placeholder-photo={f.stock ? 'PLACEHOLDER_PHOTO' : undefined}>
+      <div class:list={['ebene serie-foto', { 'ist-aktiv': i === 0 }]} data-ebene={i} data-kueche={id} data-placeholder-photo={f.stock ? 'PLACEHOLDER_PHOTO' : undefined}>
         <img src={url(f, 2000)} srcset={srcset(f)} sizes="100vw" alt="" width={f.breite} height={f.hoehe} loading="lazy" decoding="async" />
       </div>
     ))}
@@ -121,12 +121,6 @@ const eintraege = await Promise.all(
   }
   .ebene.ist-aktiv {
     opacity: 1;
-  }
-  .ebene img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
   }
   .verlauf {
     position: absolute;
