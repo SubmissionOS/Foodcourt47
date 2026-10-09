@@ -20,7 +20,7 @@ const links = [
 const pfad = Astro.url.pathname.replace(/\/$/, '') || '/';
 const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
 ---
-<div class="entwurf">Designentwurf von GuddiWeb · noch nicht live</div>
+<aside class="entwurf" aria-label="Hinweis">Designentwurf von GuddiWeb · noch nicht live</aside>
 
 <header class:list={['kopf ist-oben', { 'ist-gescrollt ist-fest': fest }]} data-kopf data-fest={fest ? '' : undefined}>
   <div class="kopf-leiste">
@@ -38,23 +38,22 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
 
     <a class="kopf-knopf" href="/reservieren">Reservieren</a>
 
-    <details class="mobil">
-      <summary aria-label="Menü öffnen">
-        <span class="mobil-linien" aria-hidden="true"></span>
-      </summary>
-      <div class="mobil-panel">
-        <nav aria-label="Hauptnavigation mobil">
-          <ul>
-            <li><a href="/" aria-current={aktiv('/')}>Start</a></li>
-            {links.map((l) => (
-              <li><a href={l.href} aria-current={aktiv(l.href)}>{l.label}</a></li>
-            ))}
-          </ul>
-        </nav>
-        <a class="knopf knopf--hell" href="/reservieren">Tisch reservieren</a>
-        <p class="mobil-info">{site.adresse.strasse}, {site.adresse.plz} {site.adresse.ort}<br />{site.telefon}</p>
-      </div>
-    </details>
+    <button class="mobil-knopf" type="button" aria-expanded="false" aria-controls="mobil-menue" aria-label="Menü öffnen" data-menue-knopf>
+      <span class="mobil-linien" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <div class="mobil-panel" id="mobil-menue" role="dialog" aria-modal="true" aria-label="Menü" data-menue hidden>
+    <nav aria-label="Hauptnavigation mobil">
+      <ul>
+        <li><a href="/" aria-current={aktiv('/')}>Start</a></li>
+        {links.map((l) => (
+          <li><a href={l.href} aria-current={aktiv(l.href)}>{l.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <a class="knopf knopf--hell" href="/reservieren">Tisch reservieren</a>
+    <p class="mobil-info">{site.adresse.strasse}, {site.adresse.plz} {site.adresse.ort}<br />{site.telefon}</p>
   </div>
 </header>
 
@@ -68,7 +67,7 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
     color: #d9cdb8;
     font-family: var(--display);
     font-weight: 500;
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     line-height: 1.2rem;
     letter-spacing: 0.03em;
     text-align: center;
@@ -100,7 +99,7 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
     gap: 2rem;
     max-width: var(--breite);
     margin-inline: auto;
-    padding: 1.1rem var(--rand);
+    padding: 0.9rem var(--rand);
     border-radius: 12px;
     transition: padding 500ms var(--weich), box-shadow 500ms var(--weich), max-width 500ms var(--weich);
   }
@@ -131,7 +130,7 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
   }
   .kopf:global(.ist-gescrollt) .kopf-leiste {
     max-width: 1600px;
-    padding: 0.7rem clamp(1rem, 2.2vw, 2rem);
+    padding: 0.5rem clamp(1rem, 2.2vw, 2rem);
     box-shadow: 0 12px 40px -12px #1d1b1826, 0 2px 8px -4px #1d1b1814;
   }
   .kopf:global(.ist-gescrollt) .kopf-leiste::before {
@@ -143,6 +142,9 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
   }
 
   .logo {
+    display: inline-flex;
+    align-items: center;
+    min-height: 3rem;
     margin-right: auto;
     font-family: var(--display);
     font-size: 1.3rem;
@@ -172,7 +174,7 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
   .nav a,
   .kopf-knopf {
     font-family: var(--display);
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -181,14 +183,16 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
   }
   .nav a {
     position: relative;
-    padding-block: 0.4rem;
+    display: inline-flex;
+    align-items: center;
+    min-height: 3rem;
   }
   .nav a::after {
     content: '';
     position: absolute;
     left: 0;
     right: 0.2em;
-    bottom: 0;
+    bottom: 0.55rem;
     height: 1px;
     background: currentColor;
     transform: scaleX(0);
@@ -201,7 +205,7 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
   }
   .kopf-knopf {
     align-items: center;
-    min-height: 2.6rem;
+    min-height: 3rem;
     padding: 0.55rem 1.3rem 0.5rem 1.5rem;
     border: 1px solid currentColor;
     border-radius: 999px;
@@ -222,17 +226,17 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
     border-color: var(--messing);
   }
 
-  /* Mobil: dieselbe schwebende Leiste, Menü als Overlay */
-  .mobil summary {
+  /* Mobil: dieselbe schwebende Leiste, Menü als Overlay (Button mit aria-expanded, Fokusfalle in Basis.astro) */
+  .mobil-knopf {
     display: grid;
     place-items: center;
-    width: 2.75rem;
-    height: 2.75rem;
+    width: 3rem;
+    height: 3rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
     cursor: pointer;
-    list-style: none;
-  }
-  .mobil summary::-webkit-details-marker {
-    display: none;
   }
   .mobil-linien,
   .mobil-linien::before {
@@ -251,17 +255,17 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
     position: absolute;
     top: 8px;
   }
-  .mobil[open] .mobil-linien {
-    transform: rotate(45deg);
-  }
-  .mobil[open] .mobil-linien::before {
-    top: 0;
-    transform: rotate(-90deg);
-  }
-  .mobil[open] summary {
+  .mobil-knopf[aria-expanded='true'] {
     position: relative;
     z-index: 3;
     color: var(--creme);
+  }
+  .mobil-knopf[aria-expanded='true'] .mobil-linien {
+    transform: rotate(45deg);
+  }
+  .mobil-knopf[aria-expanded='true'] .mobil-linien::before {
+    top: 0;
+    transform: rotate(-90deg);
   }
   .mobil-panel {
     position: fixed;
@@ -275,6 +279,9 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
     background: var(--kiefer);
     color: var(--creme);
     overflow-y: auto;
+  }
+  .mobil-panel[hidden] {
+    display: none;
   }
   .mobil-panel ul {
     margin: 0;
@@ -304,13 +311,22 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
     color: #cfc5b4;
   }
   /* Logo bleibt über dem offenen Menü lesbar */
-  .kopf:has(.mobil[open]) .logo {
+  .kopf:has(.mobil-knopf[aria-expanded='true']) .logo {
     position: relative;
     z-index: 3;
     color: var(--creme);
   }
-  .kopf:has(.mobil[open]) .kopf-leiste::before {
+  .kopf:has(.mobil-knopf[aria-expanded='true']) .kopf-leiste::before {
     opacity: 0;
+  }
+  :global(html.menue-offen) {
+    overflow: hidden;
+  }
+  /* Ohne Skripte funktioniert der Button nicht, dann bleibt nur der Rückfall über den Footer */
+  @media (scripting: none) {
+    .mobil-knopf {
+      display: none;
+    }
   }
 
   @media (min-width: 72rem) {
@@ -320,7 +336,8 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
     .kopf-knopf {
       display: inline-flex;
     }
-    .mobil {
+    .mobil-knopf,
+    .mobil-panel {
       display: none;
     }
   }

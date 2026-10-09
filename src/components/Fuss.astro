@@ -21,7 +21,10 @@ const a = site.adresse;
       </div>
       <div>
         <h2 class="fuss-titel">Kontakt</h2>
-        <p><Fragment set:html={markiere(site.telefon)} /><br /><Fragment set:html={markiere(site.email)} /></p>
+        <p class="fuss-kontakt">
+          <a href={`tel:+49${site.telefon.replace(/^0/, '').replace(/\s/g, '')}`}>{site.telefon}</a>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </p>
       </div>
       <nav aria-label="Küchen und Seiten">
         <h2 class="fuss-titel">Entdecken</h2>
@@ -77,8 +80,15 @@ const a = site.adresse;
     padding: 0;
     list-style: none;
   }
-  .fuss li + li {
-    margin-top: 0.2rem;
+  .fuss li a,
+  .fuss-kontakt a,
+  .fuss-recht a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 3rem;
+  }
+  .fuss-kontakt a {
+    display: flex;
   }
   .fuss a:not(.knopf) {
     text-decoration: none;
