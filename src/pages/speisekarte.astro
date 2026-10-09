@@ -4,11 +4,15 @@ import Karte from '../components/Karte.astro';
 import Bild from '../components/Bild.astro';
 import SeitenHero from '../components/SeitenHero.astro';
 import { alleKuechen } from '../lib/kuechen';
+import { speisekarteSchema } from '../lib/schema';
 
 const kuechen = await alleKuechen();
 ---
 <Basis
   titel="Speisekarte"
+  heroFotos={['abend-tisch']}
+  ogFoto="abend-tisch"
+  schema={speisekarteSchema(kuechen)}
   beschreibung="Speisekarte des Foodcourt47 Hammerbrook mit Preisen: Mittagskarten Mo–Fr 11–16 Uhr und Abendkarten von Cucino Italiano, Manju und Sushify."
 >
   <SeitenHero foto="abend-tisch" titel="Speisekarte" satz="Drei Küchen, eine Karte. Mittags gelten feste Preise, danach die Abendkarten." />
@@ -60,6 +64,9 @@ const kuechen = await alleKuechen();
     font-size: clamp(1.4rem, 2.6vw, 2rem);
   }
   .inhalt a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 3rem;
     text-decoration: none;
     transition: color 300ms var(--weich);
   }

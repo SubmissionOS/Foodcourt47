@@ -5,7 +5,6 @@ import Bild from '../components/Bild.astro';
 import SeitenHero from '../components/SeitenHero.astro';
 import { alleKuechen, type Kueche } from '../lib/kuechen';
 import { kuecheSchema } from '../lib/schema';
-import { foto, url } from '../lib/fotos';
 
 export async function getStaticPaths() {
   const kuechen = await alleKuechen();
@@ -23,14 +22,15 @@ const { k, naechste } = Astro.props;
 const d = k.data;
 const domain = new URL(d.website).hostname;
 const [heroId, ...weitere] = d.fotos;
-const heroFoto = await foto(heroId);
 ---
 <Basis
   titel={`${d.name}: ${d.kategorie}`}
   beschreibung={`${d.name} im Foodcourt47 Hammerbrook: ${d.claim} ${d.karten.map((c) => `${c.titel} ${c.zeit}`).join(', ')}.`}
   akzent={k.id}
   schema={await kuecheSchema(k)}
-  ogBild={url(heroFoto, 1600)}
+  ogFoto={heroId}
+  heroFotos={[heroId]}
+  krume={d.name}
 >
   <SeitenHero foto={heroId} titel={d.name} satz={d.claim} />
 

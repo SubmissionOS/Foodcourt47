@@ -6,7 +6,7 @@ const seite = await getEntry('seiten', 'datenschutz');
 if (!seite) throw new Error('Inhalt src/content/seiten/datenschutz.md fehlt');
 const { Content } = await render(seite);
 ---
-<Basis titel="Datenschutz" kopf="solide" beschreibung="Datenschutzerklärung des Foodcourt47 Hammerbrook (Entwurf).">
+<Basis titel="Datenschutz" kopf="solide" ogFoto="abend-tisch" beschreibung="Datenschutzerklärung des Foodcourt47 Hammerbrook (Entwurf).">
   <article class="wrap recht">
     <h1>{seite.data.titel}</h1>
     <p class="stand">Stand {seite.data.stand}</p>

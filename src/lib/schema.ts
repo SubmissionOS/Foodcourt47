@@ -1,32 +1,39 @@
 import type { CollectionEntry } from 'astro:content';
-import { site, adresseBelegt } from './site';
-import { istPlatzhalter } from './format';
-import { foto, url } from './fotos';
+import { site } from './site';
+import { ogBild } from './fotos';
 
 type Kueche = CollectionEntry<'kuechen'>;
 
 const basis = site.url;
+const basisUrl = new URL(basis);
 
-/** Gemeinsame Ortsangaben. Platzhalter werden nicht an Google ausgegeben. */
+/** "040 22 68 99999" wird zu "+49 40 22 68 99999" (international, wie Suchmaschinen es erwarten). */
+const telefonIntern = site.telefon.replace(/^0/, '+49 ');
+
+/** Gemeinsame Ortsangaben. */
 function ort() {
-  const daten: Record<string, unknown> = {};
-  if (adresseBelegt()) {
-    daten.address = {
+  return {
+    address: {
       '@type': 'PostalAddress',
       streetAddress: site.adresse.strasse,
       postalCode: site.adresse.plz,
       addressLocality: site.adresse.ort,
       addressCountry: 'DE',
-    };
-  } else {
-    daten.address = { '@type': 'PostalAddress', addressLocality: 'Hamburg', addressRegion: 'Hammerbrook', addressCountry: 'DE' };
-  }
-  if (!istPlatzhalter(site.telefon)) daten.telephone = site.telefon;
-  if (!istPlatzhalter(site.email)) daten.email = site.email;
-  return daten;
+    },
+    telephone: telefonIntern,
+    email: site.email,
+  };
 }
 
-export function foodcourtSchema(kuechen: Kueche[]) {
+const reservierung = {
+  '@type': 'ReserveAction',
+  target: { '@type': 'EntryPoint', urlTemplate: `${basis}/reservieren`, actionPlatform: ['http://schema.org/DesktopWebPlatform', 'http://schema.org/MobileWebPlatform'] },
+  result: { '@type': 'Reservation', name: 'Tischreservierung' },
+};
+
+/** Restaurant auf der Startseite, mit Öffnungszeiten, Küchen und Link zur Speisekarte. */
+export async function foodcourtSchema(kuechen: Kueche[]) {
+  const bild = await ogBild('cucino-pizza', basisUrl);
   return {
     '@context': 'https://schema.org',
     '@type': 'Restaurant',
@@ -35,10 +42,11 @@ export function foodcourtSchema(kuechen: Kueche[]) {
     description: site.beschreibung,
     url: basis,
     logo: site.logo.src,
-    image: 'https://foodcourt47.de/wp-content/uploads/2023/02/2.jpg',
+    image: bild.url,
     servesCuisine: kuechen.map((k) => k.data.kueche),
     hasMenu: `${basis}/speisekarte`,
-    acceptsReservations: site.reservierungUrl,
+    acceptsReservations: `${basis}/reservieren`,
+    potentialAction: reservierung,
     ...ort(),
     openingHoursSpecification: site.oeffnungszeiten.map((z) => ({
       '@type': 'OpeningHoursSpecification',
@@ -50,8 +58,33 @@ export function foodcourtSchema(kuechen: Kueche[]) {
   };
 }
 
+/** Menu, MenuSection und MenuItem einer Küche (Mittags- und Abendkarte). */
+export function menuSchema(k: Kueche) {
+  return {
+    '@type': 'Menu',
+    '@id': `${basis}/${k.id}#karte`,
+    name: `Speisekarte ${k.data.name}`,
+    inLanguage: 'de',
+    url: `${basis}/${k.id}`,
+    hasMenuSection: k.data.karten.map((karte) => ({
+      '@type': 'MenuSection',
+      name: `${karte.titel} (${karte.zeit})`,
+      hasMenuSection: karte.sektionen.map((s) => ({
+        '@type': 'MenuSection',
+        name: s.titel,
+        hasMenuItem: s.gerichte.map((g) => ({
+          '@type': 'MenuItem',
+          name: g.name,
+          ...(g.beschreibung ? { description: g.beschreibung } : {}),
+          ...(g.preis === null ? {} : { offers: { '@type': 'Offer', price: g.preis.toFixed(2), priceCurrency: 'EUR' } }),
+        })),
+      })),
+    })),
+  };
+}
+
 export async function kuecheSchema(k: Kueche) {
-  const bild = url(await foto(k.data.fotos[0]), 1600);
+  const bild = await ogBild(k.data.fotos[0], basisUrl);
   return {
     '@context': 'https://schema.org',
     '@type': 'Restaurant',
@@ -61,35 +94,23 @@ export async function kuecheSchema(k: Kueche) {
     url: `${basis}/${k.id}`,
     sameAs: [k.data.website],
     logo: k.data.logo.src,
-    image: bild,
+    image: bild.url,
     servesCuisine: k.data.kueche,
     containedInPlace: { '@id': `${basis}/#foodcourt` },
-    acceptsReservations: site.reservierungUrl,
+    acceptsReservations: `${basis}/reservieren`,
+    potentialAction: reservierung,
     ...ort(),
-    hasMenu: {
-      '@type': 'Menu',
-      name: `Speisekarte ${k.data.name}`,
-      hasMenuSection: k.data.karten.map((karte) => ({
-        '@type': 'MenuSection',
-        name: `${karte.titel} (${karte.zeit})`,
-        hasMenuSection: karte.sektionen
-          .filter((s) => !istPlatzhalter(s.titel))
-          .map((s) => ({
-            '@type': 'MenuSection',
-            name: s.titel,
-            hasMenuItem: s.gerichte
-              .filter((g) => !istPlatzhalter(g.name))
-              .map((g) => ({
-                '@type': 'MenuItem',
-                name: g.name,
-                description: g.beschreibung ?? undefined,
-                offers:
-                  g.preis === null
-                    ? undefined
-                    : { '@type': 'Offer', price: g.preis.toFixed(2), priceCurrency: 'EUR' },
-              })),
-          })),
-      })),
-    },
+    hasMenu: menuSchema(k),
   };
+}
+
+/** Alle Speisekarten auf /speisekarte. */
+export function speisekarteSchema(kuechen: Kueche[]) {
+  return kuechen.map((k) => ({
+    '@context': 'https://schema.org',
+    ...menuSchema(k),
+    '@id': `${basis}/speisekarte#${k.id}`,
+    url: `${basis}/speisekarte#${k.id}`,
+    provider: { '@id': `${basis}/${k.id}#restaurant` },
+  }));
 }

@@ -2,33 +2,29 @@
 import Basis from '../layouts/Basis.astro';
 import HeroStart from '../components/HeroStart.astro';
 import Bild from '../components/Bild.astro';
+import Foto from '../components/Foto.astro';
 import { getCollection } from 'astro:content';
 import { alleKuechen, abPreis } from '../lib/kuechen';
 import { preis, markiere } from '../lib/format';
 import { site } from '../lib/site';
 import { foodcourtSchema } from '../lib/schema';
-import { foto, url, srcset } from '../lib/fotos';
+import { serie } from '../lib/serie';
 
 const kuechen = await alleKuechen();
 const ab = preis(abPreis(kuechen));
 
-// PLACEHOLDER_PHOTO: Pizza (og:image) und Abschluss sind Stockfotos, siehe DESIGN.md
-const hero = await foto('cucino-pizza');
-const abschluss = await foto('tisch-teilen');
 
 const reihenfolge = (await import('../content/galerie.json')).default.map((g) => g.id);
 const streifen = (await getCollection('galerie')).sort((a, b) => reihenfolge.indexOf(a.id) - reihenfolge.indexOf(b.id));
 
 ---
-<Basis titel="Start" beschreibung={site.beschreibung} schema={foodcourtSchema(kuechen)} ogBild={url(hero, 1600)}>
+<Basis titel="Start" beschreibung={site.beschreibung} schema={await foodcourtSchema(kuechen)} heroFotos={serie.map((s) => s.foto)} heroArt="start" ogFoto="cucino-pizza">
   <HeroStart />
 
   <div class="kuechen">
     {kuechen.map((k, i) => (
       <section class:list={['kueche', `kueche--${i + 1}`]} style={`--akzent: var(--k-${k.id})`} aria-labelledby={`k-${k.id}`}>
-        <a class="kueche-bildlink" href={`/${k.id}`} tabindex="-1" aria-hidden="true">
-          <Bild id={k.data.fotos[0]} format={i === 1 ? '4 / 5' : '5 / 4'} sizes="(min-width: 64rem) 55vw, 100vw" class="kueche-bild" />
-        </a>
+        <Bild id={k.data.fotos[0]} format={i === 1 ? '4 / 5' : '5 / 4'} sizes="(min-width: 64rem) 55vw, 100vw" class="kueche-bild" />
         <div class="kueche-text einblenden">
           <h2 id={`k-${k.id}`}>{k.data.name}</h2>
           <p>{k.data.kurztext}</p>
@@ -62,7 +58,7 @@ const streifen = (await getCollection('galerie')).sort((a, b) => reihenfolge.ind
 
   <section class="abschluss dunkel" aria-labelledby="abschluss-titel">
     <div class="abschluss-bild zoom" data-placeholder-photo="PLACEHOLDER_PHOTO">
-      <img src={url(abschluss, 2000)} srcset={srcset(abschluss)} sizes="100vw" alt={abschluss.alt} width={abschluss.breite} height={abschluss.hoehe} loading="lazy" decoding="async" />
+      <Foto id="tisch-teilen" widths={[768, 1280, 1920, 2400]} sizes="100vw" art="hero" alt="" />
     </div>
     <div class="wrap abschluss-text einblenden">
       <h2 id="abschluss-titel">Wir halten Ihren Tisch bereit.</h2>
@@ -87,9 +83,6 @@ const streifen = (await getCollection('galerie')).sort((a, b) => reihenfolge.ind
     grid-template-columns: minmax(0, 1fr);
     gap: 1.75rem;
     align-items: center;
-  }
-  .kueche-bildlink {
-    display: block;
   }
   .kueche-text h2 {
     margin-bottom: 1.1rem;
@@ -125,7 +118,7 @@ const streifen = (await getCollection('galerie')).sort((a, b) => reihenfolge.ind
     .kueche--2 {
       grid-template-columns: minmax(0, 4fr) minmax(0, 5fr);
     }
-    .kueche--2 .kueche-bildlink {
+    .kueche--2 :global(.kueche-bild) {
       order: 2;
     }
     .kueche--2 .kueche-text {
@@ -134,7 +127,7 @@ const streifen = (await getCollection('galerie')).sort((a, b) => reihenfolge.ind
     .kueche--3 {
       grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
     }
-    .kueche--3 .kueche-bildlink {
+    .kueche--3 :global(.kueche-bild) {
       margin-left: calc(var(--rand) * -1);
     }
   }
@@ -210,7 +203,7 @@ const streifen = (await getCollection('galerie')).sort((a, b) => reihenfolge.ind
     position: absolute;
     inset: 0;
   }
-  .abschluss-bild img {
+  .abschluss-bild :global(img) {
     width: 100%;
     height: 100%;
     object-fit: cover;

@@ -1,17 +1,11 @@
 ---
-import '@fontsource/archivo/400.css';
-import '@fontsource/archivo/500.css';
-import '@fontsource/archivo/700.css';
-import '@fontsource/archivo/800.css';
-import '@fontsource/archivo/900.css';
-import '@fontsource/jost/300.css';
-import '@fontsource/jost/400.css';
-import '@fontsource/jost/500.css';
+import { Font } from 'astro:assets';
 import '../styles/global.css';
 import Kopf from '../components/Kopf.astro';
 import Fuss from '../components/Fuss.astro';
 import { site } from '../lib/site';
 import { erlaubeIndex } from '../lib/index-schalter';
+import { foto, HERO, ogBild, vorladenAttribute } from '../lib/fotos';
 
 interface Props {
   titel: string;
@@ -21,14 +15,39 @@ interface Props {
   /** "transparent": Header liegt über einem Hero-Foto */
   kopf?: 'transparent' | 'solide';
   schema?: Record<string, unknown> | Record<string, unknown>[];
-  ogBild?: string;
+  /** Foto-id für das Open-Graph-Bild (1200×630). Standard: Gastraum */
+  ogFoto?: string;
+  /** Foto-ids der Hero-Bilder, werden vorgeladen (LCP) */
+  heroFotos?: string[];
+  heroArt?: 'seite' | 'start';
+  /** Kurzer Name für die Breadcrumb, Standard: titel */
+  krume?: string;
 }
 
-const { titel, beschreibung, akzent, kopf = 'transparent', schema, ogBild } = Astro.props;
+const { titel, beschreibung, akzent, kopf = 'transparent', schema, ogFoto = 'hero-gastraum', heroFotos = [], heroArt = 'seite', krume } = Astro.props;
 const voll = Astro.url.pathname === '/' ? `${site.name} · Pizza, Curry und Sushi in Hamburg` : `${titel} · ${site.name}`;
 const kanonisch = new URL(Astro.url.pathname, Astro.site).href;
-const bild = ogBild ?? 'https://foodcourt47.de/wp-content/uploads/2023/02/2.jpg';
-const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+const og = await ogBild(ogFoto, Astro.site);
+const vorladen = await Promise.all(
+  heroFotos.map(async (id) => vorladenAttribute(await foto(id), [...HERO[heroArt].widths], HERO[heroArt].sizes, 'hero')),
+);
+
+// Breadcrumb auf allen Unterseiten (nicht auf Start und 404)
+const pfad = Astro.url.pathname.replace(/\/$/, '') || '/';
+const breadcrumb =
+  pfad === '/' || pfad === '/404'
+    ? []
+    : [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Start', item: new URL('/', Astro.site).href },
+            { '@type': 'ListItem', position: 2, name: krume ?? titel, item: kanonisch },
+          ],
+        },
+      ];
+const schemas = [...(schema ? (Array.isArray(schema) ? schema : [schema]) : []), ...breadcrumb];
 ---
 <!doctype html>
 <html lang="de">
@@ -40,9 +59,11 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     <link rel="canonical" href={kanonisch} />
     <meta name="robots" content={erlaubeIndex ? 'index, follow, max-image-preview:large' : 'noindex, nofollow'} />
     <meta name="theme-color" content="#1e2a24" />
+    <Font cssVariable="--font-archivo" preload />
+    <Font cssVariable="--font-jost" preload />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="preconnect" href="https://images.unsplash.com" />
+    {vorladen.map((v) => <link rel="preload" as="image" type={v.type} href={v.href} imagesrcset={v.imagesrcset} imagesizes={v.imagesizes} fetchpriority="high" />)}
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="de_DE" />
@@ -50,10 +71,17 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     <meta property="og:title" content={voll} />
     <meta property="og:description" content={beschreibung} />
     <meta property="og:url" content={kanonisch} />
-    <meta property="og:image" content={bild} />
+    <meta property="og:image" content={og.url} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content={String(og.breite)} />
+    <meta property="og:image:height" content={String(og.hoehe)} />
+    <meta property="og:image:alt" content={og.alt} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={voll} />
+    <meta name="twitter:description" content={beschreibung} />
+    <meta name="twitter:image" content={og.url} />
+    <meta name="twitter:image:alt" content={og.alt} />
 
-    <script is:inline>document.documentElement.classList.add('js');</script>
     {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
   </head>
   <body style={akzent ? `--akzent: var(--k-${akzent})` : undefined}>
@@ -64,6 +92,8 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     </main>
     <Fuss />
     <script>
+      import '../scripts/webmcp';
+
       const ruhig = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       // Header wird beim Scrollen solide
@@ -77,11 +107,51 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
       pruefen();
       window.addEventListener('scroll', pruefen, { passive: true });
 
-      // Bilder blenden beim Scrollen weich ein (?shot: sofort sichtbar, nur für Screenshots)
-      const einblenden = document.querySelectorAll('.einblenden, main section h2, .zoom');
-      if (new URLSearchParams(location.search).has('shot') || !('IntersectionObserver' in window)) {
-        einblenden.forEach((el) => el.classList.add('ist-sichtbar'));
+      // Mobiles Menü: aria-expanded, Fokusfalle, Escape schließt, Fokus kehrt zum Button zurück
+      const menueKnopf = document.querySelector<HTMLButtonElement>('[data-menue-knopf]');
+      const menue = document.querySelector<HTMLElement>('[data-menue]');
+      if (menueKnopf && menue) {
+        const fokussierbar = () => [menueKnopf, ...menue.querySelectorAll<HTMLElement>('a[href], button')];
+        const taste = (e: KeyboardEvent) => {
+          if (e.key === 'Escape') return schliessen();
+          if (e.key !== 'Tab') return;
+          const liste = fokussierbar();
+          const erstes = liste[0];
+          const letztes = liste[liste.length - 1];
+          if (e.shiftKey && document.activeElement === erstes) {
+            e.preventDefault();
+            letztes.focus();
+          } else if (!e.shiftKey && document.activeElement === letztes) {
+            e.preventDefault();
+            erstes.focus();
+          }
+        };
+        const oeffnen = () => {
+          menue.hidden = false;
+          menueKnopf.setAttribute('aria-expanded', 'true');
+          menueKnopf.setAttribute('aria-label', 'Menü schließen');
+          document.documentElement.classList.add('menue-offen');
+          menue.querySelector<HTMLElement>('a[href]')?.focus();
+          document.addEventListener('keydown', taste);
+        };
+        const schliessen = () => {
+          menue.hidden = true;
+          menueKnopf.setAttribute('aria-expanded', 'false');
+          menueKnopf.setAttribute('aria-label', 'Menü öffnen');
+          document.documentElement.classList.remove('menue-offen');
+          document.removeEventListener('keydown', taste);
+          menueKnopf.focus();
+        };
+        menueKnopf.addEventListener('click', () => (menue.hidden ? oeffnen() : schliessen()));
+        // Wird das Fenster breit, verschwindet der Button: Menü schließen
+        window.matchMedia('(min-width: 72rem)').addEventListener('change', (e) => {
+          if (e.matches && !menue.hidden) schliessen();
+        });
       }
+
+      // Bilder und Überschriften blenden beim Scrollen weich ein
+      const einblenden = document.querySelectorAll('.einblenden, main section h2, .zoom');
+      if (!('IntersectionObserver' in window)) einblenden.forEach((el) => el.classList.add('ist-sichtbar'));
       const beobachter = new IntersectionObserver(
         (eintraege) => {
           for (const e of eintraege) {
