@@ -239,6 +239,7 @@ a {
 
 /* Textlink mit Linie */
 .weiter {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
@@ -250,6 +251,13 @@ a {
   letter-spacing: 0.01em;
   text-decoration: none;
   transition: gap 300ms var(--weich), color 300ms var(--weich);
+}
+
+/* größere Tippfläche, ohne das Aussehen zu ändern */
+.weiter::before {
+  content: "";
+  position: absolute;
+  inset: -0.8rem -0.6rem;
 }
 
 .weiter:hover {
@@ -302,7 +310,7 @@ a {
     animation: none !important;
   }
   .js .einblenden,
-  .js main section h2,
+  .js main section h2:not(.einblenden *),
   .js .bild.einblenden img,
   .js .zoom img {
     opacity: 1;
