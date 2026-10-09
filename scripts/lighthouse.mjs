@@ -19,16 +19,22 @@ const seiten = gewaehlt.length ? gewaehlt.map(pfad) : alle;
 const presets = process.env.LH_PRESETS ? process.env.LH_PRESETS.split(',') : ['mobile', 'desktop'];
 const slug = (s) => (s === '/' ? 'start' : s.slice(1));
 
-const chrome = await launch({
-  chromePath: process.env.CHROME_PATH ?? 'C:/Program Files/Google/Chrome/Application/chrome.exe',
-  chromeFlags: ['--headless=new', '--disable-gpu', '--no-sandbox'],
-});
-
 const ergebnisse = [];
 for (const seite of seiten) {
   for (const preset of presets) {
-    const optionen = { port: chrome.port, output: ['json', 'html'], logLevel: 'error' };
-    const lauf = await lighthouse(basis + seite, optionen, preset === 'desktop' ? desktopConfig : undefined);
+    // Ohne Vollbild- und Verlaufs-Screenshots: kleinere Berichte, gleiche Messwerte
+    // Pro Lauf ein frischer Chrome: sonst beeinflusst der Zustand des Prozesses spätere Läufe (gemessen: ab dem ca. 13. Lauf schlechtere LCP)
+    const chrome = await launch({
+      chromePath: process.env.CHROME_PATH ?? 'C:/Program Files/Google/Chrome/Application/chrome.exe',
+      chromeFlags: ['--headless=new', '--disable-gpu', '--no-sandbox'],
+    });
+    const optionen = { port: chrome.port, output: ['json', 'html'], logLevel: 'error', disableFullPageScreenshot: true, skipAudits: ['screenshot-thumbnails', 'final-screenshot'] };
+    let lauf;
+    try {
+      lauf = await lighthouse(basis + seite, optionen, preset === 'desktop' ? desktopConfig : undefined);
+    } finally {
+      await chrome.kill();
+    }
     const [json, html] = lauf.report;
     const name = `${slug(seite)}-${preset}`;
     writeFileSync(join(ordner, name + '.json'), json);
@@ -66,4 +72,3 @@ for (const seite of seiten) {
   }
 }
 writeFileSync(join(ordner, 'zusammenfassung.json'), JSON.stringify(ergebnisse, null, 2));
-chrome.kill();
