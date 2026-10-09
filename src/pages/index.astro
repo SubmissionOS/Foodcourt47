@@ -1,7 +1,6 @@
 ---
 import Basis from '../layouts/Basis.astro';
 import HeroStart from '../components/HeroStart.astro';
-import KuechenWahl from '../components/KuechenWahl.astro';
 import Bild from '../components/Bild.astro';
 import { getCollection } from 'astro:content';
 import { alleKuechen, abPreis } from '../lib/kuechen';
@@ -24,7 +23,6 @@ const streifen = (await getCollection('galerie')).sort((a, b) => reihenfolge.ind
 <Basis titel="Start" beschreibung={site.beschreibung} schema={foodcourtSchema(kuechen)} ogBild={url(hero, 1600)}>
   <HeroStart />
 
-  <KuechenWahl kuechen={kuechen} />
 
 
   <section class="mittag dunkel" aria-labelledby="mittag-titel">
