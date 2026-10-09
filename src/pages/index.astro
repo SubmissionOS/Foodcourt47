@@ -1,6 +1,7 @@
 ---
 import Basis from '../layouts/Basis.astro';
 import HeroStart from '../components/HeroStart.astro';
+import KuechenWahl from '../components/KuechenWahl.astro';
 import Bild from '../components/Bild.astro';
 import { getCollection } from 'astro:content';
 import { alleKuechen, abPreis } from '../lib/kuechen';
@@ -12,40 +13,19 @@ import { foto, url, srcset } from '../lib/fotos';
 const kuechen = await alleKuechen();
 const ab = preis(abPreis(kuechen));
 
-// PLACEHOLDER_PHOTO: Hero und Abschluss sind Stockfotos, siehe DESIGN.md
-const hero = await foto('hero-gastraum');
+// PLACEHOLDER_PHOTO: Pizza (og:image) und Abschluss sind Stockfotos, siehe DESIGN.md
+const hero = await foto('cucino-pizza');
 const abschluss = await foto('tisch-teilen');
 
 const reihenfolge = (await import('../content/galerie.json')).default.map((g) => g.id);
 const streifen = (await getCollection('galerie')).sort((a, b) => reihenfolge.indexOf(a.id) - reihenfolge.indexOf(b.id));
 
-const texte: Record<string, string> = {
-  'cucino-italiano': 'Pizza und Pasta wie in Venedig. Saucen und Teig entstehen jeden Tag frisch.',
-  manju: 'Indische Currys, seit 2009 in Hamburg zu Hause. Angefangen hat alles in der Wandelhalle am Hauptbahnhof.',
-  sushify: 'Premium-Sushi, einzeln zubereitet aus täglich frischen Zutaten. Von Maki bis Trüffel.',
-};
 ---
 <Basis titel="Start" beschreibung={site.beschreibung} schema={foodcourtSchema(kuechen)} ogBild={url(hero, 1600)}>
-  <HeroStart variante="b" />
+  <HeroStart />
 
-  <section class="intro wrap" aria-label="Willkommen">
-    <p class="intro-satz einblenden">
-      Am selben Tisch bestellt der eine Pizza, die andere ein Curry und der Dritte Sushi. Genau dafür gibt es Foodcourt47.
-    </p>
-  </section>
+  <KuechenWahl kuechen={kuechen} />
 
-  <div class="kuechen">
-    {kuechen.map((k, i) => (
-      <section class:list={['kueche', `kueche--${i + 1}`]} style={`--akzent: var(--k-${k.id})`} aria-labelledby={`k-${k.id}`}>
-        <Bild id={k.data.fotos[0]} format={i === 1 ? '4 / 5' : '5 / 4'} sizes="(min-width: 64rem) 55vw, 100vw" class="kueche-bild" />
-        <div class="kueche-text einblenden">
-          <h2 id={`k-${k.id}`}>{k.data.name}</h2>
-          <p>{texte[k.id]}</p>
-          <a class="weiter" href={`/${k.id}`}>Zur Karte von {k.data.name}</a>
-        </div>
-      </section>
-    ))}
-  </div>
 
   <section class="mittag dunkel" aria-labelledby="mittag-titel">
     <div class="wrap mittag-innen einblenden">
@@ -83,69 +63,6 @@ const texte: Record<string, string> = {
 </Basis>
 
 <style>
-  /* Intro */
-  .intro {
-    padding-block: var(--luft);
-  }
-  .intro-satz {
-    max-width: 30ch;
-    margin: 0 auto;
-    font-family: var(--serif);
-    font-size: clamp(1.9rem, 3.6vw, 3rem);
-    line-height: 1.2;
-    text-align: center;
-  }
-  .intro-satz em {
-    color: var(--messing);
-  }
-
-  /* Küchen im Wechsel */
-  .kuechen {
-    display: grid;
-    gap: var(--luft);
-    max-width: var(--breite);
-    margin-inline: auto;
-    padding-inline: var(--rand);
-  }
-  .kueche {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 2.25rem;
-    align-items: center;
-  }
-  .kueche h2 {
-    margin-bottom: 1.25rem;
-  }
-  .kueche p {
-    font-size: 1.12rem;
-    max-width: 34ch;
-  }
-  .kueche .weiter {
-    margin-top: 0.75rem;
-  }
-
-  @media (min-width: 64rem) {
-    .kueche {
-      grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
-      gap: 6rem;
-    }
-    .kueche--2 {
-      grid-template-columns: minmax(0, 4fr) minmax(0, 5fr);
-    }
-    .kueche--2 :global(.kueche-bild) {
-      order: 2;
-    }
-    .kueche--2 .kueche-text {
-      justify-self: end;
-    }
-    .kueche--3 {
-      grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
-    }
-    .kueche--3 :global(.kueche-bild) {
-      margin-left: calc(var(--rand) * -1);
-    }
-  }
-
   /* Mittag */
   .mittag {
     margin-top: var(--luft);

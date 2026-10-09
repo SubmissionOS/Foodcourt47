@@ -25,6 +25,8 @@ const kuechen = defineCollection({
     kategorie: z.string(),
     kueche: z.string(),
     claim: z.string(),
+    /** Zwei Sätze für den Küchen-Abschnitt der Startseite */
+    kurztext: z.string(),
     einleitung: z.array(z.string()),
     website: z.url(),
     logo: z.object({ src: z.string(), alt: z.string(), breite: z.number(), hoehe: z.number() }),
