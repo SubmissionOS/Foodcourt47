@@ -78,3 +78,27 @@ Zwei Varianten wurden gebaut und bei 1440 px und 390 px verglichen:
 - **B, asymmetrisch (gewählt):** „Pizza, Curry“ links oben, „und Sushi.“ rechts darunter, über die ganze Bildbreite gesetzt, der eine Button rechts unter der zweiten Zeile. Die Headline nennt sofort, was es gibt, die Diagonale führt das Auge durch das Foto zum Reservieren-Button, und das Layout funktioniert auch auf 390 px.
 
 Die Speisekarte erreicht man über die Navigation. Ein dezenter Hinweis „Entdecken“ am unteren Rand führt zum Inhalt.
+
+## Hero-Varianten zum Vergleich (Runde 4)
+Vergleichsseiten, nicht in der Navigation, `noindex` und nicht in der Sitemap: `/hero-a`, `/hero-b`, `/hero-c`. Die Startseite ist unverändert. Screenshots (1920×1080 und 390 px) liegen in `docs/hero-vergleich/`. Komponente: `src/components/HeroVariante.astro`.
+
+Alle drei: Foodfotos statt Restaurant-Interieur, dunkler Verlauf hinter der Schrift, kein Label über der Headline, kein Wechsel normal/kursiv, ein Reservieren-Button.
+
+| | A | B | C |
+|---|---|---|---|
+| Schrift | Archivo Black, Versalien | Fraunces, fett, „weich“ (SOFT 100, WONK) | Inter Tight Black, Mischschrift |
+| Headline | PIZZA, CURRY UND SUSHI | Hier isst jeder, was er mag. | Pizza. Curry. Sushi. |
+| Foto | Triptychon: Pizza, Curry, Sushi nebeneinander | ein Curry-Foto, vollflächig | Foto wechselt je Wort (Hover, Fokus, mobil automatisch alle 2,8 s) |
+
+**A:** Wirkt am meisten nach Foodcourt, nach Beschilderung und Markthalle statt Hochzeit. Das Triptychon zeigt alle drei Küchen sofort, die Headline füllt fast die Bildbreite und sitzt unten links. Schwäche: Das Sushi-Feld ist vor allem schwarz mit einem kleinen Röllchen, weil das Sushify-Material nur 500×350 px misst. Mit eigenem Foto in Bildschirmgröße würde A noch deutlich stärker.
+
+**B:** Warm, appetitlich und ruhig, am nächsten an einem Restaurant. Die weiche Fraunces hat Charakter und wirkt nicht mehr wie Buchdruck. Sie sagt aber nichts über die Küchen aus, die Headline funktioniert für jedes Restaurant, und das Foto zeigt nur eine Küche (Curry). Die sicherste, aber nicht die unverwechselbarste Wahl.
+
+**C:** Die interaktivste Variante, und die einzige, die die drei Küchen als Auswahl erlebbar macht. Jedes Wort ist ein Link zur Küche. Schwächen: Der erste Eindruck (Pizza) gewichtet eine Küche vor den anderen, und mobil bedeutet die Automatik Bewegung, die manche stört (bei `prefers-reduced-motion` bleibt sie aus). Das Sushi-Bild steht auf Schwarz und ist klein.
+
+**Einschätzung:** A als Hero der Startseite, C als Idee für den Abschnitt „Drei Küchen“ darunter. B, wenn der Inhaber ein ruhigeres, klassischeres Auftreten will. Entscheidung offen.
+
+**Fotos:**
+- Pizza: Unsplash, `cucino-pizza`, mit `PLACEHOLDER_PHOTO` markiert.
+- Curry: Unsplash, `manju-currys`, mit `PLACEHOLDER_PHOTO` markiert.
+- Sushi: `sushify.de/wp-content/uploads/2021/04/1504-Goldify.jpg`, echtes Foto, aber nur 500×350 px. Alle Fotos dieser Serie haben dieses Format und zeigen eine Rolle auf reinem Schwarz. Deshalb steht es auf einem schwarzen Feld statt vollflächig.

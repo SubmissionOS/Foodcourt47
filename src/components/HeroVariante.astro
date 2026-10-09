@@ -1,0 +1,325 @@
+---
+// Hero-Varianten zum Vergleichen, nur über /hero-a, /hero-b, /hero-c erreichbar.
+// PLACEHOLDER_PHOTO: Pizza und Curry sind Stockfotos (Unsplash), die Sushi-Fotos stammen von sushify.de.
+import { foto, url, srcset } from '../lib/fotos';
+
+interface Props {
+  v: 'a' | 'b' | 'c';
+}
+const { v } = Astro.props;
+
+if (v === 'a') {
+  await import('@fontsource/archivo/800.css');
+  await import('@fontsource/archivo/900.css');
+}
+if (v === 'b') {
+  await import('@fontsource-variable/fraunces/full.css');
+}
+if (v === 'c') {
+  await import('@fontsource/inter-tight/900.css');
+}
+
+const pizza = await foto('cucino-pizza');
+const curry = await foto('manju-currys');
+const sushi = await foto('sushify-goldify');
+
+const kueche = [
+  { id: 'cucino-italiano', wort: 'Pizza', foto: pizza },
+  { id: 'manju', wort: 'Curry', foto: curry },
+  { id: 'sushify', wort: 'Sushi', foto: sushi },
+];
+---
+<section class:list={['hero dunkel', `hero--${v}`]} aria-labelledby="hero-titel" data-hero-c={v === 'c' ? '' : undefined} data-aktiv="0">
+  {v === 'a' && (
+    <>
+      <div class="a-tripel" aria-hidden="true">
+        {kueche.map((k) => (
+          <div class:list={['a-feld', { 'a-feld--produkt': k.id === 'sushify' }]} data-placeholder-photo={k.foto.stock ? 'PLACEHOLDER_PHOTO' : undefined}>
+            <img src={url(k.foto, 1000)} srcset={srcset(k.foto)} sizes="34vw" alt="" width={k.foto.breite} height={k.foto.hoehe} fetchpriority="high" />
+          </div>
+        ))}
+      </div>
+      <div class="verlauf"></div>
+      <div class="hero-inhalt wrap a-inhalt">
+        <h1 id="hero-titel">
+          <span class="a-z">Pizza,</span> <span class="a-z">Curry</span> <span class="a-z a-z--und">und Sushi</span>
+        </h1>
+        <a class="knopf knopf--hell hero-knopf" href="/reservieren">Tisch reservieren</a>
+      </div>
+    </>
+  )}
+
+  {v === 'b' && (
+    <>
+      <div class="b-bild" data-placeholder-photo="PLACEHOLDER_PHOTO">
+        <img src={url(curry, 2400)} srcset={srcset(curry)} sizes="100vw" alt={curry.alt} width={curry.breite} height={curry.hoehe} fetchpriority="high" />
+      </div>
+      <div class="verlauf verlauf--links"></div>
+      <div class="hero-inhalt wrap b-inhalt">
+        <h1 id="hero-titel">Hier isst jeder,<br />was er mag.</h1>
+        <p class="b-satz">Pizza, Curry und Sushi, drei Küchen an einem Tisch.</p>
+        <a class="knopf knopf--hell hero-knopf" href="/reservieren">Tisch reservieren</a>
+      </div>
+    </>
+  )}
+
+  {v === 'c' && (
+    <>
+      <div class="c-ebenen" aria-hidden="true">
+        {kueche.map((k, i) => (
+          <div class:list={['c-ebene', { 'c-ebene--produkt': k.id === 'sushify', 'ist-aktiv': i === 0 }]} data-ebene={i} data-placeholder-photo={k.foto.stock ? 'PLACEHOLDER_PHOTO' : undefined}>
+            <img src={url(k.foto, 2000)} srcset={srcset(k.foto)} sizes="100vw" alt="" width={k.foto.breite} height={k.foto.hoehe} loading={i === 0 ? 'eager' : 'lazy'} />
+          </div>
+        ))}
+      </div>
+      <div class="verlauf"></div>
+      <div class="hero-inhalt wrap c-inhalt">
+        <h1 id="hero-titel" class="c-woerter">
+          {kueche.map((k, i) => (
+            <a class:list={['c-wort', { 'ist-aktiv': i === 0 }]} href={`/${k.id}`} data-wort={i}>{k.wort}.</a>
+          ))}
+        </h1>
+        <a class="knopf knopf--hell hero-knopf" href="/reservieren">Tisch reservieren</a>
+      </div>
+    </>
+  )}
+</section>
+
+<script>
+  // Variante C: Hover und Fokus wechseln das Foto, auf Touch-Geräten wechselt es automatisch
+  const hero = document.querySelector<HTMLElement>('[data-hero-c]');
+  if (hero) {
+    const ebenen = [...hero.querySelectorAll<HTMLElement>('[data-ebene]')];
+    const woerter = [...hero.querySelectorAll<HTMLElement>('[data-wort]')];
+    const ruhig = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const hover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    let aktiv = 0;
+    let takt: number | undefined;
+
+    const setze = (i: number) => {
+      aktiv = i;
+      hero.dataset.aktiv = String(i);
+      ebenen.forEach((e, n) => e.classList.toggle('ist-aktiv', n === i));
+      woerter.forEach((w, n) => w.classList.toggle('ist-aktiv', n === i));
+    };
+
+    woerter.forEach((w, i) => {
+      w.addEventListener('mouseenter', () => setze(i));
+      w.addEventListener('focus', () => setze(i));
+    });
+
+    const start = Number(new URLSearchParams(location.search).get('a'));
+    if (start > 0 && start < ebenen.length) setze(start);
+
+    if (!hover && !ruhig) {
+      takt = window.setInterval(() => setze((aktiv + 1) % ebenen.length), 2800);
+    }
+    // Wer ein Wort antippt, folgt dem Link; Automatik pausiert bei Fokus
+    woerter.forEach((w) => w.addEventListener('focus', () => takt && window.clearInterval(takt)));
+  }
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    display: grid;
+    height: 100svh;
+    min-height: 34rem;
+    margin-top: -2rem;
+    overflow: hidden;
+    background: #0b0d0c;
+    color: var(--creme);
+  }
+  .hero-inhalt {
+    position: relative;
+    z-index: 2;
+  }
+  .hero h1 {
+    margin: 0;
+  }
+  .hero :global(.knopf) {
+    justify-self: start;
+  }
+  .verlauf {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(to bottom, #0b0d0cb3 0%, #0b0d0c00 22%),
+      linear-gradient(to top, #0b0d0cf2 0%, #0b0d0cb8 38%, #0b0d0c59 72%, #0b0d0c40 100%);
+  }
+  .verlauf--links {
+    background:
+      linear-gradient(to bottom, #0b0d0cb3 0%, #0b0d0c00 22%),
+      linear-gradient(to right, #0b0d0cf0 0%, #0b0d0ca6 45%, #0b0d0c33 100%),
+      linear-gradient(to top, #0b0d0ccc 0%, #0b0d0c00 55%);
+  }
+
+  /* ---------- A: kräftige Grotesk in Versalien, unten links, Foto-Triptychon ---------- */
+  .hero--a .a-tripel {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2px;
+    background: #0b0d0c;
+  }
+  .a-feld {
+    position: relative;
+    overflow: hidden;
+    background: #000;
+  }
+  .a-feld img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  /* Sushify-Fotos sind klein und stehen auf Schwarz: nicht aufblasen */
+  .a-feld--produkt img {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    width: min(100%, 560px);
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+  }
+  .a-inhalt {
+    display: grid;
+    align-content: end;
+    gap: 2rem;
+    padding-block: 8rem clamp(2rem, 6vh, 4.5rem);
+  }
+  .hero--a h1 {
+    font-family: 'Archivo', 'Arial Black', system-ui, sans-serif;
+    font-weight: 900;
+    font-size: clamp(3rem, 15vw, 15rem);
+    line-height: 0.86;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+    text-wrap: nowrap;
+    color: #fff;
+  }
+  .a-z {
+    display: block;
+  }
+  @media (min-width: 48rem) {
+    .hero--a h1 {
+      font-size: clamp(3rem, 10.6vw, 15rem);
+    }
+    .a-z {
+      display: inline;
+    }
+    .a-z--und {
+      display: block;
+    }
+  }
+
+  /* ---------- B: warme, weiche Serif, groß und ruhig ---------- */
+  .b-bild {
+    position: absolute;
+    inset: 0;
+  }
+  .b-bild img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .b-inhalt {
+    display: grid;
+    align-content: center;
+    padding-block: 7rem 4rem;
+  }
+  .hero--b h1 {
+    font-family: 'Fraunces Variable', 'Fraunces', Georgia, serif;
+    font-weight: 800;
+    font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144;
+    font-size: clamp(3.4rem, 9vw, 9.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    color: #fbf4e6;
+  }
+  .b-satz {
+    margin: 1.75rem 0 2.25rem;
+    max-width: 30ch;
+    font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+    color: #f1e8d6;
+  }
+
+  /* ---------- C: drei Wörter, Foto wechselt ---------- */
+  .c-ebenen {
+    position: absolute;
+    inset: 0;
+    background: #000;
+  }
+  .c-ebene {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 700ms var(--weich);
+    background: #000;
+  }
+  .c-ebene.ist-aktiv {
+    opacity: 1;
+  }
+  .c-ebene img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.62) saturate(1.05);
+  }
+  .c-ebene--produkt img {
+    position: absolute;
+    left: 50%;
+    top: 80%;
+    width: min(92%, 520px);
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+  }
+  @media (min-width: 48rem) {
+    .c-woerter {
+      font-size: clamp(4rem, 15.5vw, 16rem);
+    }
+    .c-ebene--produkt img {
+      left: auto;
+      right: clamp(1rem, 8vw, 10rem);
+      top: 50%;
+      width: min(70%, 760px);
+      transform: translateY(-50%);
+    }
+  }
+  .c-inhalt {
+    display: grid;
+    align-content: center;
+    gap: 2.5rem;
+    padding-block: 7rem 4rem;
+  }
+  .c-woerter {
+    display: grid;
+    justify-items: start;
+    font-family: 'Inter Tight', 'Arial Narrow', system-ui, sans-serif;
+    font-weight: 900;
+    font-size: clamp(4rem, 22vw, 16rem);
+    line-height: 0.96;
+    letter-spacing: -0.05em;
+  }
+  .c-wort {
+    color: #fff;
+    text-decoration: none;
+    opacity: 0.55;
+    text-shadow: 0 2px 30px #0b0d0c99;
+    transition: opacity 400ms var(--weich);
+  }
+  .c-wort.ist-aktiv,
+  .c-wort:focus-visible {
+    opacity: 1;
+  }
+  .c-wort:focus-visible {
+    outline: 3px solid var(--messing-hell);
+    outline-offset: 0.06em;
+  }
+</style>
