@@ -85,6 +85,7 @@ const schemas = [...(schema ? (Array.isArray(schema) ? schema : [schema]) : []),
     {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
   </head>
   <body style={akzent ? `--akzent: var(--k-${akzent})` : undefined}>
+    <div class="oben-marker" data-oben-marker aria-hidden="true"></div>
     <a class="springen" href="#inhalt">Zum Inhalt springen</a>
     <Kopf modus={kopf} />
     <main id="inhalt" tabindex="-1">
@@ -96,16 +97,17 @@ const schemas = [...(schema ? (Array.isArray(schema) ? schema : [schema]) : []),
 
       const ruhig = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      // Header wird beim Scrollen solide
+      // Header: ganz oben transparent, danach schwebende Leiste. Ein unsichtbarer Marker am Seitenanfang
+      // und ein IntersectionObserver ersetzen den Scroll-Handler (kein Layout-Lesen, kein erzwungener Reflow).
       const kopf = document.querySelector<HTMLElement>('[data-kopf]');
+      const marker = document.querySelector<HTMLElement>('[data-oben-marker]');
       const fest = kopf?.hasAttribute('data-fest') ?? false;
-      const pruefen = () => {
-        const oben = window.scrollY <= 40;
-        kopf?.classList.toggle('ist-oben', oben);
-        kopf?.classList.toggle('ist-gescrollt', fest || !oben);
-      };
-      pruefen();
-      window.addEventListener('scroll', pruefen, { passive: true });
+      if (kopf && marker && 'IntersectionObserver' in window) {
+        new IntersectionObserver(([e]) => {
+          kopf.classList.toggle('ist-oben', e.isIntersecting);
+          kopf.classList.toggle('ist-gescrollt', fest || !e.isIntersecting);
+        }).observe(marker);
+      }
 
       // Mobiles Menü: aria-expanded, Fokusfalle, Escape schließt, Fokus kehrt zum Button zurück
       const menueKnopf = document.querySelector<HTMLButtonElement>('[data-menue-knopf]');
@@ -149,31 +151,37 @@ const schemas = [...(schema ? (Array.isArray(schema) ? schema : [schema]) : []),
         });
       }
 
-      // Bilder und Überschriften blenden beim Scrollen weich ein
+      // Bilder und Überschriften blenden beim Scrollen weich ein (nur Opacity und Transform per CSS)
       const einblenden = document.querySelectorAll('.einblenden, main section h2, .zoom');
-      if (!('IntersectionObserver' in window)) einblenden.forEach((el) => el.classList.add('ist-sichtbar'));
-      const beobachter = new IntersectionObserver(
-        (eintraege) => {
-          for (const e of eintraege) {
-            if (e.isIntersecting) {
-              e.target.classList.add('ist-sichtbar');
-              beobachter.unobserve(e.target);
+      if ('IntersectionObserver' in window) {
+        const beobachter = new IntersectionObserver(
+          (eintraege) => {
+            for (const e of eintraege) {
+              if (e.isIntersecting) {
+                e.target.classList.add('ist-sichtbar');
+                beobachter.unobserve(e.target);
+              }
             }
-          }
-        },
-        { rootMargin: '0px 0px -8% 0px' },
-      );
-      einblenden.forEach((el) => beobachter.observe(el));
+          },
+          { rootMargin: '0px 0px -8% 0px' },
+        );
+        einblenden.forEach((el) => beobachter.observe(el));
+      } else {
+        einblenden.forEach((el) => el.classList.add('ist-sichtbar'));
+      }
 
-      // Leichter Parallax im Hero
+      // Leichter Parallax im Hero. Höhen werden einmal gemessen und bei Größenänderung neu, nicht bei jedem Frame.
       const parallax = document.querySelectorAll<HTMLElement>('[data-parallax]');
       if (!ruhig && parallax.length) {
         let geplant = false;
+        let hoehen: number[] = [];
         const bewegen = () => {
           geplant = false;
+          if (!hoehen.length) hoehen = [...parallax].map((el) => el.offsetHeight);
           const y = window.scrollY;
-          parallax.forEach((el) => {
-            if (y < window.innerHeight * 1.2) el.style.transform = `translate3d(0, ${Math.min(y * 0.18, el.offsetHeight * 0.18)}px, 0) scale(1.06)`;
+          if (y > window.innerHeight * 1.2) return;
+          parallax.forEach((el, i) => {
+            el.style.transform = `translate3d(0, ${Math.min(y * 0.18, hoehen[i] * 0.18)}px, 0) scale(1.06)`;
           });
         };
         window.addEventListener(
@@ -186,6 +194,7 @@ const schemas = [...(schema ? (Array.isArray(schema) ? schema : [schema]) : []),
           },
           { passive: true },
         );
+        window.addEventListener('resize', () => (hoehen = []), { passive: true });
       }
     </script>
   </body>

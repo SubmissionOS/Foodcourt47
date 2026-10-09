@@ -4,7 +4,7 @@
   "stadtteil": "Hammerbrook",
   "stadt": "Hamburg",
   "url": "https://foodcourt47.de",
-  "beschreibung": "Drei Küchen unter einem Dach in Hamburg-Hammerbrook: Pizza und Pasta von Cucino Italiano, indische Currys von Manju und Premium-Sushi von Sushify. Mittagsangebote Mo–Fr 11–16 Uhr.",
+  "beschreibung": "Drei Küchen unter einem Dach in Hamburg-Hammerbrook: Pizza von Cucino Italiano, Currys von Manju, Sushi von Sushify. Mittagstisch Mo–Fr ab 7,50 €.",
   "adresse": {
     "strasse": "Hammerbrookstraße 47",
     "plz": "20097",
@@ -56,7 +56,7 @@
     "Mittagsangebote Mo–Fr 11–16 Uhr"
   ],
   "logo": {
-    "src": "https://foodcourt47.de/wp-content/uploads/2023/01/3.svg",
+    "src": "https://foodcourt47.de/logos/foodcourt47.svg",
     "alt": "Foodcourt-Logo: weißer Schriftzug „Food court“ in einem schwarzen Kreis mit rotem Ring, darunter „We love good food“"
   },
   "impressum": {

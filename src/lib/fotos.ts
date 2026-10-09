@@ -32,7 +32,7 @@ export type Art = 'normal' | 'hero';
 
 /** Qualität je Format. Hero-Fotos liegen unter einem dunklen Verlauf und vertragen mehr Kompression. */
 const qualitaet = (format: Format | 'jpg', art: Art): number => {
-  const basis = { avif: 52, webp: 68, jpg: 72 }[format];
+  const basis = { avif: 46, webp: 66, jpg: 70 }[format];
   return art === 'hero' ? basis - 8 : basis;
 };
 
@@ -64,7 +64,7 @@ export async function vorladenAttribute(f: Foto, widths: number[], sizes: string
 /** Breiten und Größenangaben der Hero-Bilder, an einer Stelle gepflegt (Komponente und Preload nutzen sie gemeinsam). */
 export const HERO = {
   seite: { widths: [640, 1024, 1600, 2400], sizes: '100vw' },
-  start: { widths: [480, 800, 1200], sizes: '34vw' },
+  start: { widths: [280, 480, 800, 1200], sizes: '34vw' },
 } as const;
 
 /** Open-Graph-Bild: 1200×630 als JPEG, absolute URL. */
