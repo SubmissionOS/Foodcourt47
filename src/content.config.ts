@@ -39,9 +39,8 @@ const kuechen = defineCollection({
 const fotos = defineCollection({
   loader: file('./src/content/fotos.json'),
   schema: z.object({
-    src: z.string(),
-    breite: z.number(),
-    hoehe: z.number(),
+    /** Ursprungsquelle, die Datei liegt lokal in src/assets/fotos/<id>.jpg */
+    quelle: z.string(),
     alt: z.string(),
     /** Stockfoto, später durch eigenes Foto ersetzen (PLACEHOLDER_PHOTO) */
     stock: z.boolean(),

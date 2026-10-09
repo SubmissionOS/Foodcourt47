@@ -1,6 +1,7 @@
 ---
 // Einheitlicher Hero für alle Unterseiten: 50svh (mindestens 360px), Foto füllt die Fläche immer komplett
-import { foto, url, srcset } from '../lib/fotos';
+import Foto from './Foto.astro';
+import { foto, HERO } from '../lib/fotos';
 
 interface Props {
   foto: string;
@@ -12,7 +13,7 @@ const f = await foto(fotoId);
 ---
 <section class="s-hero dunkel" aria-labelledby="s-hero-titel">
   <div class="s-hero-bild" data-parallax data-placeholder-photo={f.stock ? 'PLACEHOLDER_PHOTO' : undefined}>
-    <img src={url(f, 2400)} srcset={srcset(f)} sizes="100vw" alt={f.alt} width={f.breite} height={f.hoehe} fetchpriority="high" />
+    <Foto id={fotoId} widths={HERO.seite.widths} sizes={HERO.seite.sizes} eager art="hero" />
   </div>
   <div class="wrap s-hero-text">
     <h1 id="s-hero-titel">{titel}</h1>
@@ -40,7 +41,7 @@ const f = await foto(fotoId);
     transform-origin: center bottom;
     will-change: transform;
   }
-  .s-hero-bild img {
+  .s-hero-bild :global(img) {
     display: block;
     width: 100%;
     height: 100%;

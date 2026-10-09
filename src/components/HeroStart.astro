@@ -1,6 +1,7 @@
 ---
 // Hero der Startseite: Foto-Triptychon der drei Küchen, Headline in Versalien unten links
-import { foto, url, srcset } from '../lib/fotos';
+import Foto from './Foto.astro';
+import { foto, HERO } from '../lib/fotos';
 import { serie } from '../lib/serie';
 
 const fotos = await Promise.all(serie.map(async (s) => ({ ...s, f: await foto(s.foto) })));
@@ -9,7 +10,7 @@ const fotos = await Promise.all(serie.map(async (s) => ({ ...s, f: await foto(s.
   <div class="tripel" aria-hidden="true">
     {fotos.map(({ id, f }) => (
       <div class="feld serie-foto" data-placeholder-photo={f.stock ? 'PLACEHOLDER_PHOTO' : undefined} data-kueche={id}>
-        <img src={url(f, 1000)} srcset={srcset(f)} sizes="34vw" alt="" width={f.breite} height={f.hoehe} fetchpriority="high" />
+        <Foto id={f.id} widths={HERO.start.widths} sizes={HERO.start.sizes} eager art="hero" alt="" />
       </div>
     ))}
   </div>
@@ -59,7 +60,7 @@ const fotos = await Promise.all(serie.map(async (s) => ({ ...s, f: await foto(s.
   }
   h1 {
     margin: 0;
-    font-family: 'Archivo', 'Arial Black', system-ui, sans-serif;
+    font-family: var(--display);
     font-weight: 900;
     font-size: clamp(3rem, 15vw, 15rem);
     line-height: 0.86;

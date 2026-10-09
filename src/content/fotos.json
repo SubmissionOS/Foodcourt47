@@ -1,137 +1,105 @@
 [
   {
     "id": "hero-gastraum",
-    "src": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4",
-    "breite": 2400,
-    "hoehe": 1600,
+    "quelle": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4",
     "alt": "Gastraum am Abend mit dunklem Holz, Hängeleuchten und gedeckten Tischen",
     "stock": true,
     "hinweis": "PLACEHOLDER_PHOTO"
   },
   {
     "id": "cucino-pizza",
-    "src": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002",
-    "breite": 2400,
-    "hoehe": 1600,
+    "quelle": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002",
     "alt": "Pizza mit Tomate, Mozzarella und Basilikum auf einem Teller",
     "stock": true,
     "hinweis": "PLACEHOLDER_PHOTO"
   },
   {
     "id": "cucino-pasta",
-    "src": "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9",
-    "breite": 2400,
-    "hoehe": 1600,
+    "quelle": "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9",
     "alt": "Penne mit Tomatensauce und Parmesan auf einem weißen Teller",
     "stock": true,
     "hinweis": "PLACEHOLDER_PHOTO"
   },
   {
     "id": "sushi-hero",
-    "src": "https://images.unsplash.com/photo-1611143669185-af224c5e3252",
-    "breite": 2400,
-    "hoehe": 1600,
+    "quelle": "https://images.unsplash.com/photo-1611143669185-af224c5e3252",
     "alt": "Sushi-Platte von oben: Nigiri, Maki und Rollen mit Mayonnaise-Linien auf einer schwarzen Schieferplatte",
     "stock": true,
     "hinweis": "PLACEHOLDER_PHOTO"
   },
   {
     "id": "manju-currys",
-    "src": "https://images.unsplash.com/photo-1585937421612-70a008356fbe",
-    "breite": 2400,
-    "hoehe": 1600,
+    "quelle": "https://images.unsplash.com/photo-1585937421612-70a008356fbe",
     "alt": "Zwei Currys in Kupferschalen, daneben Basmatireis",
     "stock": true,
     "hinweis": "PLACEHOLDER_PHOTO"
   },
   {
     "id": "manju-samosa",
-    "src": "https://images.unsplash.com/photo-1601050690597-df0568f70950",
-    "breite": 2400,
-    "hoehe": 1600,
+    "quelle": "https://images.unsplash.com/photo-1601050690597-df0568f70950",
     "alt": "Goldbraune Samosas mit grüner Chili und Granatapfelkernen",
     "stock": true,
     "hinweis": "PLACEHOLDER_PHOTO"
   },
   {
     "id": "tisch-teilen",
-    "src": "https://images.unsplash.com/photo-1424847651672-bf20a4b0982b",
-    "breite": 2400,
-    "hoehe": 1600,
+    "quelle": "https://images.unsplash.com/photo-1424847651672-bf20a4b0982b",
     "alt": "Gedeckter Tisch von oben mit mehreren Gerichten, Hände greifen zu",
     "stock": true,
     "hinweis": "PLACEHOLDER_PHOTO"
   },
   {
     "id": "abend-tisch",
-    "src": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0",
-    "breite": 2400,
-    "hoehe": 1600,
+    "quelle": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0",
     "alt": "Angerichteter Teller auf einem Tisch mit Gläsern am Abend",
     "stock": true,
     "hinweis": "PLACEHOLDER_PHOTO"
   },
   {
     "id": "manju-curry-schale",
-    "src": "https://foodcourt47.de/wp-content/uploads/2023/02/3.jpg",
-    "breite": 1024,
-    "hoehe": 710,
+    "quelle": "https://foodcourt47.de/wp-content/uploads/2023/02/3.jpg",
     "alt": "Cremiges Curry mit Fleischstücken in einer dunklen Schale, mit Sahne verziert",
     "stock": false
   },
   {
     "id": "manju-reis",
-    "src": "https://foodcourt47.de/wp-content/uploads/2023/02/1.jpg",
-    "breite": 1024,
-    "hoehe": 710,
+    "quelle": "https://foodcourt47.de/wp-content/uploads/2023/02/1.jpg",
     "alt": "Gelber Gewürzreis mit Hähnchen, Cashewkernen, Rosinen und Koriander auf einem türkisblauen Teller",
     "stock": false
   },
   {
     "id": "sushify-staebchen",
-    "src": "https://foodcourt47.de/wp-content/uploads/2023/02/2.jpg",
-    "breite": 1024,
-    "hoehe": 710,
+    "quelle": "https://foodcourt47.de/wp-content/uploads/2023/02/2.jpg",
     "alt": "Sushi-Rolle mit Thunfisch und Avocado zwischen Essstäbchen, dahinter weitere Rollen",
     "stock": false
   },
   {
     "id": "sushify-lachsrolle",
-    "src": "https://foodcourt47.de/wp-content/uploads/2023/02/4.jpg",
-    "breite": 1024,
-    "hoehe": 710,
+    "quelle": "https://foodcourt47.de/wp-content/uploads/2023/02/4.jpg",
     "alt": "Angeschnittene Sushi-Rollen mit Lachs, Avocado, Sesam und Kresse",
     "stock": false
   },
   {
     "id": "sushify-goldify",
-    "src": "https://sushify.de/wp-content/uploads/2021/04/1504-Goldify.jpg",
-    "breite": 500,
-    "hoehe": 350,
+    "quelle": "https://sushify.de/wp-content/uploads/2021/04/1504-Goldify.jpg",
     "alt": "Goldify-Rolle mit Thunfisch und Avocado vor schwarzem Hintergrund",
     "stock": false
   },
   {
     "id": "sushify-simplify",
-    "src": "https://sushify.de/wp-content/uploads/2021/04/1405-Simplify-it.jpg",
-    "breite": 500,
-    "hoehe": 350,
+    "quelle": "https://sushify.de/wp-content/uploads/2021/04/1405-Simplify-it.jpg",
     "alt": "Simplify-it-Rolle mit gebackenem Hähnchen vor schwarzem Hintergrund",
     "stock": false
   },
   {
     "id": "sushify-avocado-maki",
-    "src": "https://sushify.de/wp-content/uploads/2021/04/1302-Avocado-Maki.jpg",
-    "breite": 500,
-    "hoehe": 350,
+    "quelle": "https://sushify.de/wp-content/uploads/2021/04/1302-Avocado-Maki.jpg",
     "alt": "Avocado Maki vor schwarzem Hintergrund",
     "stock": false
   },
   {
     "id": "sushify-stay-beefy",
-    "src": "https://sushify.de/wp-content/uploads/2021/04/1503-Stay-Beefy.jpg",
-    "breite": 500,
-    "hoehe": 350,
+    "quelle": "https://sushify.de/wp-content/uploads/2021/04/1503-Stay-Beefy.jpg",
     "alt": "Stay-Beefy-Rolle mit flambiertem Rinderfilet vor schwarzem Hintergrund",
     "stock": false
   }

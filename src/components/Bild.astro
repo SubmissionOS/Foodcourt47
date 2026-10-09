@@ -1,6 +1,7 @@
 ---
-// Foto aus src/content/fotos.json. Stockfotos tragen data-placeholder-photo (PLACEHOLDER_PHOTO).
-import { foto, url, srcset } from '../lib/fotos';
+// Foto aus src/content/fotos.json im festen Rahmen. Stockfotos tragen data-placeholder-photo (PLACEHOLDER_PHOTO).
+import Foto from './Foto.astro';
+import { foto } from '../lib/fotos';
 
 interface Props {
   id: string;
@@ -20,47 +21,5 @@ const verhaeltnis = format ?? `${f.breite} / ${f.hoehe}`;
   style={`aspect-ratio: ${verhaeltnis}`}
   data-placeholder-photo={f.stock ? 'PLACEHOLDER_PHOTO' : undefined}
 >
-  <img
-    src={url(f, 1600)}
-    srcset={srcset(f)}
-    sizes={sizes}
-    alt={f.alt}
-    width={f.breite}
-    height={f.hoehe}
-    loading={eager ? 'eager' : 'lazy'}
-    fetchpriority={eager ? 'high' : undefined}
-    decoding="async"
-    onerror="this.parentElement.classList.add('ist-fehlend');"
-  />
-  <span class="bild-ersatz" aria-hidden="true">{f.alt}</span>
+  <Foto id={id} widths={[480, 720, 1080, 1600]} sizes={sizes} eager={eager} />
 </figure>
-
-<style>
-  .bild {
-    position: relative;
-    margin: 0;
-    overflow: hidden;
-    background: var(--leinen);
-  }
-  .bild img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .bild-ersatz {
-    display: none;
-  }
-  .ist-fehlend img {
-    visibility: hidden;
-  }
-  .ist-fehlend .bild-ersatz {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    padding: 1.5rem;
-    text-align: center;
-  }
-</style>

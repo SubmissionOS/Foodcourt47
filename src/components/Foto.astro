@@ -1,0 +1,32 @@
+---
+// <picture> mit AVIF, WebP und JPEG-Rückfall. Die Breiten sind feste Vorgaben, die Größe kommt aus dem Layout (sizes).
+import { foto, bildsatz, type Art } from '../lib/fotos';
+
+interface Props {
+  id: string;
+  widths: readonly number[];
+  sizes: string;
+  /** Hero-Bild: sofort laden, hohe Priorität */
+  eager?: boolean;
+  /** "" für dekorative Bilder */
+  alt?: string;
+  art?: Art;
+  class?: string;
+}
+const { id, widths, sizes, eager = false, alt, art = 'normal', class: klasse } = Astro.props;
+const f = await foto(id);
+const satz = await bildsatz(f, [...widths], art);
+---
+<picture>
+  {satz.quellen.map((q) => <source type={q.type} srcset={q.srcset} sizes={sizes} />)}
+  <img
+    src={satz.fallback.src}
+    alt={alt ?? f.alt}
+    width={f.breite}
+    height={f.hoehe}
+    class={klasse}
+    loading={eager ? 'eager' : 'lazy'}
+    decoding={eager ? 'sync' : 'async'}
+    fetchpriority={eager ? 'high' : undefined}
+  />
+</picture>
