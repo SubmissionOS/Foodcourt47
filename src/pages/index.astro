@@ -23,7 +23,20 @@ const streifen = (await getCollection('galerie')).sort((a, b) => reihenfolge.ind
 <Basis titel="Start" beschreibung={site.beschreibung} schema={foodcourtSchema(kuechen)} ogBild={url(hero, 1600)}>
   <HeroStart />
 
-
+  <div class="kuechen">
+    {kuechen.map((k, i) => (
+      <section class:list={['kueche', `kueche--${i + 1}`]} style={`--akzent: var(--k-${k.id})`} aria-labelledby={`k-${k.id}`}>
+        <a class="kueche-bildlink" href={`/${k.id}`} tabindex="-1" aria-hidden="true">
+          <Bild id={k.data.fotos[0]} format={i === 1 ? '4 / 5' : '5 / 4'} sizes="(min-width: 64rem) 55vw, 100vw" class="kueche-bild" />
+        </a>
+        <div class="kueche-text einblenden">
+          <h2 id={`k-${k.id}`}>{k.data.name}</h2>
+          <p>{k.data.kurztext}</p>
+          <a class="knopf knopf--linie kueche-link" href={`/${k.id}`}>Zur Karte<span class="nur-sr"> von {k.data.name}</span></a>
+        </div>
+      </section>
+    ))}
+  </div>
 
   <section class="mittag dunkel" aria-labelledby="mittag-titel">
     <div class="wrap mittag-innen einblenden">
@@ -61,6 +74,71 @@ const streifen = (await getCollection('galerie')).sort((a, b) => reihenfolge.ind
 </Basis>
 
 <style>
+  /* Küchen: Foto, Name, zwei Sätze, Link. Funktioniert ohne Hover. */
+  .kuechen {
+    display: grid;
+    gap: calc(var(--luft) * 0.8);
+    max-width: var(--breite);
+    margin-inline: auto;
+    padding: calc(var(--luft) * 0.8) var(--rand) 0;
+  }
+  .kueche {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.75rem;
+    align-items: center;
+  }
+  .kueche-bildlink {
+    display: block;
+  }
+  .kueche-text h2 {
+    margin-bottom: 1.1rem;
+  }
+  .kueche-text h2::before {
+    content: '';
+    display: block;
+    width: 3rem;
+    height: 4px;
+    margin-bottom: 1.25rem;
+    background: var(--akzent);
+  }
+  .kueche-text p {
+    font-size: 1.15rem;
+    max-width: 34ch;
+  }
+  .kueche-link {
+    width: 100%;
+    min-height: 3.5rem;
+    margin-top: 0.5rem;
+  }
+
+  @media (min-width: 48rem) {
+    .kueche-link {
+      width: auto;
+    }
+  }
+  @media (min-width: 64rem) {
+    .kueche {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+      gap: 6rem;
+    }
+    .kueche--2 {
+      grid-template-columns: minmax(0, 4fr) minmax(0, 5fr);
+    }
+    .kueche--2 .kueche-bildlink {
+      order: 2;
+    }
+    .kueche--2 .kueche-text {
+      justify-self: end;
+    }
+    .kueche--3 {
+      grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+    }
+    .kueche--3 .kueche-bildlink {
+      margin-left: calc(var(--rand) * -1);
+    }
+  }
+
   /* Mittag */
   .mittag {
     margin-top: var(--luft);
