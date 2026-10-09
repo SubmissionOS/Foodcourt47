@@ -36,7 +36,7 @@ const a = site.adresse;
     </div>
 
     <div class="fuss-unten">
-      <span class="fuss-logo">Foodcourt<em>47</em></span>
+      <span class="fuss-logo">Foodcourt<span class="fuss-nr">47</span></span>
       <span>{i.firma} · {i.strasse}, {i.plzOrt} · {i.gericht} {i.register}</span>
       <span class="fuss-recht">
         <a href="/impressum">Impressum</a>
@@ -59,10 +59,11 @@ const a = site.adresse;
     padding-block: 0 3.5rem;
   }
   .fuss-titel {
-    margin-bottom: 0.6rem;
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 1.3rem;
+    margin-bottom: 0.7rem;
+    font-family: var(--display);
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
     color: var(--messing-hell);
   }
   address {
@@ -96,9 +97,15 @@ const a = site.adresse;
     font-size: 0.82rem;
     color: #cfc5b4;
   }
+  .fuss-nr {
+    font-weight: 400;
+  }
   .fuss-logo {
-    font-family: var(--serif);
-    font-size: 1.5rem;
+    font-family: var(--display);
+    font-size: 1.15rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
     color: var(--creme);
   }
   .fuss-recht {

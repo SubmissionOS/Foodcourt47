@@ -15,8 +15,8 @@
   --k-manju: #a8692c;
   --k-sushify: #7e4058;
 
-  --serif: 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
   --sans: 'Jost', system-ui, sans-serif;
+  --display: 'Archivo', 'Arial Black', system-ui, sans-serif;
 
   --rand: clamp(1.25rem, 5vw, 4.5rem);
   --breite: 84rem;
@@ -64,38 +64,35 @@ h2,
 h3,
 h4 {
   margin: 0;
-  font-family: var(--serif);
-  font-weight: 500;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
+  font-family: var(--display);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
 
 h1 {
-  font-size: clamp(3.25rem, 9vw, 7.5rem);
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-size: clamp(2.6rem, 8vw, 6.5rem);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  overflow-wrap: break-word;
 }
 
 h2 {
-  font-size: clamp(2.4rem, 5.5vw, 4.5rem);
-  font-weight: 400;
+  font-size: clamp(2rem, 4.6vw, 3.75rem);
 }
 
 h3 {
-  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  font-weight: 700;
+  letter-spacing: -0.015em;
 }
 
 em,
 .kursiv {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
-}
-
-h1 em,
-h2 em {
-  color: inherit;
+  font-style: normal;
+  font-weight: 600;
 }
 
 p {
@@ -174,20 +171,6 @@ a {
 .dunkel {
   background: var(--kiefer);
   color: var(--creme);
-}
-
-/* Kleine Überzeile in Kursiv, nie in Großbuchstaben */
-.vorzeile {
-  display: block;
-  margin-bottom: 1.1rem;
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(1.2rem, 1.8vw, 1.45rem);
-  color: var(--akzent);
-}
-
-.dunkel .vorzeile {
-  color: var(--messing-hell);
 }
 
 .lead {

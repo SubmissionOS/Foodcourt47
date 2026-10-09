@@ -142,17 +142,18 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
 
   .logo {
     margin-right: auto;
-    font-family: var(--serif);
-    font-size: 1.7rem;
-    font-weight: 500;
+    font-family: var(--display);
+    font-size: 1.3rem;
+    font-weight: 900;
     line-height: 1;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
     text-decoration: none;
     white-space: nowrap;
   }
   .logo-nr {
-    font-style: italic;
-    margin-left: 0.04em;
+    margin-left: 0.12em;
+    font-weight: 400;
   }
 
   .nav,
@@ -280,9 +281,12 @@ const aktiv = (href: string) => (pfad === href ? 'page' : undefined);
   .mobil-panel a:not(.knopf) {
     display: block;
     padding-block: 0.3rem;
-    font-family: var(--serif);
-    font-size: 2.1rem;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 1.9rem;
     line-height: 1.2;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
     text-decoration: none;
   }
   .mobil-panel a[aria-current='page'] {

@@ -115,3 +115,10 @@ Hero (Triptychon) und Küchen-Abschnitt nutzen dieselben drei Fotos, alle Unspla
 **Credits:** Die Namen der Fotograf:innen sind nicht ermittelt. Die Hotlink-IDs lassen sich ohne Unsplash-API-Schlüssel nicht zu Foto-Seiten auflösen, die Suche und der direkte Abruf brachten kein Ergebnis. Vor dem Livegang ersetzen wir die Fotos ohnehin oder tragen die Credits über die Unsplash-API nach.
 
 **Sushi-Foto:** Gewählt wurde eine scharfe Aufsicht auf eine Sushi-Platte (schwarzer Schiefer, Holztisch), weil Pizza und Curry ebenfalls von oben fotografiert sind. Ein erster Kandidat mit extrem flacher Schärfentiefe (Seitenansicht) war als Vollbild zu unscharf und wurde verworfen. Die Sushify-Produktfotos (500×350 px, Schwarz) bleiben auf der Sushify-Speisekarte, dort klein.
+
+## Schriftsystem (Runde 5)
+Die Cormorant-Serif ist komplett ersetzt, auf allen 12 Seiten. Eine Familie für alles, was groß ist:
+- **Archivo** (selbst gehostet, Fontsource), Token `--display`: Hero-Headlines und Seiten-Hero 900 in Versalien, Abschnitts-Überschriften 800 in Normalschreibung, Gerichtnamen, Preise und Zwischentitel der Karte 700 bis 800, Logo 900 mit „47“ in 400.
+- **Jost** (300 bis 500) bleibt für Fließtext, Navigation und Buttons.
+- Keine Kursivschnitte mehr. Betonungen (`<em>`) sind halbfett statt kursiv.
+- Rechtsseiten (Impressum, Datenschutz) setzen die Überschrift in Normalschreibung, weil „DATENSCHUTZERKLÄRUNG“ in Versalien auf 390 px überlaufen würde.
