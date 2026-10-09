@@ -5,6 +5,6 @@ export default defineConfig({
   site: 'https://foodcourt47.de',
   trailingSlash: 'never',
   build: { format: 'directory' },
-  integrations: [sitemap({ filter: (seite) => !/\/hero-[abc]\/?$/.test(seite) })],
+  integrations: [sitemap()],
   devToolbar: { enabled: false },
 });
