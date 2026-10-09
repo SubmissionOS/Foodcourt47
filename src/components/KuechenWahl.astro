@@ -128,15 +128,6 @@ const eintraege = await Promise.all(
     object-fit: cover;
     object-position: center;
   }
-  .ebene[data-kueche='sushify'] img {
-    position: absolute;
-    left: 50%;
-    top: 80%;
-    width: min(92%, 520px);
-    height: auto;
-    transform: translate(-50%, -50%);
-    object-fit: contain;
-  }
   .verlauf {
     position: absolute;
     inset: 0;
@@ -205,13 +196,6 @@ const eintraege = await Promise.all(
   @media (min-width: 48rem) {
     .woerter {
       font-size: clamp(4rem, 15vw, 16rem);
-    }
-    .ebene[data-kueche='sushify'] img {
-      left: auto;
-      right: clamp(1rem, 8vw, 10rem);
-      top: 50%;
-      width: min(70%, 760px);
-      transform: translateY(-50%);
     }
   }
 </style>

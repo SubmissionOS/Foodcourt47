@@ -102,3 +102,16 @@ Alle drei: Foodfotos statt Restaurant-Interieur, dunkler Verlauf hinter der Schr
 - Pizza: Unsplash, `cucino-pizza`, mit `PLACEHOLDER_PHOTO` markiert.
 - Curry: Unsplash, `manju-currys`, mit `PLACEHOLDER_PHOTO` markiert.
 - Sushi: `sushify.de/wp-content/uploads/2021/04/1504-Goldify.jpg`, echtes Foto, aber nur 500×350 px. Alle Fotos dieser Serie haben dieses Format und zeigen eine Rolle auf reinem Schwarz. Deshalb steht es auf einem schwarzen Feld statt vollflächig.
+
+## Hero-Serie der Startseite: Fotos und Credits (Runde 5)
+Hero (Triptychon) und Küchen-Abschnitt nutzen dieselben drei Fotos, alle Unsplash (Unsplash License, Hotlink), alle als `PLACEHOLDER_PHOTO` in `src/content/fotos.json` markiert und später durch eigene Fotos zu ersetzen.
+
+| Küche | Schlüssel | Foto |
+|---|---|---|
+| Pizza | `cucino-pizza` | images.unsplash.com/photo-1574071318508-1cdbab80d002 |
+| Curry | `manju-currys` | images.unsplash.com/photo-1585937421612-70a008356fbe |
+| Sushi | `sushi-hero` | images.unsplash.com/photo-1611143669185-af224c5e3252 |
+
+**Credits:** Die Namen der Fotograf:innen sind nicht ermittelt. Die Hotlink-IDs lassen sich ohne Unsplash-API-Schlüssel nicht zu Foto-Seiten auflösen, die Suche und der direkte Abruf brachten kein Ergebnis. Vor dem Livegang ersetzen wir die Fotos ohnehin oder tragen die Credits über die Unsplash-API nach.
+
+**Sushi-Foto:** Gewählt wurde eine scharfe Aufsicht auf eine Sushi-Platte (schwarzer Schiefer, Holztisch), weil Pizza und Curry ebenfalls von oben fotografiert sind. Ein erster Kandidat mit extrem flacher Schärfentiefe (Seitenansicht) war als Vollbild zu unscharf und wurde verworfen. Die Sushify-Produktfotos (500×350 px, Schwarz) bleiben auf der Sushify-Speisekarte, dort klein.

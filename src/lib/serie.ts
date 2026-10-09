@@ -10,5 +10,5 @@ export interface SerienFoto {
 export const serie: SerienFoto[] = [
   { id: 'cucino-italiano', wort: 'Pizza', foto: 'cucino-pizza' },
   { id: 'manju', wort: 'Curry', foto: 'manju-currys' },
-  { id: 'sushify', wort: 'Sushi', foto: 'sushify-goldify' },
+  { id: 'sushify', wort: 'Sushi', foto: 'sushi-hero' },
 ];

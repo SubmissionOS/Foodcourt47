@@ -53,15 +53,6 @@ const fotos = await Promise.all(serie.map(async (s) => ({ ...s, f: await foto(s.
     object-fit: cover;
     object-position: center;
   }
-  .feld[data-kueche='sushify'] img {
-    position: absolute;
-    left: 50%;
-    top: 40%;
-    width: min(100%, 560px);
-    height: auto;
-    transform: translate(-50%, -50%);
-    object-fit: contain;
-  }
   .verlauf {
     position: absolute;
     inset: 0;
