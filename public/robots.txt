@@ -1,5 +1,0 @@
-# Entwurf: vor dem Livegang auf "Allow: /" umstellen
-User-agent: *
-Disallow: /
-
-Sitemap: https://foodcourt47.de/sitemap-index.xml

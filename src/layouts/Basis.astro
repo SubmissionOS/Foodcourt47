@@ -11,6 +11,7 @@ import '../styles/global.css';
 import Kopf from '../components/Kopf.astro';
 import Fuss from '../components/Fuss.astro';
 import { site } from '../lib/site';
+import { erlaubeIndex } from '../lib/index-schalter';
 
 interface Props {
   titel: string;
@@ -37,8 +38,7 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     <title>{voll}</title>
     <meta name="description" content={beschreibung} />
     <link rel="canonical" href={kanonisch} />
-    {/* Entwurf: nicht indexieren. Vor dem Livegang entfernen. */}
-    <meta name="robots" content="noindex, nofollow" />
+    <meta name="robots" content={erlaubeIndex ? 'index, follow, max-image-preview:large' : 'noindex, nofollow'} />
     <meta name="theme-color" content="#1e2a24" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
