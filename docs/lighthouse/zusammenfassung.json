@@ -1,0 +1,1358 @@
+[
+  {
+    "seite": "/",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1728.6738,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 753.6738,
+    "si": 753.6738,
+    "fehler": [
+      {
+        "id": "largest-contentful-paint",
+        "titel": "Largest Contentful Paint",
+        "score": 0.99,
+        "anzeige": "1.7 s"
+      },
+      {
+        "id": "image-delivery-insight",
+        "titel": "Improve image delivery",
+        "score": 0.5,
+        "anzeige": "Est savings of 36 KiB"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 364.9691,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 204.96910000000003,
+    "si": 204.96910000000003,
+    "fehler": [
+      {
+        "id": "image-delivery-insight",
+        "titel": "Improve image delivery",
+        "score": 0.5,
+        "anzeige": "Est savings of 12 KiB"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/cucino-italiano",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1427.1491,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 760.1491000000001,
+    "si": 760.1491000000001,
+    "fehler": [
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/cucino-italiano",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 422.1732,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 202.1732,
+    "si": 202.1732,
+    "fehler": [
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/manju",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1577.0702,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 759.0702000000001,
+    "si": 759.0702000000001,
+    "fehler": [
+      {
+        "id": "largest-contentful-paint",
+        "titel": "Largest Contentful Paint",
+        "score": 0.99,
+        "anzeige": "1.6 s"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/manju",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 441.78010000000006,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 201.7801,
+    "si": 201.7801,
+    "fehler": [
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/sushify",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1501.9591,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 761.9591,
+    "si": 761.9591,
+    "fehler": [
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/sushify",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 381.92140000000006,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 201.9214,
+    "si": 201.9214,
+    "fehler": [
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/speisekarte",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1502.3887,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 763.3887,
+    "si": 763.3887,
+    "fehler": [
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/speisekarte",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 381.977,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 201.97699999999998,
+    "si": 201.97699999999998,
+    "fehler": [
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/mittag",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1652.0049,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 759.0048999999999,
+    "si": 759.0048999999999,
+    "fehler": [
+      {
+        "id": "largest-contentful-paint",
+        "titel": "Largest Contentful Paint",
+        "score": 0.99,
+        "anzeige": "1.7 s"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/mittag",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 421.7601,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 201.76010000000002,
+    "si": 201.76010000000002,
+    "fehler": [
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/galerie",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1653.6415,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 760.6415,
+    "si": 760.6415,
+    "fehler": [
+      {
+        "id": "largest-contentful-paint",
+        "titel": "Largest Contentful Paint",
+        "score": 0.99,
+        "anzeige": "1.7 s"
+      },
+      {
+        "id": "image-delivery-insight",
+        "titel": "Improve image delivery",
+        "score": 0.5,
+        "anzeige": "Est savings of 80 KiB"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/galerie",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 422.29910000000007,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 202.2991,
+    "si": 202.2991,
+    "fehler": [
+      {
+        "id": "image-delivery-insight",
+        "titel": "Improve image delivery",
+        "score": 0.5,
+        "anzeige": "Est savings of 18 KiB"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/reservieren",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1501.6546,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 757.6546000000001,
+    "si": 757.6546000000001,
+    "fehler": [
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/reservieren",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 382.4883,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 202.48829999999998,
+    "si": 202.48829999999998,
+    "fehler": [
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/kontakt",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1579.096,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 763.096,
+    "si": 763.096,
+    "fehler": [
+      {
+        "id": "largest-contentful-paint",
+        "titel": "Largest Contentful Paint",
+        "score": 0.99,
+        "anzeige": "1.6 s"
+      },
+      {
+        "id": "image-delivery-insight",
+        "titel": "Improve image delivery",
+        "score": 0.5,
+        "anzeige": "Est savings of 23 KiB"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/kontakt",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 421.4015,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 201.4015,
+    "si": 201.4015,
+    "fehler": [
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/impressum",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1201.2493,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 751.2493,
+    "si": 751.2493,
+    "fehler": [
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/impressum",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 322.0805,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 202.08049999999997,
+    "si": 202.08049999999997,
+    "fehler": [
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/datenschutz",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1201.6346,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 751.6346000000001,
+    "si": 751.6346000000001,
+    "fehler": [
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/datenschutz",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 321.3251,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 201.32510000000002,
+    "si": 201.32510000000002,
+    "fehler": [
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/404",
+    "preset": "mobile",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 1351.4677,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 751.4676999999999,
+    "si": 751.4676999999999,
+    "fehler": [
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  },
+  {
+    "seite": "/404",
+    "preset": "desktop",
+    "punkte": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "agent": [
+      {
+        "id": "agent-accessibility-tree",
+        "status": "pass"
+      },
+      {
+        "id": "webmcp-form-coverage",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-registered-tools",
+        "status": "n/a"
+      },
+      {
+        "id": "webmcp-schema-validity",
+        "status": "n/a"
+      },
+      {
+        "id": "cumulative-layout-shift",
+        "status": "pass"
+      },
+      {
+        "id": "llms-txt",
+        "status": "pass"
+      },
+      {
+        "id": "ard-schema",
+        "status": "n/a"
+      }
+    ],
+    "lcp": 364.6037,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 204.6037,
+    "si": 204.6037,
+    "fehler": [
+      {
+        "id": "network-dependency-tree-insight",
+        "titel": "Network dependency tree",
+        "score": 0,
+        "anzeige": ""
+      }
+    ]
+  }
+]
