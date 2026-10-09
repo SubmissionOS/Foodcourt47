@@ -81,6 +81,8 @@ h1 {
 
 h2 {
   font-size: clamp(2rem, 4.6vw, 3.75rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
 }
 
 h3 {
@@ -190,10 +192,10 @@ a {
   border-radius: 999px;
   background: var(--tinte);
   color: var(--creme);
-  font-family: var(--sans);
-  font-weight: 400;
+  font-family: var(--display);
+  font-weight: 700;
   font-size: 0.95rem;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.01em;
   text-decoration: none;
   cursor: pointer;
   transition: background-color 300ms var(--weich), color 300ms var(--weich), border-color 300ms var(--weich);
@@ -242,9 +244,10 @@ a {
   gap: 0.75rem;
   padding-bottom: 0.3rem;
   border-bottom: 1px solid currentColor;
+  font-family: var(--display);
   font-size: 0.95rem;
-  font-weight: 400;
-  letter-spacing: 0.04em;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   text-decoration: none;
   transition: gap 300ms var(--weich), color 300ms var(--weich);
 }
